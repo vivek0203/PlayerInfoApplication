@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 public class PlayerAppController {
-    @Autowired
+
     private static PlayerAppDao playerAppDao;
     public static void setPlayerAppDao(PlayerAppDao playerAppDao) {
         PlayerAppController.playerAppDao = playerAppDao;

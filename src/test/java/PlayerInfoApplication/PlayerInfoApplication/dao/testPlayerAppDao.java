@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,21 +19,17 @@ public class testPlayerAppDao {
     PlayerAppDao playerAppDao;
     private static final Logger log = LoggerFactory.getLogger(testPlayerAppDao.class);
 
-    @Test(priority = 1,description = "Valid name is provided")
-    public void testFetchPlayerCareerDataByName() {
+    @Test(priority = 1)
+    public void testFetchPlayerCareerDataByName() throws SQLException {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
         Map<String , Object> getPlayerData ;
-        try {
-            getPlayerData = playerAppDao.fetchPlayerCareerData("Suryakumar Yadav");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+            getPlayerData = playerAppDao.fetchPlayerCareerData("Surkumar Yadav");
+
         assertNotNull(getPlayerData);
         assertThat(getPlayerData.size()).isEqualTo(1);
 
-
     }
-
     @Test(priority = 2)
     public void testFetchPlayerCareerDataByNameNull() {
         log.debug("Executing testFetchPlayerCareerDataByNameNull()...");
