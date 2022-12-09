@@ -24,7 +24,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
         Map<String , Object> getPlayerData ;
 
-            getPlayerData = playerAppDao.fetchPlayerCareerData("Surkumar Yadav");
+            getPlayerData = playerAppDao.fetchPlayerCareerData("Suryakumar Yadav");
 
         assertNotNull(getPlayerData);
         assertThat(getPlayerData.size()).isEqualTo(1);

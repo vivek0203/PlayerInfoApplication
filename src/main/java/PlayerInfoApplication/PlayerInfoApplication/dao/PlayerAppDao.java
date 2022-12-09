@@ -4,6 +4,7 @@ package PlayerInfoApplication.PlayerInfoApplication.dao;
 import PlayerInfoApplication.PlayerInfoApplication.connection.Connect;
 import PlayerInfoApplication.PlayerInfoApplication.entity.PlayerCareerInfo;
 import PlayerInfoApplication.PlayerInfoApplication.util.DBUtil;
+import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -31,6 +32,10 @@ public class PlayerAppDao {
         PreparedStatement ps = null;
         Map<String, Object> playerCareerInfo = new LinkedHashMap<>();
         Map<String,Object> playerData = new LinkedHashMap<>();
+        if(player_name == null || player_name.isEmpty()) {
+            log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}",player_name);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :"+player_name);
+        }
 
         try {
             conn = Connect.CreateConnection();
@@ -175,7 +180,10 @@ public class PlayerAppDao {
         PreparedStatement ps = null;
         Map<String, Object> playerT20iInfo = new LinkedHashMap<>();
         Map<String,Object> playerData = new LinkedHashMap<>();
-
+        if(player_name == null || player_name.isEmpty()) {
+            log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}",player_name);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :"+player_name);
+        }
 
         try{
             conn = Connect.CreateConnection();
@@ -217,6 +225,10 @@ public class PlayerAppDao {
 
         Connection conn = null;
         PreparedStatement ps = null;
+        if(player_name == null || player_name.isEmpty()) {
+            log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}",player_name);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :"+player_name);
+        }
         try{
             conn = Connect.CreateConnection();
 
@@ -260,7 +272,10 @@ public class PlayerAppDao {
         Map<String,Object> playerData = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
-
+        if(player_name == null || player_name.isEmpty()) {
+            log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}",player_name);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :"+player_name);
+        }
         try{
             conn = Connect.CreateConnection();
 
@@ -302,6 +317,10 @@ public class PlayerAppDao {
         Map<String,Object> playerData = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
+        if(name == null || name.isEmpty()) {
+            log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}",name);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :"+name);
+        }
         try {
             conn = Connect.CreateConnection();
 
@@ -336,6 +355,10 @@ public class PlayerAppDao {
         Map<String,Object>Top5experiencedPlayerInfo = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
+        if(gender == null || gender.isEmpty()) {
+            log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}",gender);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :"+gender);
+        }
         try {
             conn = Connect.CreateConnection();
 
@@ -383,6 +406,10 @@ public class PlayerAppDao {
         Map<String,Object>Top5CenturyScorerInfo = new HashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
+        if(gender == null || gender.isEmpty()) {
+            log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}",gender);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :"+gender);
+        }
         try {
             conn = Connect.CreateConnection();
 
@@ -428,6 +455,10 @@ public class PlayerAppDao {
         List<Object> playerData = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
+        if(gender == null || gender.isEmpty()) {
+            log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}",gender);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :"+gender);
+        }
         try {
             conn = Connect.CreateConnection();
 
