@@ -28,6 +28,7 @@ public class PlayerAppController {
     }
     @GetMapping("/player_t20i_info")
     public static Map<String, Object> fetchPlayerT20iInfoByName(@RequestParam String  player_name) throws SQLException {
+
         return playerAppDao.fetchPlayerT20iInfoByName(player_name);
     }
     @GetMapping("/players_odi_info")
@@ -39,8 +40,8 @@ public class PlayerAppController {
         return playerAppDao.fetchPlayerTestInfoByName(player_name);
     }
     @GetMapping("/players_personal_info")
-    public static Map<String, Object> fetchPlayerPersonalInfoByName(@RequestParam String  player_name) throws SQLException {
-        return playerAppDao.fetchPlayerPersonalDataByName(player_name);
+    public static Map<String, Object> fetchPlayerPersonalInfoByName(@RequestParam String  name) throws SQLException {
+        return playerAppDao.fetchPlayerPersonalDataByName(name);
     }
 
     @GetMapping("/top_5_experienced_players_data")

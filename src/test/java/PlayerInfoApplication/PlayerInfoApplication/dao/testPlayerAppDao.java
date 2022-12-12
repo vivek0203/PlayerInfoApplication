@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.SQLException;
-import java.util.List;
+
 import java.util.Map;
 
 import static org.testng.Assert.*;
@@ -24,7 +24,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
         Map<String , Object> getPlayerData ;
 
-            getPlayerData = playerAppDao.fetchPlayerCareerData("Suryakumar Yadav");
+        getPlayerData = playerAppDao.fetchPlayerCareerData("Hardik Pandya");
 
         assertNotNull(getPlayerData);
         assertThat(getPlayerData.size()).isEqualTo(1);
@@ -36,7 +36,7 @@ public class testPlayerAppDao {
         Map<String,Object>getPlayerData;
         try {
             getPlayerData = playerAppDao.fetchPlayerCareerData("null");
-        } catch (Exception e) {
+        } catch (NullPointerException | SQLException Exception ) {
             assert true;
         }
 
@@ -47,7 +47,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerCareerDataByNameEmpty()...");
         Map<String,Object>getPlayerData ;
         try {
-            getPlayerData = playerAppDao.fetchPlayerCareerData("1");
+            getPlayerData = playerAppDao.fetchPlayerCareerData("");
         } catch (Exception e) {
             assert true;
         }
@@ -185,7 +185,6 @@ public class testPlayerAppDao {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
         assertThat(getPlayerPersonalInfo).isNotNull();
         assertThat(getPlayerPersonalInfo.size()).isEqualTo(1);
     }
@@ -275,13 +274,14 @@ public class testPlayerAppDao {
     @Test(priority = 22)
     public void testFetch5PlayerInfoByGenderEmpty() {
         log.debug("Executing testFetch5PlayerInfoByGenderEmpty()...");
-        Map<String, Object> get5PlayersData;
+        Map<String, Object> get5PlayersData ;
         try
         {
-            get5PlayersData = playerAppDao.fetch5PlayerInfoByGender(" ");
+            get5PlayersData = playerAppDao.fetch5PlayerInfoByGender("");
         }catch (Exception e){
             assert true;
         }
+
 
     }
     @Test(priority = 23)
@@ -298,7 +298,7 @@ public class testPlayerAppDao {
     }
     @Test(priority = 24)
     public void testFetch3PlayerInfoByGenderNull() {
-        log.debug("Executing testFetch3PlayerInfoByGender()...");
+        log.debug("Executing testFetch3PlayerInfoByGenderNull()...");
         Map<String, Object>get3PlayerData ;
         try{
             get3PlayerData = playerAppDao.fetch3PlayerInfoByGender("null");
@@ -309,10 +309,10 @@ public class testPlayerAppDao {
     }
     @Test(priority = 25)
     public void testFetch3PlayerInfoByGenderEmpty() {
-        log.debug("Executing testFetch3PlayerInfoByGender()...");
+        log.debug("Executing testFetch3PlayerInfoByGenderEmpty()...");
         Map<String,Object> get3PlayerData;
         try{
-            get3PlayerData = playerAppDao.fetch3PlayerInfoByGender("female");
+            get3PlayerData = PlayerAppDao.fetch3PlayerInfoByGender("");
         }catch (Exception e){
             assert true;
         }

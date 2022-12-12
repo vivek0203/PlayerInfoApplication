@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PlayerInfoApplication {
 
 			public static void main(String[] args) {
+
 				SpringApplication.run(PlayerInfoApplication.class, args);
+				System.out.println("Welcome To Player Information Application..");
 			}
 }

@@ -4,7 +4,6 @@ package PlayerInfoApplication.PlayerInfoApplication.dao;
 import PlayerInfoApplication.PlayerInfoApplication.connection.Connect;
 import PlayerInfoApplication.PlayerInfoApplication.entity.PlayerCareerInfo;
 import PlayerInfoApplication.PlayerInfoApplication.util.DBUtil;
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -13,8 +12,10 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -36,7 +37,6 @@ public class PlayerAppDao {
             log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}", player_name);
             throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + player_name);
         }
-
         try {
             conn = Connect.CreateConnection();
 
@@ -94,8 +94,9 @@ public class PlayerAppDao {
     public static JSONObject get10PlayerData() throws SQLException {
         Connection conn = null;
         Statement stmt = null;
-        JSONObject playerFullInfo = new JSONObject();
+
         JSONArray playerData = new JSONArray();
+        JSONObject playerFullInfo = new JSONObject();
         try {
             conn = Connect.CreateConnection();
 
@@ -167,7 +168,7 @@ public class PlayerAppDao {
                 // playerData.put("State", rs.getString("state"));
                 log.info("+++++++++++++++++++++++++++++++++++++++++++++++++");
             }
-            playerFullInfo.put("players", playerData);
+            playerFullInfo.put("players" ,playerData);
 
         } finally {
             DBUtil.close(stmt, conn);
@@ -179,7 +180,7 @@ public class PlayerAppDao {
     public static Map<String, Object> fetchPlayerT20iInfoByName(String player_name) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
-        Map<String, Object> playerT20iInfo = new LinkedHashMap<>();
+        Map<String, Object> playerT20iInfo = new HashMap<>();
         Map<String, Object> playerData = new LinkedHashMap<>();
         if (player_name == null || player_name.isEmpty()) {
             log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}", player_name);
@@ -222,7 +223,7 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Object> fetchPlayerODIInfoByName(String player_name) throws SQLException {
-        Map<String, Object> playerOdiInfo = new LinkedHashMap<>();
+        Map<String, Object> playerOdiInfo = new HashMap<>();
         Map<String, Object> playerData = new LinkedHashMap<>();
 
         Connection conn = null;
@@ -271,7 +272,7 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Object> fetchPlayerTestInfoByName(String player_name) throws SQLException {
-        Map<String, Object> playerTestInfo = new LinkedHashMap<>();
+        Map<String, Object> playerTestInfo = new HashMap<>();
         Map<String, Object> playerData = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
@@ -317,7 +318,7 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Object> fetchPlayerPersonalDataByName(String name) throws SQLException {
-        Map<String, Object> playerPersonalInfo = new LinkedHashMap<>();
+        Map<String, Object> playerPersonalInfo = new HashMap<>();
         Map<String, Object> playerData = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
@@ -330,11 +331,11 @@ public class PlayerAppDao {
 
             String query = "Select * from player_personal_info  where name = ?";
             log.debug("Executing fetchPlayerPersonalData Query : {} ", query);
+            log.debug("Parameter : { name : {}  } ", name);
             ps = conn.prepareStatement(query);
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-
                 log.info("Id : " + rs.getInt("player_id"));
                 playerData.put("Id", rs.getInt("player_id"));
                 log.info("Player Name :" + rs.getString("name"));
@@ -345,13 +346,14 @@ public class PlayerAppDao {
                 log.info("State : " + rs.getString("state"));
                 playerData.put("State", rs.getString("state"));
 
+
             }
             playerPersonalInfo.put(name, playerData);
-
-        } finally {
-            DBUtil.close(ps, conn);
-        }
+            }finally{
+                DBUtil.close(ps, conn);
+            }
         return playerPersonalInfo;
+
 
     }
 
