@@ -36,7 +36,7 @@ public class testPlayerAppDao {
         Map<String,Object>getPlayerData;
         try {
             getPlayerData = playerAppDao.fetchPlayerCareerData("null");
-        } catch (NullPointerException | SQLException Exception ) {
+        } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
 
