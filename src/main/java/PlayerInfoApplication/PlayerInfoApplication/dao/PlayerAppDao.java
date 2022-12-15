@@ -3,6 +3,7 @@ package PlayerInfoApplication.PlayerInfoApplication.dao;
 import PlayerInfoApplication.PlayerInfoApplication.connection.Connect;
 import PlayerInfoApplication.PlayerInfoApplication.entity.PlayerCareerInfo;
 import PlayerInfoApplication.PlayerInfoApplication.util.DBUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -508,7 +509,7 @@ public class PlayerAppDao {
 
     }
 
-    public static Map<String, Object> fetch3PlayerInfoByGender(String gender) throws SQLException {
+    public static Map<String, Object> fetch3PlayerInfoByGender(String gender) throws SQLException, IOException {
         Map<String, Object> top3OdiWicketTakers = new LinkedHashMap<>();
         List<Object> playerData = new ArrayList<>();
         Connection conn = null;
@@ -546,22 +547,14 @@ public class PlayerAppDao {
                     log.info("++++++++++++++++++++++++++++++++");
 
                 }
+
                 top3OdiWicketTakers.put(gender, playerData);
+
                 if (playerData.isEmpty()){
                     log.debug("player is not available with  gender " +gender);
                     throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
                 }
-                //JavaObj to json
-                ObjectMapper om=new ObjectMapper();
-                om.writerWithDefaultPrettyPrinter().writeValueAsString(top3OdiWicketTakers);
-                om.writeValue(new File("json.file"),top3OdiWicketTakers);
 
-            } catch (StreamWriteException e) {
-                throw new RuntimeException(e);
-            } catch (DatabindException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             } finally {
                 DBUtil.close(ps, conn);
             }
