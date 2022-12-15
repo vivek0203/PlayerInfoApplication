@@ -85,9 +85,12 @@ public class PlayerAppDao {
                 playerData.put("TotalT20iRuns", rs.getInt("player_t20i_runs"));
                 log.info("TotalTestRuns : " + rs.getInt("player_test_runs"));
                 playerData.put("TotalTestRuns ", rs.getInt("player_test_runs"));
-
             }
             playerCareerInfo.put(player_name, playerData);
+            if (playerData.isEmpty()){
+                    log.debug("player is not available with this name " + player_name);
+                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + player_name);
+            }
 
         } finally {
             DBUtil.close(ps, conn);
@@ -228,6 +231,10 @@ public class PlayerAppDao {
                 playerData.put("Gender", rs.getString("gender"));
             }
             playerT20iInfo.put(player_name, playerData);
+            if (playerData.isEmpty()){
+                log.debug("player is not available with this name " + player_name);
+                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + player_name);
+            }
 
         } finally {
             DBUtil.close(ps, conn);
@@ -273,9 +280,12 @@ public class PlayerAppDao {
                 log.info("Gender : " + rs.getString("gender"));
                 playerData.put("Gender", rs.getString("gender"));
 
-
             }
             playerOdiInfo.put(player_name, playerData);
+            if (playerData.isEmpty()){
+                log.debug("player is not available with this name " + player_name);
+                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + player_name);
+            }
 
         } finally {
             DBUtil.close(ps, conn);
@@ -326,7 +336,10 @@ public class PlayerAppDao {
 
             }
             playerTestInfo.put(player_name, playerData);
-
+            if (playerData.isEmpty()){
+                log.debug("player is not available with this name " + player_name);
+                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + player_name);
+            }
         } finally {
             DBUtil.close(ps, conn);
         }
@@ -370,6 +383,10 @@ public class PlayerAppDao {
 
             }
             playerPersonalInfo.put(name, playerData);
+            if (playerData.isEmpty()){
+                log.debug("player is not available with this name " + name);
+                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + name);
+            }
             }finally{
                 DBUtil.close(ps, conn);
             }
@@ -425,7 +442,10 @@ public class PlayerAppDao {
             }
 
             Top5experiencedPlayerInfo.put(gender, playerData);
-
+            if (playerData.isEmpty()){
+                log.debug("player is not available with this gender " +gender);
+                throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
+            }
         } finally {
             DBUtil.close(ps, conn);
         }
@@ -477,7 +497,10 @@ public class PlayerAppDao {
             }
 
             Top5CenturyScorerInfo.put(gender, playerData);
-
+            if (playerData.isEmpty()){
+                log.debug("player is not available with gender " +gender);
+                throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
+            }
         } finally {
             DBUtil.close(ps, conn);
         }
@@ -524,7 +547,10 @@ public class PlayerAppDao {
 
                 }
                 top3OdiWicketTakers.put(gender, playerData);
-
+                if (playerData.isEmpty()){
+                    log.debug("player is not available with  gender " +gender);
+                    throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
+                }
                 //JavaObj to json
                 ObjectMapper om=new ObjectMapper();
                 om.writerWithDefaultPrettyPrinter().writeValueAsString(top3OdiWicketTakers);

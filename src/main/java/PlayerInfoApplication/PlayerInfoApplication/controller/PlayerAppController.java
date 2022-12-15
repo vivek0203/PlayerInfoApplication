@@ -21,6 +21,7 @@ public class PlayerAppController {
     @GetMapping("/player_career_info")
     public static Map<String, Object> GetPlayerCareerInfo(@RequestParam String player_name) throws SQLException {
         return playerAppDao.fetchPlayerCareerData(player_name);
+
     }
 
     @GetMapping("/player_full_info")

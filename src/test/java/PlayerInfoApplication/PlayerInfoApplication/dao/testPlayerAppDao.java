@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.SQLException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.testng.Assert.*;
@@ -23,16 +24,24 @@ public class testPlayerAppDao {
     public void testFetchPlayerCareerDataByName() throws SQLException {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
         Map<String , Object> getPlayerData ;
-
-
         getPlayerData = playerAppDao.fetchPlayerCareerData("Hardik Pandya");
 
         assertNotNull(getPlayerData);
         assertThat(getPlayerData.size()).isEqualTo(1);
 
+    }
+    @Test(priority = 26)
+    public void testFetchPlayerCareerDataByInvalidName() throws SQLException {
+        log.debug("Executing testFetchPlayerCareerDataByName()...");
+        Map<String , Object> getPlayerData ;
+        try {
+            getPlayerData = playerAppDao.fetchPlayerCareerData("Hark Pandya");
+        }catch (IllegalArgumentException e){
+            assert true;
+        }
+
 
     }
-
     @Test(priority = 2)
     public void testFetchPlayerCareerDataByNameNull() {
         log.debug("Executing testFetchPlayerCareerDataByNameNull()...");
@@ -42,7 +51,6 @@ public class testPlayerAppDao {
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
-
     }
 
     @Test(priority = 3)
@@ -225,6 +233,16 @@ public class testPlayerAppDao {
         assertThat(get5PlayerInfo).isNotNull();
         assertThat(get5PlayerInfo.size()).isEqualTo(1);
 
+    }
+    @Test(priority = 27)
+    public void testFetch5PlayerDataByInvalidGender() {
+        log.debug("Executing testFetch5PlayerDataByInvalidGender()...");
+        Map<String, Object> get5PlayerInfo;
+        try {
+            get5PlayerInfo = playerAppDao.fetch5PlayerDataByGender("me");
+        } catch (Exception e) {
+            assert true;
+        }
     }
     @Test(priority = 18)
     public void testFetch5PlayerDataByGenderNull() {
