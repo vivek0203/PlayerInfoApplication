@@ -24,12 +24,15 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
         Map<String , Object> getPlayerData ;
 
+
         getPlayerData = playerAppDao.fetchPlayerCareerData("Hardik Pandya");
 
         assertNotNull(getPlayerData);
         assertThat(getPlayerData.size()).isEqualTo(1);
 
+
     }
+
     @Test(priority = 2)
     public void testFetchPlayerCareerDataByNameNull() {
         log.debug("Executing testFetchPlayerCareerDataByNameNull()...");
