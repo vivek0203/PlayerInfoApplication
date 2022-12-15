@@ -12,14 +12,11 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-
-import javax.swing.tree.RowMapper;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -194,6 +191,7 @@ public class PlayerAppDao {
                 playerData.add(19, "State : " + rs.getString("state"));
                 // playerData.put("State", rs.getString("state"));
                 log.info("++++++++++++++++++++++++++++++++++++++");
+
             }
             playerFullInfo.put("players" ,playerData);
 
@@ -534,10 +532,10 @@ public class PlayerAppDao {
                 }
                 top3OdiWicketTakers.put(gender, playerData);
 
-                File jsonFile=new File("json.file");
-
+                //JavaObj to json
                 ObjectMapper om=new ObjectMapper();
-                om.writeValue(jsonFile, playerData);
+                om.writerWithDefaultPrettyPrinter().writeValueAsString(top3OdiWicketTakers);
+                om.writeValue(new File("json.file"),top3OdiWicketTakers);
 
 
             } catch (StreamWriteException e) {

@@ -35,7 +35,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerCareerDataByNameNull()...");
         Map<String,Object>getPlayerData;
         try {
-            getPlayerData = playerAppDao.fetchPlayerCareerData("null");
+            getPlayerData = playerAppDao.fetchPlayerCareerData(null);
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -74,14 +74,12 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerT20iInfoByName()...");
         Map<String,Object> getPlayerT20Info ;
         try {
-            getPlayerT20Info = playerAppDao.fetchPlayerT20iInfoByName("Yuzvendra Chahal");
+            getPlayerT20Info = playerAppDao.fetchPlayerT20iInfoByName("Suryakumar yadav");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         assertThat(getPlayerT20Info).isNotNull();
         assertThat(getPlayerT20Info.size()).isEqualTo(1);
-
-
     }
 
     @Test(priority = 6)
@@ -89,7 +87,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerT20iInfoByNameNull()...");
         Map<String,Object> getPlayerT20Info ;
         try {
-            getPlayerT20Info = playerAppDao.fetchPlayerT20iInfoByName("null");
+            getPlayerT20Info = playerAppDao.fetchPlayerT20iInfoByName(null);
         } catch (Exception e) {
             assert true;
         }
@@ -124,7 +122,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerODIInfoByNameNull()...");
         Map<String,Object>  getPlayerODIInfo ;
         try {
-            getPlayerODIInfo = playerAppDao.fetchPlayerODIInfoByName("Null");
+            getPlayerODIInfo = playerAppDao.fetchPlayerODIInfoByName(null);
         } catch (Exception e) {
             assert true;
         }
@@ -159,7 +157,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerTestInfoByNameNull()...");
         Map<String,Object> getPlayerTestInfo ;
         try {
-            getPlayerTestInfo = playerAppDao.fetchPlayerTestInfoByName("null");
+            getPlayerTestInfo = playerAppDao.fetchPlayerTestInfoByName(null);
         } catch (Exception e) {
             assert true;
         }
@@ -194,7 +192,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetchPlayerPersonalDataByNameNul()...");
         Map<String,Object> getPlayerPersonalInfo ;
         try {
-            getPlayerPersonalInfo = playerAppDao.fetchPlayerPersonalDataByName("null");
+            getPlayerPersonalInfo = playerAppDao.fetchPlayerPersonalDataByName(null);
         } catch (Exception e) {
             assert true;
         }
@@ -230,7 +228,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetch5PlayerDataByGender()...");
         Map<String,Object> get5PlayerInfo;
         try{
-            get5PlayerInfo = playerAppDao.fetch5PlayerDataByGender("null");
+            get5PlayerInfo = playerAppDao.fetch5PlayerDataByGender(null);
         }catch (Exception e){
             assert true;
         }
@@ -265,7 +263,7 @@ public class testPlayerAppDao {
         Map<String, Object> get5PlayersData ;
         try
         {
-            get5PlayersData = playerAppDao.fetch5PlayerInfoByGender("null");
+            get5PlayersData = playerAppDao.fetch5PlayerInfoByGender(null);
         }catch (Exception e){
             assert true;
         }
@@ -281,8 +279,6 @@ public class testPlayerAppDao {
         }catch (Exception e){
             assert true;
         }
-
-
     }
     @Test(priority = 23)
     public void testFetch3PlayerInfoByGender() {
@@ -301,7 +297,7 @@ public class testPlayerAppDao {
         log.debug("Executing testFetch3PlayerInfoByGenderNull()...");
         Map<String, Object>get3PlayerData ;
         try{
-            get3PlayerData = playerAppDao.fetch3PlayerInfoByGender("null");
+            get3PlayerData = playerAppDao.fetch3PlayerInfoByGender(null);
         }catch (Exception e){
             assert true;
         }
