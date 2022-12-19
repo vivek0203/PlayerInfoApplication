@@ -1,17 +1,12 @@
 package PlayerInfoApplication.PlayerInfoApplication.dao;
 
-
-
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.sql.SQLException;
 import java.util.Map;
-
 import static org.testng.Assert.*;
 
 public class testPlayerAppDao {
