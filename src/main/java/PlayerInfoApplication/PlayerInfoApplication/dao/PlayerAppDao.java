@@ -513,6 +513,7 @@ public class PlayerAppDao {
             ps = conn.prepareStatement(query);
             ps.setString(1, gender);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
 
                 Map<String,Object> playerData = new LinkedHashMap<>();
@@ -573,7 +574,9 @@ public class PlayerAppDao {
                 ps = conn.prepareStatement(query);
                 ps.setString(1, gender);
                 ResultSet rs = ps.executeQuery();
+
                 while (rs.next()) {
+
                     Map<String,Object> playerData = new LinkedHashMap<>();
 
                     log.info("Id : " + rs.getInt("id"));
