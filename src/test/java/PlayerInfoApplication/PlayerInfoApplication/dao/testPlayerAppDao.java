@@ -32,7 +32,7 @@ public class testPlayerAppDao {
     }
     @Test(priority = 26)
     public void testFetchPlayerCareerDataByInvalidName() throws SQLException {
-        log.debug("Executing testFetchPlayerCareerDataByName()...");
+        log.debug("Executing testFetchPlayerCareerDataByInvalidName()...");
         Map<String , Object> getPlayerData ;
         try {
             getPlayerData = playerAppDao.fetchPlayerCareerData("Hark Pandya");
@@ -197,7 +197,18 @@ public class testPlayerAppDao {
         assertThat(getPlayerPersonalInfo).isNotNull();
         assertThat(getPlayerPersonalInfo.size()).isEqualTo(1);
     }
+    @Test(priority = 28)
+    public void testFetchPlayerPersonalDataByNameInvalidName() throws SQLException {
+        log.debug("Executing testFetchPlayerCareerDataByInvalidName()...");
+        Map<String , Object> getPlayerData ;
+        try {
+            getPlayerData = playerAppDao.fetchPlayerPersonalDataByName("Vir Koli");
+        }catch (IllegalArgumentException e){
+            assert true;
+        }
 
+
+    }
     @Test(priority = 15)
     public void testFetchPlayerPersonalDataByNameNull() {
         log.debug("Executing testFetchPlayerPersonalDataByNameNul()...");
@@ -219,7 +230,6 @@ public class testPlayerAppDao {
         } catch (Exception e) {
             assert true;
         }
-
     }
 
     @Test(priority = 17)
