@@ -16,11 +16,9 @@ public class Connect {
 
             conn = DriverManager.getConnection(DB_URL,USER1,PASS);
 
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return conn;
 

@@ -3,13 +3,11 @@ package PlayerInfoApplication.PlayerInfoApplication.dao;
 import PlayerInfoApplication.PlayerInfoApplication.connection.Connect;
 import PlayerInfoApplication.PlayerInfoApplication.entity.PlayerCareerInfo;
 import PlayerInfoApplication.PlayerInfoApplication.util.DBUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -129,7 +127,7 @@ public class PlayerAppDao {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                JSONObject playerData = new JSONObject();
+               Map<String ,Object> playerData = new LinkedHashMap<>();
 
                 log.info("Id : " + rs.getInt("id"));
                 playerData.put("Id", rs.getInt("id"));
@@ -479,7 +477,7 @@ public class PlayerAppDao {
                 log.info("State : " + rs.getString("state"));
                 playerData.put("State", rs.getString("state"));
 
-                log.info("+++++++++++++++++++++++++++++++++++");
+                log.info("++++++++++++++++++++++++++++++++");
                 players.add(playerData);
 
             }
@@ -555,14 +553,13 @@ public class PlayerAppDao {
 
     }
 
-    public static Map<String, Object> fetch3PlayerInfoByGender(String gender) throws SQLException, IOException {
+    public static Map<String, Object> fetch3PlayerInfoByGender(String gender) throws SQLException {
         Map<String, Object> top3OdiWicketTakers = new LinkedHashMap<>();
         List<Object> players = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
-        ObjectMapper objectMapper = new ObjectMapper();
 
-            try {
+        try {
                 if (gender == null || gender.isEmpty()) {
                     log.debug("Please provide a valid gender, invalid gender null or empty ::{}", gender);
                     throw new IllegalArgumentException("Please provide a valid gender, invalid gender null or empty :" + gender);
