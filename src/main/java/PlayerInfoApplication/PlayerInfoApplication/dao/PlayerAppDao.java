@@ -126,7 +126,10 @@ public class PlayerAppDao {
 
             ResultSet rs = stmt.executeQuery(query);
 
+            int rowCount =0 ;
+
             while (rs.next()) {
+
                Map<String ,Object> playerData = new LinkedHashMap<>();
 
                 log.info("Id : " + rs.getInt("id"));
@@ -191,13 +194,15 @@ public class PlayerAppDao {
 
                 playerData.put("State", rs.getString("state"));
                 log.info("++++++++++++++++++++++++++++++++++++++");
+                rowCount ++;
                 players.add(playerData);
             }
             playerFullInfo.put("players" ,players);
-
+            log.info("Data of "+rowCount+ " player is displayed ");
         } finally {
             DBUtil.close(stmt, conn);
         }
+
         return playerFullInfo;
 
     }
