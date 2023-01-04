@@ -1,4 +1,4 @@
-package PlayerInfoApplication.PlayerInfoApplication.util;
+package player_info_application.player_info_application.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
