@@ -1,11 +1,15 @@
 package player_info_application.player_info_application.connection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connect {
     static Connection conn;
+    private static final Logger logger = LoggerFactory.getLogger(Connect.class);
     public static Connection createConnection(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -17,7 +21,7 @@ public class Connect {
             conn = DriverManager.getConnection(dbUrl,user,pass);
 
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            logger.error("Error occurred during the database connection",e);
 
         }
         return conn;

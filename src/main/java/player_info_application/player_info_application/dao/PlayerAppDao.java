@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 @Repository
 public class PlayerAppDao {
     private static final Logger log = LoggerFactory.getLogger(PlayerAppDao.class);
@@ -27,7 +28,6 @@ public class PlayerAppDao {
         Connection conn = null;
         PreparedStatement ps = null;
         Map<String, Object> playerCareerInfo = new LinkedHashMap<>();
-        Map<String, Object> playerData = new LinkedHashMap<>();
 
         try {
             if (playerName == null || playerName.isEmpty()) {
@@ -44,6 +44,7 @@ public class PlayerAppDao {
             ps.setString(1, playerName);
             ResultSet rs = ps.executeQuery();
 
+            Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
                 log.info("Id : {}" , rs.getInt("id"));
@@ -113,7 +114,6 @@ public class PlayerAppDao {
         Connection conn = null;
         Statement stmt = null;
 
-        JSONArray players = new JSONArray();
         JSONObject playerFullInfo = new JSONObject();
 
         try {
@@ -127,6 +127,7 @@ public class PlayerAppDao {
 
             int rowCount =0 ;
 
+            JSONArray players = new JSONArray();
             while (rs.next()) {
 
                Map<String ,Object> playerData = new LinkedHashMap<>();
@@ -210,7 +211,6 @@ public class PlayerAppDao {
         Connection conn = null;
         PreparedStatement ps = null;
         Map<String, Object> playerT20iInfo = new HashMap<>();
-        Map<String, Object> playerData = new LinkedHashMap<>();
 
         try {
 
@@ -229,6 +229,7 @@ public class PlayerAppDao {
             ps.setString(1, playerName);
             ResultSet rs = ps.executeQuery();
 
+            Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
                 log.info("PlayerName : {}" , rs.getString("player_name"));
@@ -258,6 +259,10 @@ public class PlayerAppDao {
             }
 
         } finally {
+
+
+
+
             DBUtil.close(ps, conn);
         }
         return playerT20iInfo;
@@ -265,7 +270,6 @@ public class PlayerAppDao {
 
     public static Map<String, Object> fetchPlayerODIInfoByName(String playerName) throws SQLException {
         Map<String, Object> playerOdiInfo = new HashMap<>();
-        Map<String, Object> playerData = new LinkedHashMap<>();
 
         Connection conn = null;
         PreparedStatement ps = null;
@@ -284,6 +288,7 @@ public class PlayerAppDao {
             ps.setString(1, playerName);
             ResultSet rs = ps.executeQuery();
 
+            Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
                 log.info("Id : {}" , rs.getInt("id"));
                 playerData.put("Id", rs.getInt("id"));
@@ -324,7 +329,6 @@ public class PlayerAppDao {
 
     public static Map<String, Object> fetchPlayerTestInfoByName(String playerName) throws SQLException {
         Map<String, Object> playerTestInfo = new HashMap<>();
-        Map<String, Object> playerData = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -342,6 +346,7 @@ public class PlayerAppDao {
             ps.setString(1, playerName);
             ResultSet rs = ps.executeQuery();
 
+            Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
                 log.info("Id : {}" , rs.getInt("id"));
@@ -384,7 +389,6 @@ public class PlayerAppDao {
 
     public static Map<String, Object> fetchPlayerPersonalDataByName(String name) throws SQLException {
         Map<String, Object> playerPersonalInfo = new HashMap<>();
-        Map<String, Object> playerData = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -405,6 +409,7 @@ public class PlayerAppDao {
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
 
+            Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
                 log.info("Id : {}", rs.getInt("player_id"));
@@ -436,10 +441,10 @@ public class PlayerAppDao {
 
     public static Map<String, Object> fetch5PlayerDataByGender(String gender) throws SQLException {
         List<Object> players = new ArrayList<>();
-        Map<String, Object> top5experiencedPlayerInfo = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
 
+        Map<String, Object> top5experiencedPlayerInfo = new LinkedHashMap<>();
         try {
             if (gender == null || gender.isEmpty()) {
                 log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
@@ -499,10 +504,10 @@ public class PlayerAppDao {
 
     public static Map<String, Object> fetch5PlayerInfoByGender(String gender) throws SQLException {
         List<Object> players = new ArrayList<>();
-        Map<String, Object> top5CenturyScorerInfo = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
 
+        Map<String, Object> top5CenturyScorerInfo = new LinkedHashMap<>();
         try {
             if (gender == null || gender.isEmpty()) {
                 log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
@@ -559,7 +564,6 @@ public class PlayerAppDao {
 
     public static Map<String, Object> fetch3PlayerInfoByGender(String gender) throws SQLException {
         Map<String, Object> top3OdiWicketTakers = new LinkedHashMap<>();
-        List<Object> players = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -578,7 +582,8 @@ public class PlayerAppDao {
                 ps.setString(1, gender);
                 ResultSet rs = ps.executeQuery();
 
-                while (rs.next()) {
+            List<Object> players = new ArrayList<>();
+            while (rs.next()) {
 
                     Map<String,Object> playerData = new LinkedHashMap<>();
 
