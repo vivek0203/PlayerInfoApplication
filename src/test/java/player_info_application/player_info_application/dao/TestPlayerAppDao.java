@@ -68,8 +68,9 @@ public class TestPlayerAppDao {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        assertThat(list10Players).isNotNull();
-        assertThat(list10Players).hasSize(1);
+        assertThat(list10Players)
+                .isNotNull()
+                     .hasSize(1);
     }
 
     @Test(priority = 5)
@@ -85,6 +86,16 @@ public class TestPlayerAppDao {
         assertThat(getPlayerT20Info).hasSize(1);
     }
 
+    @Test(priority = 29)
+    public void testFetchPlayerT20iInfoByInvalidName() {
+        log.debug("Executing testFetchPlayerT20iInfoByInvalidName()...");
+        try {
+            PlayerAppDao.fetchPlayerT20iInfoByName("Sur dav");
+        } catch (Exception e) {
+            assert true;
+        }
+
+    }
     @Test(priority = 6)
     public void testFetchPlayerT20iInfoByNameNull() {
         log.debug("Executing testFetchPlayerT20iInfoByNameNull()...");
@@ -119,6 +130,15 @@ public class TestPlayerAppDao {
         assertThat(getPlayerODIInfo).hasSize(1);
     }
 
+    @Test(priority = 30)
+    public void testFetchPlayerODIInfoByInvalidName() {
+        log.debug("Executing testFetchPlayerODIInfoByInvalidName()...");
+        try {
+            PlayerAppDao.fetchPlayerODIInfoByName("Mita rj");
+        } catch (Exception e) {
+            assert true;
+        }
+    }
     @Test(priority = 9)
     public void testFetchPlayerODIInfoByNameNull() {
         log.debug("Executing testFetchPlayerODIInfoByNameNull()...");
@@ -128,7 +148,6 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-
     @Test(priority = 10)
     public void testFetchPlayerODIInfoByNameEmpty() {
         log.debug("Executing testFetchPlayerODIInfoByNameEmpty()...");
@@ -163,7 +182,16 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
+    @Test(priority = 13)
+    public void testFetchPlayerTestInfoByInvalidName() {
+        log.debug("Executing testFetchPlayerTestInfoByInvalidName()...");
 
+        try {
+            PlayerAppDao.fetchPlayerTestInfoByName("yuzvend chal");
+        } catch (Exception e) {
+            assert true;
+        }
+    }
     @Test(priority = 13)
     public void testFetchPlayerTestInfoByNameEmpty() {
         log.debug("Executing testFetchPlayerTestInfoByNameEmpty()...");
@@ -275,6 +303,15 @@ public class TestPlayerAppDao {
         assertThat(get5PlayersData).isNotNull();
         assertThat(get5PlayersData).hasSize(1);
     }
+    @Test(priority = 31)
+    public void testFetch5PlayerInfoByInvalidGender() {
+        log.debug("Executing testFetch5PlayerInfoByInvalidGender()...");
+        try {
+            PlayerAppDao.fetch5PlayerDataByGender("fmael");
+        } catch (Exception e) {
+            assert true;
+        }
+    }
     @Test(priority = 21)
     public void testFetch5PlayerInfoByGenderNull() {
         log.debug("Executing testFetch5PlayerInfoByGenderNull()...");
@@ -308,6 +345,15 @@ public class TestPlayerAppDao {
         }
         assertNotNull(get3PlayerData);
         assertThat(get3PlayerData).hasSize(1);
+    }
+    @Test(priority = 27)
+    public void testFetch3PlayerInfoByInvalidGender() {
+        log.debug("Executing testFetch3PlayerInfoByInvalidGender()...");
+        try {
+            PlayerAppDao.fetch5PlayerDataByGender("mael");
+        } catch (Exception e) {
+            assert true;
+        }
     }
     @Test(priority = 24)
     public void testFetch3PlayerInfoByGenderNull() {
