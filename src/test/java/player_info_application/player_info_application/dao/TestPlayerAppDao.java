@@ -23,7 +23,7 @@ public class TestPlayerAppDao {
         assertThat(getPlayerData).hasSize(1);
 
     }
-    @Test(priority = 26)
+    @Test(priority = 2)
     public void testFetchPlayerCareerDataByInvalidName() throws SQLException {
         log.debug("Executing testFetchPlayerCareerDataByInvalidName()...");
 
@@ -35,7 +35,7 @@ public class TestPlayerAppDao {
 
 
     }
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void testFetchPlayerCareerDataByNameNull() {
         log.debug("Executing testFetchPlayerCareerDataByNameNull()...");
         try {
@@ -45,7 +45,7 @@ public class TestPlayerAppDao {
         }
     }
 
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void testFetchPlayerCareerDataByNameEmpty() {
         log.debug("Executing testFetchPlayerCareerDataByNameEmpty()...");
 
@@ -57,7 +57,7 @@ public class TestPlayerAppDao {
 
     }
 
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void testGet10PlayerData() {
         log.debug("Executing testGet10PlayerData()...");
         JSONObject list10Players ;
@@ -73,7 +73,7 @@ public class TestPlayerAppDao {
                      .hasSize(1);
     }
 
-    @Test(priority = 5)
+    @Test(priority = 6)
     public void testFetchPlayerT20iInfoByName() {
         log.debug("Executing testFetchPlayerT20iInfoByName()...");
         Map<String,Object> getPlayerT20Info ;
@@ -86,7 +86,7 @@ public class TestPlayerAppDao {
         assertThat(getPlayerT20Info).hasSize(1);
     }
 
-    @Test(priority = 29)
+    @Test(priority = 7)
     public void testFetchPlayerT20iInfoByInvalidName() {
         log.debug("Executing testFetchPlayerT20iInfoByInvalidName()...");
         try {
@@ -96,7 +96,7 @@ public class TestPlayerAppDao {
         }
 
     }
-    @Test(priority = 6)
+    @Test(priority = 8)
     public void testFetchPlayerT20iInfoByNameNull() {
         log.debug("Executing testFetchPlayerT20iInfoByNameNull()...");
         try {
@@ -106,7 +106,7 @@ public class TestPlayerAppDao {
         }
     }
 
-    @Test(priority = 7)
+    @Test(priority = 9)
     public void testFetchPlayerT20iInfoByNameEmpty() {
         log.debug("Executing testFetchPlayerT20iInfoByNameEmpty()...");
 
@@ -117,7 +117,7 @@ public class TestPlayerAppDao {
         }
     }
 
-    @Test(priority = 8)
+    @Test(priority = 10)
     public void testFetchPlayerODIInfoByName() {
         log.debug("Executing testFetchPlayerODIInfoByName()...");
         Map<String,Object> getPlayerODIInfo;
@@ -130,7 +130,7 @@ public class TestPlayerAppDao {
         assertThat(getPlayerODIInfo).hasSize(1);
     }
 
-    @Test(priority = 30)
+    @Test(priority = 11)
     public void testFetchPlayerODIInfoByInvalidName() {
         log.debug("Executing testFetchPlayerODIInfoByInvalidName()...");
         try {
@@ -139,7 +139,7 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-    @Test(priority = 9)
+    @Test(priority = 12)
     public void testFetchPlayerODIInfoByNameNull() {
         log.debug("Executing testFetchPlayerODIInfoByNameNull()...");
         try {
@@ -148,7 +148,7 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-    @Test(priority = 10)
+    @Test(priority = 13)
     public void testFetchPlayerODIInfoByNameEmpty() {
         log.debug("Executing testFetchPlayerODIInfoByNameEmpty()...");
 
@@ -159,7 +159,7 @@ public class TestPlayerAppDao {
         }
     }
 
-    @Test(priority = 11)
+    @Test(priority = 14)
     public void testFetchPlayerTestInfoByName() {
         log.debug("Executing testFetchPlayerTestInfoByName()...");
         Map<String,Object> getPlayerTestInfo ;
@@ -172,7 +172,7 @@ public class TestPlayerAppDao {
         assertThat(getPlayerTestInfo).hasSize(1);
     }
 
-    @Test(priority = 12)
+    @Test(priority = 15)
     public void testFetchPlayerTestInfoByNameNull() {
         log.debug("Executing testFetchPlayerTestInfoByNameNull()...");
 
@@ -182,7 +182,7 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-    @Test(priority = 13)
+    @Test(priority = 16)
     public void testFetchPlayerTestInfoByInvalidName() {
         log.debug("Executing testFetchPlayerTestInfoByInvalidName()...");
 
@@ -192,7 +192,7 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-    @Test(priority = 13)
+    @Test(priority = 17)
     public void testFetchPlayerTestInfoByNameEmpty() {
         log.debug("Executing testFetchPlayerTestInfoByNameEmpty()...");
 
@@ -203,7 +203,7 @@ public class TestPlayerAppDao {
         }
     }
 
-    @Test(priority = 14)
+    @Test(priority = 18)
     public void testFetchPlayerPersonalDataByName() {
         log.debug("Executing testFetchPlayerPersonalDataByName()...");
         Map<String,Object>  getPlayerPersonalInfo;
@@ -215,7 +215,7 @@ public class TestPlayerAppDao {
         assertThat(getPlayerPersonalInfo).isNotNull();
         assertThat(getPlayerPersonalInfo).hasSize(1);
     }
-    @Test(priority = 28)
+    @Test(priority = 19)
     public void testFetchPlayerPersonalDataByNameInvalidName() throws SQLException {
         log.debug("Executing testFetchPlayerCareerDataByInvalidName()...");
 
@@ -227,7 +227,7 @@ public class TestPlayerAppDao {
 
 
     }
-    @Test(priority = 15)
+    @Test(priority = 20)
     public void testFetchPlayerPersonalDataByNameNull() {
         log.debug("Executing testFetchPlayerPersonalDataByNameNul()...");
         try {
@@ -238,7 +238,7 @@ public class TestPlayerAppDao {
 
     }
 
-    @Test(priority = 16)
+    @Test(priority = 21)
     public void testFetchPlayerPersonalDataByNameEmpty() {
         log.debug("Executing testFetchPlayerPersonalDataByNameEmpty()...");
         try {
@@ -248,7 +248,7 @@ public class TestPlayerAppDao {
         }
     }
 
-    @Test(priority = 17)
+    @Test(priority = 22)
     public void testFetch5PlayerDataByGender() {
         log.debug("Executing testFetch5PlayerDataByGender()...");
         Map<String,Object>get5PlayerInfo;
@@ -261,7 +261,7 @@ public class TestPlayerAppDao {
         assertThat(get5PlayerInfo).hasSize(1);
 
     }
-    @Test(priority = 27)
+    @Test(priority = 23)
     public void testFetch5PlayerDataByInvalidGender() {
         log.debug("Executing testFetch5PlayerDataByInvalidGender()...");
         try {
@@ -270,7 +270,7 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-    @Test(priority = 18)
+    @Test(priority = 24)
     public void testFetch5PlayerDataByGenderNull() {
         log.debug("Executing testFetch5PlayerDataByGender()...");
 
@@ -280,7 +280,7 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-    @Test(priority = 19)
+    @Test(priority = 25)
     public void testFetch5PlayerDataByGenderEmpty() {
         log.debug("Executing testFetch5PlayerDataByGender()...");
         try{
@@ -290,7 +290,7 @@ public class TestPlayerAppDao {
         }
 
     }
-    @Test(priority = 20)
+    @Test(priority = 26)
     public void testFetch5PlayerInfoByGender() {
         log.debug("Executing testFetch5PlayerInfoByGender()...");
         Map<String, Object>get5PlayersData ;
@@ -303,7 +303,7 @@ public class TestPlayerAppDao {
         assertThat(get5PlayersData).isNotNull();
         assertThat(get5PlayersData).hasSize(1);
     }
-    @Test(priority = 31)
+    @Test(priority = 27)
     public void testFetch5PlayerInfoByInvalidGender() {
         log.debug("Executing testFetch5PlayerInfoByInvalidGender()...");
         try {
@@ -312,7 +312,7 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-    @Test(priority = 21)
+    @Test(priority = 28)
     public void testFetch5PlayerInfoByGenderNull() {
         log.debug("Executing testFetch5PlayerInfoByGenderNull()...");
         try
@@ -323,7 +323,7 @@ public class TestPlayerAppDao {
         }
 
     }
-    @Test(priority = 22)
+    @Test(priority = 29)
     public void testFetch5PlayerInfoByGenderEmpty() {
         log.debug("Executing testFetch5PlayerInfoByGenderEmpty()...");
 
@@ -334,7 +334,7 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-    @Test(priority = 23)
+    @Test(priority = 30)
     public void testFetch3PlayerInfoByGender() {
         log.debug("Executing testFetch3PlayerInfoByGender()...");
         Map<String, Object> get3PlayerData ;
@@ -346,7 +346,7 @@ public class TestPlayerAppDao {
         assertNotNull(get3PlayerData);
         assertThat(get3PlayerData).hasSize(1);
     }
-    @Test(priority = 27)
+    @Test(priority = 31)
     public void testFetch3PlayerInfoByInvalidGender() {
         log.debug("Executing testFetch3PlayerInfoByInvalidGender()...");
         try {
@@ -355,7 +355,7 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-    @Test(priority = 24)
+    @Test(priority = 32)
     public void testFetch3PlayerInfoByGenderNull() {
         log.debug("Executing testFetch3PlayerInfoByGenderNull()...");
 
@@ -366,7 +366,7 @@ public class TestPlayerAppDao {
         }
 
     }
-    @Test(priority = 25)
+    @Test(priority = 33)
     public void testFetch3PlayerInfoByGenderEmpty() {
         log.debug("Executing testFetch3PlayerInfoByGenderEmpty()...");
         try{
