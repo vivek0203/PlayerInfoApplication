@@ -11,7 +11,7 @@ import java.util.Map;
 @RestController
 public class PlayerAppController {
 
-    @GetMapping("/player_career_info")
+   @GetMapping("/player_career_info")
     public static Map<String, Object> getPlayerCareerInfo(@RequestParam String playerName) throws SQLException {
         return PlayerAppDao.fetchPlayerCareerData(playerName);
 
