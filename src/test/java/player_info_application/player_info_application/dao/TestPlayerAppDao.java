@@ -6,8 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import static org.testng.Assert.*;
 
@@ -18,16 +16,16 @@ public class TestPlayerAppDao {
     @Test(priority = 1)
     public void testFetchPlayerCareerDataByName()  {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
-        Map<String , Object> getPlayerData;
         try {
-            getPlayerData = PlayerAppDao.fetchPlayerCareerData("Hardik Pandya");
+            Map<String , Object>  getPlayerData = PlayerAppDao.fetchPlayerCareerData("Hardik Pandya");
+
             assertNotNull(getPlayerData);
             assertThat(getPlayerData).hasSize(1);
             log.info("PlayerCareerInfo : {}",getPlayerData);
-
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
+        log.info("Exiting from TestPlayerAppDao.testFetchPlayerCareerDataByName()");
     }
     @Test(priority = 2)
     public void testFetchPlayerCareerDataByInvalidName()  {
@@ -61,16 +59,18 @@ public class TestPlayerAppDao {
     @Test(priority = 5)
     public void testGet10PlayerData() {
         log.debug("Executing testGet10PlayerData()...");
-        JSONObject list10Players ;
+        JSONObject list10Players;
         try {
             list10Players = PlayerAppDao.get10PlayerData();
+            assertThat(list10Players)
+                    .isNotNull()
+                    .hasSize(1);
+            log.info("PlayerFullInfo : {}", list10Players);
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        assertThat(list10Players)
-                .isNotNull()
-                     .hasSize(1);
-        log.info("PlayerFullInfo : {}",list10Players);
     }
 
     @Test(priority = 6)
@@ -79,12 +79,13 @@ public class TestPlayerAppDao {
         Map<String,Object> getPlayerT20Info ;
         try {
             getPlayerT20Info = PlayerAppDao.fetchPlayerT20iInfoByName("Suryakumar yadav");
+            assertThat(getPlayerT20Info).isNotNull();
+            assertThat(getPlayerT20Info).hasSize(1);
+            log.info("PlayerT20Data : {}",getPlayerT20Info);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-        assertThat(getPlayerT20Info).isNotNull();
-        assertThat(getPlayerT20Info).hasSize(1);
-        log.info("PlayerT20Data : {}",getPlayerT20Info);
+
     }
 
     @Test(priority = 7)
@@ -125,12 +126,13 @@ public class TestPlayerAppDao {
         Map<String,Object> getPlayerODIInfo;
         try {
             getPlayerODIInfo = PlayerAppDao.fetchPlayerODIInfoByName("Mithali Raj");
+            assertThat(getPlayerODIInfo).isNotNull();
+            assertThat(getPlayerODIInfo).hasSize(1);
+            log.info("playerOdiData : {}",getPlayerODIInfo);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-        assertThat(getPlayerODIInfo).isNotNull();
-        assertThat(getPlayerODIInfo).hasSize(1);
-        log.info("playerOdiData : {}",getPlayerODIInfo);
+
     }
 
     @Test(priority = 11)
@@ -169,12 +171,13 @@ public class TestPlayerAppDao {
         Map<String,Object> getPlayerTestInfo ;
         try {
             getPlayerTestInfo = PlayerAppDao.fetchPlayerTestInfoByName("Rohit Sharma");
+            assertThat(getPlayerTestInfo).isNotNull();
+            assertThat(getPlayerTestInfo).hasSize(1);
+            log.info("PlayerTestData : {}",getPlayerTestInfo);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-        assertThat(getPlayerTestInfo).isNotNull();
-        assertThat(getPlayerTestInfo).hasSize(1);
-        log.info("PlayerTestData : {}",getPlayerTestInfo);
+
     }
 
     @Test(priority = 15)
@@ -215,12 +218,13 @@ public class TestPlayerAppDao {
         Map<String,Object>  getPlayerPersonalInfo;
         try {
             getPlayerPersonalInfo = PlayerAppDao.fetchPlayerPersonalDataByName("Rishabh Pant");
+            assertThat(getPlayerPersonalInfo).isNotNull();
+            assertThat(getPlayerPersonalInfo).hasSize(1);
+            log.info("PlayerPersonalInfo : {}",getPlayerPersonalInfo);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-        assertThat(getPlayerPersonalInfo).isNotNull();
-        assertThat(getPlayerPersonalInfo).hasSize(1);
-        log.info("PlayerPersonalInfo : {}",getPlayerPersonalInfo);
+
     }
     @Test(priority = 19)
     public void testFetchPlayerPersonalDataByNameInvalidName() {
@@ -262,12 +266,13 @@ public class TestPlayerAppDao {
         Map<String,Object>get5PlayerInfo;
         try{
             get5PlayerInfo = PlayerAppDao.fetch5PlayerDataByGender("male");
+            assertThat(get5PlayerInfo).isNotNull();
+            assertThat(get5PlayerInfo).hasSize(1);
+            log.info("Top5ExperiencedPlayerInfo : {} ",get5PlayerInfo);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-        assertThat(get5PlayerInfo).isNotNull();
-        assertThat(get5PlayerInfo).hasSize(1);
-        log.info("Top5ExperiencedPlayerInfo : {} ",get5PlayerInfo);
+
 
     }
     @Test(priority = 23)
@@ -307,12 +312,13 @@ public class TestPlayerAppDao {
         try
         {
             get5PlayersData = PlayerAppDao.fetch5PlayerInfoByGender("female");
+            assertThat(get5PlayersData).isNotNull();
+            assertThat(get5PlayersData).hasSize(1);
+            log.info("Top5CenturyScorerInfo : {}",get5PlayersData);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-        assertThat(get5PlayersData).isNotNull();
-        assertThat(get5PlayersData).hasSize(1);
-        log.info("Top5CenturyScorerInfo : {}",get5PlayersData);
+
     }
     @Test(priority = 27)
     public void testFetch5PlayerInfoByInvalidGender() {
@@ -352,12 +358,12 @@ public class TestPlayerAppDao {
         Map<String, Object> get3PlayerData ;
         try{
             get3PlayerData = PlayerAppDao.fetch3PlayerInfoByGender("female");
+            assertNotNull(get3PlayerData);
+            assertThat(get3PlayerData).hasSize(1);
+            log.info(" Top3OdiWicketTakers : {}",get3PlayerData);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-        assertNotNull(get3PlayerData);
-        assertThat(get3PlayerData).hasSize(1);
-        log.info(" Top3OdiWicketTakers : {}",get3PlayerData);
     }
     @Test(priority = 31)
     public void testFetch3PlayerInfoByInvalidGender() {
