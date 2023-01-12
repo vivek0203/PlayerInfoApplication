@@ -14,7 +14,7 @@ public class PlayerAppController {
 
 
     @GetMapping("/player_career_info")
-    private static Map<String, Object> getPlayerCareerInfo(@RequestParam String playerName) {
+    public static Map<String, Object> getPlayerCareerInfo(@RequestParam String playerName) {
         try {
             return PlayerAppDao.fetchPlayerCareerData(playerName);
         } catch (SQLException e) {
@@ -24,7 +24,7 @@ public class PlayerAppController {
     }
 
     @GetMapping("/player_full_info")
-    private static JSONObject getFirst10PlayerData() {
+    public static JSONObject getFirst10PlayerData() {
         try {
             return PlayerAppDao.get10PlayerData();
         } catch (SQLException e) {
@@ -33,7 +33,7 @@ public class PlayerAppController {
     }
 
     @GetMapping("/player_t20i_info")
-    private static Map<String, Object> fetchPlayerT20iInfoByName(@RequestParam String  playerName) {
+    public static Map<String, Object> fetchPlayerT20iInfoByName(@RequestParam String  playerName) {
 
         try {
             return PlayerAppDao.fetchPlayerT20iInfoByName(playerName);
@@ -43,7 +43,7 @@ public class PlayerAppController {
     }
 
     @GetMapping("/players_odi_info")
-    private static Map<String, Object> fetchPlayerODIInfoByName(@RequestParam String  playerName)
+    public static Map<String, Object> fetchPlayerODIInfoByName(@RequestParam String  playerName)
     {
         try {
             return PlayerAppDao.fetchPlayerODIInfoByName(playerName);
@@ -53,7 +53,7 @@ public class PlayerAppController {
     }
 
     @GetMapping("/players_test_info")
-    private static Map<String, Object> fetchPlayerTestInfoByName(@RequestParam String  playerName)
+    public static Map<String, Object> fetchPlayerTestInfoByName(@RequestParam String  playerName)
     {
         try {
             return PlayerAppDao.fetchPlayerTestInfoByName(playerName);
@@ -63,7 +63,7 @@ public class PlayerAppController {
     }
 
     @GetMapping("/players_personal_info")
-   private static Map<String, Object> fetchPlayerPersonalInfoByName(@RequestParam String  name)
+   public static Map<String, Object> fetchPlayerPersonalInfoByName(@RequestParam String  name)
     {
         try {
             return PlayerAppDao.fetchPlayerPersonalDataByName(name);
@@ -73,7 +73,7 @@ public class PlayerAppController {
     }
 
     @GetMapping("/top_5_experienced_players_data")
-    private static Map<String, Object> fetchTop5ExperiencedPlayerDataByGender(@RequestParam String gender)
+    public static Map<String, Object> fetchTop5ExperiencedPlayerDataByGender(@RequestParam String gender)
     {
         try {
             return PlayerAppDao.fetch5PlayerDataByGender(gender);
@@ -83,7 +83,7 @@ public class PlayerAppController {
     }
 
     @GetMapping("/top_5_century_scorer_info")
-    private static Map<String, Object> fetchTop5CenturyScorerInfoByGender(@RequestParam String gender) {
+    public static Map<String, Object> fetchTop5CenturyScorerInfoByGender(@RequestParam String gender) {
         try {
             return PlayerAppDao.fetch5PlayerInfoByGender(gender);
         } catch (SQLException e) {
@@ -92,7 +92,7 @@ public class PlayerAppController {
     }
 
     @GetMapping("/top_3_ODI_wicket_takers_info")
-    private static Map<String, Object> fetchTop3ODIWicketTakersInfoByGender(@RequestParam String gender) {
+    public static Map<String, Object> fetchTop3ODIWicketTakersInfoByGender(@RequestParam String gender) {
         try {
             return PlayerAppDao.fetch3PlayerInfoByGender(gender);
         } catch (SQLException e) {

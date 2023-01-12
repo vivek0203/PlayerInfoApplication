@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import static org.testng.Assert.*;
 
@@ -16,16 +18,16 @@ public class TestPlayerAppDao {
     @Test(priority = 1)
     public void testFetchPlayerCareerDataByName()  {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
-        Map<String , Object> getPlayerData ;
+        Map<String , Object> getPlayerData;
         try {
             getPlayerData = PlayerAppDao.fetchPlayerCareerData("Hardik Pandya");
+            assertNotNull(getPlayerData);
+            assertThat(getPlayerData).hasSize(1);
+            log.info("PlayerCareerInfo : {}",getPlayerData);
+
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-
-        assertNotNull(getPlayerData);
-        assertThat(getPlayerData).hasSize(1);
-
     }
     @Test(priority = 2)
     public void testFetchPlayerCareerDataByInvalidName()  {
@@ -36,8 +38,6 @@ public class TestPlayerAppDao {
             assert true;
             log.info("Invalid playerName");
         }
-
-
     }
     @Test(priority = 3)
     public void testFetchPlayerCareerDataByNameNull() {
@@ -48,7 +48,6 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-
     @Test(priority = 4)
     public void testFetchPlayerCareerDataByNameEmpty() {
         log.debug("Executing testFetchPlayerCareerDataByNameEmpty()...");
@@ -58,9 +57,7 @@ public class TestPlayerAppDao {
         } catch (IllegalArgumentException | SQLException e) {
             assert true;
         }
-
     }
-
     @Test(priority = 5)
     public void testGet10PlayerData() {
         log.debug("Executing testGet10PlayerData()...");
@@ -73,6 +70,7 @@ public class TestPlayerAppDao {
         assertThat(list10Players)
                 .isNotNull()
                      .hasSize(1);
+        log.info("PlayerFullInfo : {}",list10Players);
     }
 
     @Test(priority = 6)
@@ -86,6 +84,7 @@ public class TestPlayerAppDao {
         }
         assertThat(getPlayerT20Info).isNotNull();
         assertThat(getPlayerT20Info).hasSize(1);
+        log.info("PlayerT20Data : {}",getPlayerT20Info);
     }
 
     @Test(priority = 7)
@@ -131,6 +130,7 @@ public class TestPlayerAppDao {
         }
         assertThat(getPlayerODIInfo).isNotNull();
         assertThat(getPlayerODIInfo).hasSize(1);
+        log.info("playerOdiData : {}",getPlayerODIInfo);
     }
 
     @Test(priority = 11)
@@ -174,6 +174,7 @@ public class TestPlayerAppDao {
         }
         assertThat(getPlayerTestInfo).isNotNull();
         assertThat(getPlayerTestInfo).hasSize(1);
+        log.info("PlayerTestData : {}",getPlayerTestInfo);
     }
 
     @Test(priority = 15)
@@ -219,6 +220,7 @@ public class TestPlayerAppDao {
         }
         assertThat(getPlayerPersonalInfo).isNotNull();
         assertThat(getPlayerPersonalInfo).hasSize(1);
+        log.info("PlayerPersonalInfo : {}",getPlayerPersonalInfo);
     }
     @Test(priority = 19)
     public void testFetchPlayerPersonalDataByNameInvalidName() {
@@ -265,6 +267,7 @@ public class TestPlayerAppDao {
         }
         assertThat(get5PlayerInfo).isNotNull();
         assertThat(get5PlayerInfo).hasSize(1);
+        log.info("Top5ExperiencedPlayerInfo : {} ",get5PlayerInfo);
 
     }
     @Test(priority = 23)
@@ -309,6 +312,7 @@ public class TestPlayerAppDao {
         }
         assertThat(get5PlayersData).isNotNull();
         assertThat(get5PlayersData).hasSize(1);
+        log.info("Top5CenturyScorerInfo : {}",get5PlayersData);
     }
     @Test(priority = 27)
     public void testFetch5PlayerInfoByInvalidGender() {
@@ -353,6 +357,7 @@ public class TestPlayerAppDao {
         }
         assertNotNull(get3PlayerData);
         assertThat(get3PlayerData).hasSize(1);
+        log.info(" Top3OdiWicketTakers : {}",get3PlayerData);
     }
     @Test(priority = 31)
     public void testFetch3PlayerInfoByInvalidGender() {

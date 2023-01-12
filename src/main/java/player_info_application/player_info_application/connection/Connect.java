@@ -13,7 +13,6 @@ public class Connect {
     public static Connection createConnection(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-
             String dbUrl = "jdbc:mysql://localhost:3306/project";
             String user = "root";
             String pass = "password";
@@ -25,6 +24,5 @@ public class Connect {
 
         }
         return conn;
-
     }
 }

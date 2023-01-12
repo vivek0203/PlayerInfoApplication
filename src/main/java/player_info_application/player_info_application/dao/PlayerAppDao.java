@@ -18,12 +18,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("unchecked")
 @Repository
 public class PlayerAppDao {
     private static final Logger log = LoggerFactory.getLogger(PlayerAppDao.class);
 
-    public static Map<String, Object> fetchPlayerCareerData(String playerName) throws SQLException, IllegalArgumentException {
+    public static Map<String, Object> fetchPlayerCareerData(String playerName) throws SQLException{
         Connection conn = null;
         PreparedStatement ps = null;
         Map<String, Object> playerCareerInfo = new LinkedHashMap<>();
@@ -45,55 +44,36 @@ public class PlayerAppDao {
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
-
-                log.info("Id : {}", rs.getInt("id"));
                 playerData.put("ID", rs.getInt("id"));
 
-                log.info("Player Name : {}", rs.getString("player_name"));
-
-                log.info("PlayerSpecification : {}", rs.getString("player_specification"));
                 playerData.put("PlayerSpecification", rs.getString("player_specification"));
 
-                log.info("Total Matches : {}", rs.getInt("player_total_matches"));
                 playerData.put("TotalMatches", rs.getInt("player_total_matches"));
 
-                log.info("TotalCenturies : {}", rs.getInt("player_centuries"));
                 playerData.put("TotalCenturies", rs.getInt("player_centuries"));
 
-                log.info("TotalHalfCenturies : {}", rs.getInt("player_half_centuries"));
                 playerData.put("TotalHalfCenturies", rs.getInt("player_half_centuries"));
 
-                log.info("Total5WicketsHaul : {}", rs.getInt("player_five_wickets"));
                 playerData.put("Total5WicketsHaul", rs.getInt("player_five_wickets"));
 
-                log.info("TotalHatricks :{} ", rs.getInt("player_total_hatricks"));
                 playerData.put("TotalHatricks", rs.getInt("player_total_hatricks"));
 
-                log.info("TotalOdiMatches : {}", rs.getInt("total_ODI_matches"));
                 playerData.put("TotalOdiMatches", rs.getInt("total_ODI_matches"));
 
-                log.info("TotalTestMatches : {}", rs.getInt("total_Test_matches"));
                 playerData.put("TotalTestMatches", rs.getInt("total_Test_matches"));
 
-                log.info("TotalT20iMatches : {}", rs.getInt("total_T20i_matches"));
                 playerData.put("TotalT20iMatches", rs.getInt("total_T20i_matches"));
 
-                log.info("TotalODIWickets : {}", rs.getInt("total_odi_wickets"));
                 playerData.put("TotalODIWickets", rs.getInt("total_odi_wickets"));
 
-                log.info("TotalT20iWickets : {}", rs.getInt("total_t20i_wickets"));
                 playerData.put("TotalT20iWickets", rs.getInt("total_t20i_wickets"));
 
-                log.info("TotalTestWickets : {}", rs.getInt("total_test_wickets"));
                 playerData.put("TotalTestWickets", rs.getInt("total_test_wickets"));
 
-                log.info("TotalODIRuns : {}", rs.getInt("player_odi_runs"));
                 playerData.put("TotalODIRuns", rs.getInt("player_odi_runs"));
 
-                log.info("TotalT20iRuns : {}", rs.getInt("player_t20i_runs"));
                 playerData.put("TotalT20iRuns", rs.getInt("player_t20i_runs"));
 
-                log.info("TotalTestRuns : {}", rs.getInt("player_test_runs"));
                 playerData.put("TotalTestRuns ", rs.getInt("player_test_runs"));
             }
             playerCareerInfo.put(playerName, playerData);
@@ -116,86 +96,60 @@ public class PlayerAppDao {
         JSONObject playerFullInfo = new JSONObject();
         try {
             conn = Connect.createConnection();
-
             stmt = conn.createStatement();
             String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.id = ppi.player_id  where id <= 10  ";
             log.debug("Executing get10PlayerData Query : {} ", query);
 
             ResultSet rs = stmt.executeQuery(query);
 
-            int rowCount =0 ;
-
             JSONArray players = new JSONArray();
             while (rs.next()) {
-
                Map<String ,Object> playerData = new LinkedHashMap<>();
 
-                log.info("Id : {}" , rs.getInt("id"));
                 playerData.put("Id", rs.getInt("id"));
 
-                log.info("PlayerName : {}" , rs.getString("player_name"));
                 playerData.put("PlayerName ",rs.getString("player_name"));
 
-                log.info("PlayerSpecification : {}" , rs.getString("player_specification"));
                 playerData.put("PlayerSpecification", rs.getString("player_specification"));
 
-                log.info("TotalMatches  : {}" ,rs.getInt("player_total_matches"));
                 playerData.put("Total Matches ",rs.getInt("player_total_matches"));
 
-                log.info("TotalCenturies : {}" , rs.getInt("player_centuries"));
                 playerData.put("TotalCenturies ",rs.getInt("player_centuries"));
 
-                log.info("TotalHalfCenturies : {}" , rs.getInt("player_half_centuries"));
                 playerData.put("TotalHalfCenturies",rs.getInt("player_half_centuries"));
 
-                log.info("Total5WicketsHaul : {}" , rs.getInt("player_five_wickets"));
                 playerData.put("TotalFiveWicketsHaul ",rs.getInt("player_five_wickets"));
 
-                log.info("TotalHatricks : {}", rs.getInt("player_total_hatricks"));
                 playerData.put("TotalHatricks ",rs.getInt("player_total_hatricks"));
 
-                log.info("TotalOdiMatches : {}" , rs.getInt("total_ODI_matches"));
                 playerData.put("TotalODIMatches", rs.getInt("total_ODI_matches"));
 
-                log.info("TotalTestMatches : {}" , rs.getInt("total_Test_matches"));
                 playerData.put("TotalTestMatches", rs.getInt("total_Test_matches"));
 
-                log.info("TotalT20iMatches : {}" , rs.getInt("total_T20i_matches"));
                 playerData.put("TotalT20iMatches", rs.getInt("total_T20i_matches"));
 
-                log.info("TotalODIWickets : {}" , rs.getInt("total_odi_wickets"));
                 playerData.put("TotalODIWickets", rs.getInt("total_odi_wickets"));
 
-                log.info("TotalT20iWickets : {}" , rs.getInt("total_t20i_wickets"));
                 playerData.put("TotalT20iWickets", rs.getInt("total_t20i_wickets"));
 
-                log.info("TotalTestWickets : {}" , rs.getInt("total_test_wickets"));
                 playerData.put("TotalTestWickets", rs.getInt("total_test_wickets"));
 
-                log.info("TotalODIRuns : {}" , rs.getInt("player_odi_runs"));
                 playerData.put("TotalODIRuns", rs.getInt("player_odi_runs"));
 
-                log.info("TotalT20iRuns : {}" , rs.getInt("player_t20i_runs"));
                 playerData.put("TotalT20iRuns", rs.getInt("player_t20i_runs"));
 
-                log.info("TotalTestRuns : {}" , rs.getInt("player_test_runs"));
                 playerData.put("TotalTestRuns", rs.getInt("player_test_runs"));
 
-                log.info("Age : {}" , rs.getInt("age"));
                 playerData.put("Age", rs.getInt("age"));
 
-                log.info("Gender : {}" ,rs.getString("gender"));
                 playerData.put("Gender", rs.getString("gender"));
 
-                log.info("State : {}" , rs.getString("state"));
                 playerData.put("State", rs.getString("state"));
 
-                log.info("++++++++++++++++++++++++++++++++++++++");
-                rowCount ++;
                 players.add(playerData);
             }
             playerFullInfo.put("players" ,players);
-            log.info(" total no of player displayed are: {}",rowCount);
+
         } finally {
             DBUtil.close(stmt, conn);
         }
@@ -230,35 +184,25 @@ public class PlayerAppDao {
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
-                log.info("PlayerName : {}" , rs.getString("player_name"));
-
-                log.info("PlayerSpecification : {}" , rs.getString("player_specification"));
                 playerData.put("PlayerSpecification", rs.getString("player_specification"));
 
-                log.info("TotalT20iMatches  : {}" , rs.getInt("total_T20i_matches"));
                 playerData.put("TotalT20iMatches", rs.getInt("total_T20i_matches"));
 
-                log.info("TotalT20iWickets  : {}", rs.getInt("total_t20i_wickets"));
                 playerData.put("TotalT20iWickets", rs.getInt("total_t20i_wickets"));
 
-                log.info("TotalT20iRuns : {}" ,rs.getInt("player_t20i_runs"));
                 playerData.put("TotalT20iRuns", rs.getInt("player_t20i_runs"));
 
-                log.info("Age : {}" , rs.getInt("age"));
                 playerData.put("Age", rs.getInt("age"));
 
-                log.info("Gender : {}" , rs.getString("gender"));
                 playerData.put("Gender", rs.getString("gender"));
             }
             playerT20iInfo.put(playerName, playerData);
             if (playerData.isEmpty()){
-                log.error("player is not available with this name: {} " , playerName);
+                log.error("player is not available with this name: " , playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
-
         } finally {
             DBUtil.close(ps, conn);
-
         }
         return playerT20iInfo;
     }
@@ -284,27 +228,18 @@ public class PlayerAppDao {
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
-                log.info("Id : {}" , rs.getInt("id"));
                 playerData.put("Id", rs.getInt("id"));
 
-                log.info("PlayerName : {}" , rs.getString("player_name"));
-
-                log.info("PlayerSpecification : {}" , rs.getString("player_specification"));
                 playerData.put("PlayerSpecification", rs.getString("player_specification"));
 
-                log.info("TotalODIMatches  : {}" , rs.getInt("total_ODI_matches"));
                 playerData.put("TotalODIMatches", rs.getInt("total_ODI_matches"));
 
-                log.info("TotalODIWickets  :{}" , rs.getInt("total_odi_wickets"));
                 playerData.put("TotalODIWickets", rs.getInt("total_odi_wickets"));
 
-                log.info("TotalODIRuns : {}" , rs.getInt("player_odi_runs"));
                 playerData.put("TotalODIRuns", rs.getInt("player_odi_runs"));
 
-                log.info("Age : {}" , rs.getInt("age"));
                 playerData.put("Age", rs.getInt("age"));
 
-                log.info("Gender : {}" , rs.getString("gender"));
                 playerData.put("Gender", rs.getString("gender"));
 
             }
@@ -343,30 +278,20 @@ public class PlayerAppDao {
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
-                log.info("Id : {}" , rs.getInt("id"));
                 playerData.put("Id", rs.getInt("id"));
 
-                log.info("PlayerName : {}" , rs.getString("player_name"));
-
-                log.info("PlayerSpecification : {}" , rs.getString("player_specification"));
                 playerData.put("PlayerSpecification", rs.getString("player_specification"));
 
-                log.info("TotalTestMatches  : {}" , rs.getInt("total_Test_matches"));
                 playerData.put("TotalTestMatches", rs.getInt("total_Test_matches"));
 
-                log.info("TotalTestWickets  :{}" ,rs.getInt("total_test_wickets"));
                 playerData.put("TotalTestWickets", rs.getInt("total_test_wickets"));
 
-                log.info("TotalTestRuns : {}" , rs.getInt("player_test_runs"));
                 playerData.put("TotalTestRuns", rs.getInt("player_test_runs"));
 
-                log.info("Age : {}" , rs.getInt("age"));
                 playerData.put("Age", rs.getInt("age"));
 
-                log.info("Gender : {}" , rs.getString("gender"));
                 playerData.put("Gender", rs.getString("gender"));
 
-                log.info("State : {}" , rs.getString("state"));
                 playerData.put("State", rs.getString("state"));
 
             }
@@ -380,7 +305,6 @@ public class PlayerAppDao {
         }
         return playerTestInfo;
     }
-
     public static Map<String, Object> fetchPlayerPersonalDataByName(String name) throws SQLException {
         Map<String, Object> playerPersonalInfo = new HashMap<>();
         Connection conn = null;
@@ -405,20 +329,13 @@ public class PlayerAppDao {
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
-                log.info("Id : {}", rs.getInt("player_id"));
                 playerData.put("Id", rs.getInt("player_id"));
 
-                log.info("Player Name :{}" , rs.getString("name"));
-
-                log.info("Age : {}" , rs.getInt("age"));
                 playerData.put("Age ", rs.getInt("age"));
 
-                log.info("Gender : {}" , rs.getString("gender"));
                 playerData.put("Gender", rs.getString("gender"));
 
-                log.info("State : {}", rs.getString("state"));
                 playerData.put("State", rs.getString("state"));
-
             }
             playerPersonalInfo.put(name, playerData);
             if (playerData.isEmpty()){
@@ -457,28 +374,20 @@ public class PlayerAppDao {
 
                 Map<String,Object> playerData = new LinkedHashMap<>();
 
-                log.info("Id : {}" , rs.getInt("id"));
                 playerData.put("Id", rs.getInt("id"));
 
-                log.info("PlayerName : {}" , rs.getString("player_name"));
                 playerData.put("PlayerName ",rs.getString("player_name"));
 
-                log.info("PlayerSpecification : {}" , rs.getString("player_specification"));
                 playerData.put("PlayerSpecification", rs.getString("player_specification"));
 
-                log.info("TotalMatches  : {}" , rs.getInt("player_total_matches"));
                 playerData.put("TotalMatches " , rs.getInt("player_total_matches"));
 
-                log.info("Age : {}" , rs.getInt("age"));
                 playerData.put("Age ", rs.getInt("age"));
 
-                log.info("Gender : {}" ,rs.getString("gender"));
                 playerData.put("Gender", rs.getString("gender"));
 
-                log.info("State : {}" , rs.getString("state"));
                 playerData.put("State", rs.getString("state"));
 
-                log.info("++++++++++++++++++++++++++++++++");
                 players.add(playerData);
             }
            top5experiencedPlayerInfo.put(gender, players);
@@ -518,34 +427,25 @@ public class PlayerAppDao {
 
                 Map<String,Object> playerData = new LinkedHashMap<>();
 
-                log.info("Id : {}" , rs.getInt("id"));
                 playerData.put("Id", rs.getInt("id"));
 
-                log.info("PlayerName : {}" , rs.getString("player_name"));
                 playerData.put("PlayerName ",rs.getString("player_name"));
 
-                log.info("PlayerSpecification : {}" , rs.getString("player_specification"));
                 playerData.put("PlayerSpecification", rs.getString("player_specification"));
 
-                log.info("TotalMatches  : {}" , rs.getInt("player_total_matches"));
                 playerData.put("TotalMatches " , rs.getInt("player_total_matches"));
 
-                log.info("TotalCenturies : {}" , rs.getInt("player_centuries"));
                 playerData.put("TotalCenturies ",rs.getInt("player_centuries"));
 
-                log.info("Age : {}" , rs.getInt("age"));
                 playerData.put("Age ",rs.getInt("age"));
 
-                log.info("+++++++++++++++++++++++++++");
-
                 players.add(playerData);
-
             }
 
             top5CenturyScorerInfo.put(gender, players);
             if (players.isEmpty()){
                 log.error("player is not available with gender : {}" ,gender);
-                throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
+                throw new IllegalArgumentException("Please provide a valid gender, invalid gender :{}"+ gender);
             }
         } finally {
             DBUtil.close(ps, conn);
@@ -579,27 +479,19 @@ public class PlayerAppDao {
 
                     Map<String,Object> playerData = new LinkedHashMap<>();
 
-                    log.info("Id : {}" , rs.getInt("id"));
                     playerData.put("Id", rs.getInt("id"));
 
-                    log.info("PlayerName : {}" , rs.getString("player_name"));
                     playerData.put("PlayerName ",rs.getString("player_name"));
 
-                    log.info("PlayerSpecification : {}" , rs.getString("player_specification"));
                     playerData.put("PlayerSpecification", rs.getString("player_specification"));
 
-                    log.info("TotalODIMatches  : {}" , rs.getInt("total_ODI_matches"));
                     playerData.put("TotalODIMatches", rs.getInt("total_ODI_matches"));
 
-                    log.info("TotalODIWickets  :{}" , rs.getInt("total_odi_wickets"));
                     playerData.put("TotalODIWickets", rs.getInt("total_odi_wickets"));
 
-                    log.info("Age : {}" , rs.getInt("age"));
                     playerData.put("Age ",rs.getInt("age"));
 
-                    log.info("++++++++++++++++++++++++++++++++");
                     players.add(playerData);
-
                 }
 
                 top3OdiWicketTakers.put(gender, players);
