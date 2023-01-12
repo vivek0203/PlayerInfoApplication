@@ -23,15 +23,14 @@ import java.util.Map;
 public class PlayerAppDao {
     private static final Logger log = LoggerFactory.getLogger(PlayerAppDao.class);
 
-
-    public static Map<String, Object> fetchPlayerCareerData(String playerName) throws SQLException {
+    public static Map<String, Object> fetchPlayerCareerData(String playerName) throws SQLException, IllegalArgumentException {
         Connection conn = null;
         PreparedStatement ps = null;
         Map<String, Object> playerCareerInfo = new LinkedHashMap<>();
 
         try {
             if (playerName == null || playerName.isEmpty()) {
-                log.debug("Please provide a valid Player Name, invalid Player Name null or empty ::{}", playerName);
+                log.error("Please provide a valid Player Name, invalid Player Name null or empty ::{}", playerName);
                 throw new IllegalArgumentException("Please provide a valid Player Name, invalid Player Name null or empty :" + playerName);
             }
             conn = Connect.createConnection();
@@ -99,7 +98,7 @@ public class PlayerAppDao {
             }
             playerCareerInfo.put(playerName, playerData);
             if (playerData.isEmpty()){
-                    log.debug("player is not available with this name : {}" , playerName);
+                log.error("player is not available with this name : {}" , playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
 
@@ -254,7 +253,7 @@ public class PlayerAppDao {
             }
             playerT20iInfo.put(playerName, playerData);
             if (playerData.isEmpty()){
-                log.debug("player is not available with this name: {} " , playerName);
+                log.error("player is not available with this name: {} " , playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
 
@@ -276,7 +275,7 @@ public class PlayerAppDao {
 
         try {
             if (playerName == null || playerName.isEmpty()) {
-                log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
+                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
             }
             conn = Connect.createConnection();
@@ -316,7 +315,7 @@ public class PlayerAppDao {
             }
             playerOdiInfo.put(playerName, playerData);
             if (playerData.isEmpty()){
-                log.debug("player is not available with this name : {}" , playerName);
+                log.error("player is not available with this name : {}" , playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
 
@@ -334,7 +333,7 @@ public class PlayerAppDao {
 
         try {
             if (playerName == null || playerName.isEmpty()) {
-                log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
+                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
             }
             conn = Connect.createConnection();
@@ -378,7 +377,7 @@ public class PlayerAppDao {
             }
             playerTestInfo.put(playerName, playerData);
             if (playerData.isEmpty()){
-                log.debug("player is not available with this name : {}" , playerName);
+                log.error("player is not available with this name : {}" , playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
         } finally {
@@ -395,7 +394,7 @@ public class PlayerAppDao {
         try {
 
             if (name == null || name.isEmpty()) {
-                log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}", name);
+                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", name);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + name);
             }
 
@@ -429,7 +428,7 @@ public class PlayerAppDao {
             }
             playerPersonalInfo.put(name, playerData);
             if (playerData.isEmpty()){
-                log.debug("player is not available with this name : {}" , name);
+                log.error("player is not available with this name : {}" , name);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + name);
             }
             }finally{
@@ -447,7 +446,7 @@ public class PlayerAppDao {
         Map<String, Object> top5experiencedPlayerInfo = new LinkedHashMap<>();
         try {
             if (gender == null || gender.isEmpty()) {
-                log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
+                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + gender);
             }
             conn = Connect.createConnection();
@@ -492,7 +491,7 @@ public class PlayerAppDao {
 
            top5experiencedPlayerInfo.put(gender, players);
             if (players.isEmpty()){
-                log.debug("player is not available with this gender : {}",gender);
+                log.error("player is not available with this gender : {}",gender);
                 throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
             }
         } finally {
@@ -510,7 +509,7 @@ public class PlayerAppDao {
         Map<String, Object> top5CenturyScorerInfo = new LinkedHashMap<>();
         try {
             if (gender == null || gender.isEmpty()) {
-                log.debug("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
+                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + gender);
             }
             conn = Connect.createConnection();
@@ -552,7 +551,7 @@ public class PlayerAppDao {
 
             top5CenturyScorerInfo.put(gender, players);
             if (players.isEmpty()){
-                log.debug("player is not available with gender : {}" ,gender);
+                log.error("player is not available with gender : {}" ,gender);
                 throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
             }
         } finally {
@@ -569,7 +568,7 @@ public class PlayerAppDao {
 
         try {
                 if (gender == null || gender.isEmpty()) {
-                    log.debug("Please provide a valid gender, invalid gender null or empty ::{}", gender);
+                    log.error("Please provide a valid gender, invalid gender null or empty ::{}", gender);
                     throw new IllegalArgumentException("Please provide a valid gender, invalid gender null or empty :" + gender);
 
                 }
@@ -613,7 +612,7 @@ public class PlayerAppDao {
                 top3OdiWicketTakers.put(gender, players);
 
                 if (players.isEmpty()){
-                    log.debug("Players are not available with  gender : {} ",gender);
+                    log.error("Players are not available with  gender : {} ",gender);
                     throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
                 }
 
