@@ -360,6 +360,7 @@ public class TestPlayerAppDao {
             get3PlayerData = PlayerAppDao.fetch3PlayerInfoByGender("female");
             assertNotNull(get3PlayerData);
             assertThat(get3PlayerData).hasSize(1);
+
             log.info(" Top3OdiWicketTakers : {}",get3PlayerData);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
