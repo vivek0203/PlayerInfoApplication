@@ -11,7 +11,7 @@ public class DBUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(DBUtil.class);
 
-    public static void close(ResultSet rs, Statement st, Connection conn) {
+    private static void close(ResultSet rs, Statement st, Connection conn) {
         try {
             if (rs != null) {
                 rs.close();
@@ -30,5 +30,8 @@ public class DBUtil {
     public static void close(Statement st, Connection conn) {
         close(null, st, conn);
     }
-
+    public static void close(ResultSet rs){
+        close(rs);
+    }
 }
+

@@ -28,6 +28,7 @@ public class PlayerAppDao {
         PreparedStatement ps = null;
         Map<String, Object> playerCareerInfo = new LinkedHashMap<>();
 
+        ResultSet rs = null;
         try {
             if (playerName == null || playerName.isEmpty()) {
                 log.error("Please provide a valid Player Name, invalid Player Name null or empty ::{}", playerName);
@@ -41,69 +42,70 @@ public class PlayerAppDao {
 
             ps = conn.prepareStatement(query);
             ps.setString(1, playerName);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
-                log.info("Id : {}" , rs.getInt("id"));
+                log.info("Id : {}", rs.getInt("id"));
                 playerData.put("ID", rs.getInt("id"));
 
-                log.info("Player Name : {}" , rs.getString("player_name"));
+                log.info("Player Name : {}", rs.getString("player_name"));
 
-                log.info("PlayerSpecification : {}" , rs.getString("player_specification"));
+                log.info("PlayerSpecification : {}", rs.getString("player_specification"));
                 playerData.put("PlayerSpecification", rs.getString("player_specification"));
 
-                log.info("Total Matches : {}" , rs.getInt("player_total_matches"));
+                log.info("Total Matches : {}", rs.getInt("player_total_matches"));
                 playerData.put("TotalMatches", rs.getInt("player_total_matches"));
 
-                log.info("TotalCenturies : {}" , rs.getInt("player_centuries"));
+                log.info("TotalCenturies : {}", rs.getInt("player_centuries"));
                 playerData.put("TotalCenturies", rs.getInt("player_centuries"));
 
-                log.info("TotalHalfCenturies : {}" , rs.getInt("player_half_centuries"));
+                log.info("TotalHalfCenturies : {}", rs.getInt("player_half_centuries"));
                 playerData.put("TotalHalfCenturies", rs.getInt("player_half_centuries"));
 
-                log.info("Total5WicketsHaul : {}" , rs.getInt("player_five_wickets"));
+                log.info("Total5WicketsHaul : {}", rs.getInt("player_five_wickets"));
                 playerData.put("Total5WicketsHaul", rs.getInt("player_five_wickets"));
 
-                log.info("TotalHatricks :{} " ,rs.getInt("player_total_hatricks"));
+                log.info("TotalHatricks :{} ", rs.getInt("player_total_hatricks"));
                 playerData.put("TotalHatricks", rs.getInt("player_total_hatricks"));
 
-                log.info("TotalOdiMatches : {}" , rs.getInt("total_ODI_matches"));
+                log.info("TotalOdiMatches : {}", rs.getInt("total_ODI_matches"));
                 playerData.put("TotalOdiMatches", rs.getInt("total_ODI_matches"));
 
                 log.info("TotalTestMatches : {}", rs.getInt("total_Test_matches"));
                 playerData.put("TotalTestMatches", rs.getInt("total_Test_matches"));
 
-                log.info("TotalT20iMatches : {}" , rs.getInt("total_T20i_matches"));
+                log.info("TotalT20iMatches : {}", rs.getInt("total_T20i_matches"));
                 playerData.put("TotalT20iMatches", rs.getInt("total_T20i_matches"));
 
-                log.info("TotalODIWickets : {}" , rs.getInt("total_odi_wickets"));
+                log.info("TotalODIWickets : {}", rs.getInt("total_odi_wickets"));
                 playerData.put("TotalODIWickets", rs.getInt("total_odi_wickets"));
 
-                log.info("TotalT20iWickets : {}" , rs.getInt("total_t20i_wickets"));
+                log.info("TotalT20iWickets : {}", rs.getInt("total_t20i_wickets"));
                 playerData.put("TotalT20iWickets", rs.getInt("total_t20i_wickets"));
 
-                log.info("TotalTestWickets : {}" , rs.getInt("total_test_wickets"));
+                log.info("TotalTestWickets : {}", rs.getInt("total_test_wickets"));
                 playerData.put("TotalTestWickets", rs.getInt("total_test_wickets"));
 
-                log.info("TotalODIRuns : {}" , rs.getInt("player_odi_runs"));
+                log.info("TotalODIRuns : {}", rs.getInt("player_odi_runs"));
                 playerData.put("TotalODIRuns", rs.getInt("player_odi_runs"));
 
-                log.info("TotalT20iRuns : {}" , rs.getInt("player_t20i_runs"));
+                log.info("TotalT20iRuns : {}", rs.getInt("player_t20i_runs"));
                 playerData.put("TotalT20iRuns", rs.getInt("player_t20i_runs"));
 
-                log.info("TotalTestRuns : {}" , rs.getInt("player_test_runs"));
+                log.info("TotalTestRuns : {}", rs.getInt("player_test_runs"));
                 playerData.put("TotalTestRuns ", rs.getInt("player_test_runs"));
             }
             playerCareerInfo.put(playerName, playerData);
-            if (playerData.isEmpty()){
-                log.error("player is not available with this name : {}" , playerName);
+            if (playerData.isEmpty()) {
+                log.error("player is not available with this name : {}", playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
 
         } finally {
             DBUtil.close(ps, conn);
+            DBUtil.close(rs);
         }
         return playerCareerInfo;
     }
@@ -114,7 +116,7 @@ public class PlayerAppDao {
         Statement stmt = null;
 
         JSONObject playerFullInfo = new JSONObject();
-
+        ResultSet rs = null;
         try {
             conn = Connect.createConnection();
 
@@ -122,7 +124,7 @@ public class PlayerAppDao {
             String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.id = ppi.player_id  where id <= 10  ";
             log.debug("Executing get10PlayerData Query : {} ", query);
 
-            ResultSet rs = stmt.executeQuery(query);
+            rs = stmt.executeQuery(query);
 
             int rowCount =0 ;
 
@@ -199,6 +201,7 @@ public class PlayerAppDao {
             log.info(" total no of player displayed are: {}",rowCount);
         } finally {
             DBUtil.close(stmt, conn);
+            DBUtil.close(rs);
         }
 
         return playerFullInfo;
@@ -210,7 +213,7 @@ public class PlayerAppDao {
         Connection conn = null;
         PreparedStatement ps = null;
         Map<String, Object> playerT20iInfo = new HashMap<>();
-
+        ResultSet rs = null;
         try {
 
             if (playerName == null || playerName.isEmpty()) {
@@ -226,7 +229,7 @@ public class PlayerAppDao {
 
             ps = conn.prepareStatement(query);
             ps.setString(1, playerName);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
@@ -258,11 +261,8 @@ public class PlayerAppDao {
             }
 
         } finally {
-
-
-
-
             DBUtil.close(ps, conn);
+            DBUtil.close(rs);
         }
         return playerT20iInfo;
     }
@@ -272,7 +272,7 @@ public class PlayerAppDao {
 
         Connection conn = null;
         PreparedStatement ps = null;
-
+        ResultSet rs = null;
         try {
             if (playerName == null || playerName.isEmpty()) {
                 log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
@@ -285,7 +285,7 @@ public class PlayerAppDao {
             log.debug("Parameters : { Player_Name : {}} ", playerName);
             ps = conn.prepareStatement(query);
             ps.setString(1, playerName);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
@@ -321,6 +321,7 @@ public class PlayerAppDao {
 
         } finally {
             DBUtil.close(ps, conn);
+            DBUtil.close(rs);
         }
         return playerOdiInfo;
 
@@ -330,7 +331,7 @@ public class PlayerAppDao {
         Map<String, Object> playerTestInfo = new HashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
-
+        ResultSet rs = null;
         try {
             if (playerName == null || playerName.isEmpty()) {
                 log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
@@ -343,7 +344,7 @@ public class PlayerAppDao {
             log.debug("Parameter : { PlayerName : {}} ", playerName);
             ps = conn.prepareStatement(query);
             ps.setString(1, playerName);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
@@ -382,6 +383,7 @@ public class PlayerAppDao {
             }
         } finally {
             DBUtil.close(ps, conn);
+            DBUtil.close(rs);
         }
         return playerTestInfo;
     }
@@ -390,7 +392,7 @@ public class PlayerAppDao {
         Map<String, Object> playerPersonalInfo = new HashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
-
+        ResultSet rs = null;
         try {
 
             if (name == null || name.isEmpty()) {
@@ -406,7 +408,7 @@ public class PlayerAppDao {
 
             ps = conn.prepareStatement(query);
             ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
@@ -433,6 +435,7 @@ public class PlayerAppDao {
             }
             }finally{
                 DBUtil.close(ps, conn);
+                DBUtil.close(rs);
             }
         return playerPersonalInfo;
 
@@ -442,7 +445,7 @@ public class PlayerAppDao {
         List<Object> players = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
-
+        ResultSet rs = null;
         Map<String, Object> top5experiencedPlayerInfo = new LinkedHashMap<>();
         try {
             if (gender == null || gender.isEmpty()) {
@@ -457,7 +460,7 @@ public class PlayerAppDao {
 
             ps = conn.prepareStatement(query);
             ps.setString(1, gender);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             while (rs.next()) {
 
@@ -486,9 +489,7 @@ public class PlayerAppDao {
 
                 log.info("++++++++++++++++++++++++++++++++");
                 players.add(playerData);
-
             }
-
            top5experiencedPlayerInfo.put(gender, players);
             if (players.isEmpty()){
                 log.error("player is not available with this gender : {}",gender);
@@ -496,6 +497,7 @@ public class PlayerAppDao {
             }
         } finally {
             DBUtil.close(ps, conn);
+            DBUtil.close(rs);
         }
         return top5experiencedPlayerInfo;
 
@@ -505,7 +507,7 @@ public class PlayerAppDao {
         List<Object> players = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
-
+        ResultSet rs = null;
         Map<String, Object> top5CenturyScorerInfo = new LinkedHashMap<>();
         try {
             if (gender == null || gender.isEmpty()) {
@@ -519,7 +521,7 @@ public class PlayerAppDao {
             log.debug("Parameters : { Gender : {}} ", gender);
             ps = conn.prepareStatement(query);
             ps.setString(1, gender);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             while (rs.next()) {
 
@@ -556,6 +558,7 @@ public class PlayerAppDao {
             }
         } finally {
             DBUtil.close(ps, conn);
+            DBUtil.close(rs);
         }
         return top5CenturyScorerInfo;
 
@@ -565,7 +568,7 @@ public class PlayerAppDao {
         Map<String, Object> top3OdiWicketTakers = new LinkedHashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
-
+        ResultSet rs = null;
         try {
                 if (gender == null || gender.isEmpty()) {
                     log.error("Please provide a valid gender, invalid gender null or empty ::{}", gender);
@@ -579,7 +582,7 @@ public class PlayerAppDao {
                 log.debug("Parameters : { Gender : {}} ", gender);
                 ps = conn.prepareStatement(query);
                 ps.setString(1, gender);
-                ResultSet rs = ps.executeQuery();
+                rs = ps.executeQuery();
 
             List<Object> players = new ArrayList<>();
             while (rs.next()) {
@@ -618,6 +621,7 @@ public class PlayerAppDao {
 
             } finally {
                 DBUtil.close(ps, conn);
+                DBUtil.close(rs);
             }
             return top3OdiWicketTakers;
         }
