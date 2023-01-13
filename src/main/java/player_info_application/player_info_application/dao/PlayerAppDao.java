@@ -20,31 +20,31 @@ import java.util.Map;
 
 @Repository
 public class PlayerAppDao {
-    private static final Logger log = LoggerFactory.getLogger(PlayerAppDao.class);
-    private static final String Id = "id";
-    private static final String PlayerName = "player_name";
-    private static final String playerSpecification = "player_specification";
-    private static final String TotalMatches = "player_total_matches";
-    private static final String TotalCenturies = "player_centuries";
-    private static final String TotalHalfCenturies = "player_half_centuries";
-    private static final String Total5WicketsHaul = "player_five_wickets";
-    private static final String TotalHatricks = "player_total_hatricks";
-    private static final String TotalOdiMatches = "total_ODI_matches";
-    private static final String TotalTestMatches = "total_Test_matches";
-    private static final String TotalT20iMatches = "total_T20i_matches";
-    private static final String TotalODIWickets = "total_odi_wickets";
-    private static final String TotalT20iWickets = "total_t20i_wickets";
-    private static final String TotalTestWickets = "total_test_wickets";
-    private static final String TotalODIRuns = "player_odi_runs";
-    private static final String TotalT20iRuns = "player_t20i_runs";
-    private static final String TotalTestRuns = "player_test_runs";
-    private static final String Age = "age";
-    private static final String Gender = "gender";
-    private static final String State = "state";
-
-
-    public PlayerAppDao() {
+   private PlayerAppDao() {
+       super();
     }
+
+    private static final Logger log = LoggerFactory.getLogger(PlayerAppDao.class);
+    private static final String ID= "id";
+    private static final String PLAYERNAME = "player_name";
+    private static final String PLAYERSPECIFICATION = "player_specification";
+    private static final String TOTALMATCHES = "player_total_matches";
+    private static final String TOTALCENTURIES = "player_centuries";
+    private static final String TOTALHALFCENTURIES = "player_half_centuries";
+    private static final String TOTAL5WICKETSHAUL = "player_five_wickets";
+    private static final String TOTALHATTRICKS = "player_total_hatricks";
+    private static final String TOTALODIMATCHES = "total_ODI_matches";
+    private static final String TOTALTESTMATCHES = "total_Test_matches";
+    private static final String TOTALT20IMATCHES = "total_T20i_matches";
+    private static final String TOTALODIWICKETS = "total_odi_wickets";
+    private static final String TOTALT20IWICKETS = "total_t20i_wickets";
+    private static final String TOTALTESTWICKETS = "total_test_wickets";
+    private static final String TOTALODIRUNS = "player_odi_runs";
+    private static final String TOTALT20IRUNS = "player_t20i_runs";
+    private static final String TOTALTESTRUNS = "player_test_runs";
+    private static final String AGE = "age";
+    private static final String GENDER = "gender";
+    private static final String STATE = "state";
 
     public static Map<String, Object> fetchPlayerCareerData(String playerName) throws SQLException{
         Connection conn = null;
@@ -68,37 +68,37 @@ public class PlayerAppDao {
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
-                playerData.put(Id, rs.getInt("id"));
+                playerData.put(ID, rs.getInt("id"));
 
-                playerData.put(playerSpecification, rs.getString("player_specification"));
+                playerData.put(PLAYERSPECIFICATION, rs.getString("player_specification"));
 
-                playerData.put(TotalMatches, rs.getInt("player_total_matches"));
+                playerData.put(TOTALMATCHES, rs.getInt("player_total_matches"));
 
-                playerData.put(TotalCenturies, rs.getInt("player_centuries"));
+                playerData.put(TOTALCENTURIES, rs.getInt("player_centuries"));
 
-                playerData.put(TotalHalfCenturies, rs.getInt("player_half_centuries"));
+                playerData.put(TOTALHALFCENTURIES, rs.getInt("player_half_centuries"));
 
-                playerData.put(Total5WicketsHaul, rs.getInt("player_five_wickets"));
+                playerData.put(TOTAL5WICKETSHAUL, rs.getInt("player_five_wickets"));
 
-                playerData.put(TotalHatricks, rs.getInt("player_total_hatricks"));
+                playerData.put(TOTALHATTRICKS, rs.getInt("player_total_hatricks"));
 
-                playerData.put(TotalOdiMatches, rs.getInt("total_ODI_matches"));
+                playerData.put(TOTALODIMATCHES, rs.getInt("total_ODI_matches"));
 
-                playerData.put(TotalTestMatches, rs.getInt("total_Test_matches"));
+                playerData.put(TOTALTESTMATCHES, rs.getInt("total_Test_matches"));
 
-                playerData.put(TotalT20iMatches, rs.getInt("total_T20i_matches"));
+                playerData.put(TOTALT20IMATCHES, rs.getInt("total_T20i_matches"));
 
-                playerData.put(TotalODIWickets, rs.getInt("total_odi_wickets"));
+                playerData.put(TOTALODIWICKETS, rs.getInt("total_odi_wickets"));
 
-                playerData.put(TotalT20iWickets, rs.getInt("total_t20i_wickets"));
+                playerData.put(TOTALT20IWICKETS, rs.getInt("total_t20i_wickets"));
 
-                playerData.put(TotalTestWickets, rs.getInt("total_test_wickets"));
+                playerData.put(TOTALTESTWICKETS, rs.getInt("total_test_wickets"));
 
-                playerData.put(TotalODIRuns,rs.getInt("player_odi_runs"));
+                playerData.put(TOTALODIRUNS,rs.getInt("player_odi_runs"));
 
-                playerData.put(TotalT20iRuns, rs.getInt("player_t20i_runs"));
+                playerData.put(TOTALT20IRUNS, rs.getInt("player_t20i_runs"));
 
-                playerData.put(TotalTestRuns, rs.getInt("player_test_runs"));
+                playerData.put(TOTALTESTRUNS, rs.getInt("player_test_runs"));
             }
             playerCareerInfo.put(playerName, playerData);
             if (playerData.isEmpty()) {
@@ -130,45 +130,46 @@ public class PlayerAppDao {
             while (rs.next()) {
                Map<String ,Object> playerData = new LinkedHashMap<>();
 
-                playerData.put(Id, rs.getInt("id"));
+                playerData.put(ID, rs.getInt("id"));
 
-                playerData.put(PlayerName,rs.getString("player_name"));
+                playerData.put(PLAYERNAME,rs.getString("player_name"));
 
-                playerData.put(playerSpecification, rs.getString("player_specification"));
+                playerData.put(PLAYERSPECIFICATION, rs.getString("player_specification"));
 
-                playerData.put(TotalMatches,rs.getInt("player_total_matches"));
+                playerData.put(TOTALMATCHES,rs.getInt("player_total_matches"));
 
-                playerData.put(TotalCenturies,rs.getInt("player_centuries"));
+                playerData.put(TOTALCENTURIES,rs.getInt("player_centuries"));
 
-                playerData.put(TotalHalfCenturies,rs.getInt("player_half_centuries"));
+                playerData.put(TOTALHALFCENTURIES,rs.getInt("player_half_centuries"));
 
-                playerData.put(Total5WicketsHaul,rs.getInt("player_five_wickets"));
+                playerData.put(TOTAL5WICKETSHAUL,rs.getInt("player_five_wickets"));
 
-                playerData.put(TotalHatricks,rs.getInt("player_total_hatricks"));
+                playerData.put(TOTALHATTRICKS,rs.getInt("player_total_hatricks"));
 
-                playerData.put(TotalOdiMatches, rs.getInt("total_ODI_matches"));
+                playerData.put(TOTALODIMATCHES
+                        , rs.getInt("total_ODI_matches"));
 
-                playerData.put(TotalTestMatches, rs.getInt("total_Test_matches"));
+                playerData.put(TOTALTESTMATCHES, rs.getInt("total_Test_matches"));
 
-                playerData.put(TotalT20iMatches, rs.getInt("total_T20i_matches"));
+                playerData.put(TOTALT20IMATCHES, rs.getInt("total_T20i_matches"));
 
-                playerData.put(TotalODIWickets, rs.getInt("total_odi_wickets"));
+                playerData.put(TOTALODIWICKETS, rs.getInt("total_odi_wickets"));
 
-                playerData.put(TotalT20iWickets, rs.getInt("total_t20i_wickets"));
+                playerData.put(TOTALT20IWICKETS, rs.getInt("total_t20i_wickets"));
 
-                playerData.put(TotalTestWickets, rs.getInt("total_test_wickets"));
+                playerData.put(TOTALTESTWICKETS, rs.getInt("total_test_wickets"));
 
-                playerData.put(TotalODIRuns, rs.getInt("player_odi_runs"));
+                playerData.put(TOTALODIRUNS, rs.getInt("player_odi_runs"));
 
-                playerData.put(TotalT20iRuns, rs.getInt("player_t20i_runs"));
+                playerData.put(TOTALT20IRUNS, rs.getInt("player_t20i_runs"));
 
-                playerData.put(TotalTestRuns, rs.getInt("player_test_runs"));
+                playerData.put(TOTALTESTRUNS, rs.getInt("player_test_runs"));
 
-                playerData.put(Age, rs.getInt("age"));
+                playerData.put(AGE, rs.getInt("age"));
 
-                playerData.put(Gender, rs.getString("gender"));
+                playerData.put(GENDER, rs.getString("gender"));
 
-                playerData.put(State, rs.getString("state"));
+                playerData.put(STATE, rs.getString("state"));
 
                 players.add(playerData);
             }
@@ -208,17 +209,17 @@ public class PlayerAppDao {
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
-                playerData.put(playerSpecification, rs.getString("player_specification"));
+                playerData.put(PLAYERSPECIFICATION, rs.getString("player_specification"));
 
-                playerData.put(TotalT20iMatches, rs.getInt("total_T20i_matches"));
+                playerData.put(TOTALT20IMATCHES, rs.getInt("total_T20i_matches"));
 
-                playerData.put(TotalT20iWickets, rs.getInt("total_t20i_wickets"));
+                playerData.put(TOTALT20IWICKETS, rs.getInt("total_t20i_wickets"));
 
-                playerData.put(TotalT20iRuns, rs.getInt("player_t20i_runs"));
+                playerData.put(TOTALT20IRUNS, rs.getInt("player_t20i_runs"));
 
-                playerData.put(Age, rs.getInt("age"));
+                playerData.put(AGE, rs.getInt("age"));
 
-                playerData.put(Gender, rs.getString("gender"));
+                playerData.put(GENDER, rs.getString("gender"));
             }
             playerT20iInfo.put(playerName, playerData);
             if (playerData.isEmpty()){
@@ -252,19 +253,19 @@ public class PlayerAppDao {
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
-                playerData.put(Id, rs.getInt("id"));
+                playerData.put(ID, rs.getInt("id"));
 
-                playerData.put(playerSpecification, rs.getString("player_specification"));
+                playerData.put(PLAYERSPECIFICATION, rs.getString("player_specification"));
 
-                playerData.put(TotalOdiMatches, rs.getInt("total_ODI_matches"));
+                playerData.put(TOTALODIMATCHES, rs.getInt("total_ODI_matches"));
 
-                playerData.put(TotalODIWickets, rs.getInt("total_odi_wickets"));
+                playerData.put(TOTALODIWICKETS, rs.getInt("total_odi_wickets"));
 
-                playerData.put(TotalODIRuns, rs.getInt("player_odi_runs"));
+                playerData.put(TOTALODIRUNS, rs.getInt("player_odi_runs"));
 
-                playerData.put(Age, rs.getInt("age"));
+                playerData.put(AGE, rs.getInt("age"));
 
-                playerData.put(Gender, rs.getString("gender"));
+                playerData.put(GENDER, rs.getString("gender"));
             }
             playerOdiInfo.put(playerName, playerData);
             if (playerData.isEmpty()){
@@ -301,21 +302,21 @@ public class PlayerAppDao {
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
-                playerData.put(Id, rs.getInt("id"));
+                playerData.put(ID, rs.getInt("id"));
 
-                playerData.put(playerSpecification, rs.getString("player_specification"));
+                playerData.put(PLAYERSPECIFICATION, rs.getString("player_specification"));
 
-                playerData.put(TotalTestMatches, rs.getInt("total_Test_matches"));
+                playerData.put(TOTALMATCHES, rs.getInt("total_Test_matches"));
 
-                playerData.put(TotalTestWickets, rs.getInt("total_test_wickets"));
+                playerData.put(TOTALTESTWICKETS, rs.getInt("total_test_wickets"));
 
-                playerData.put(TotalTestRuns, rs.getInt("player_test_runs"));
+                playerData.put(TOTALTESTRUNS, rs.getInt("player_test_runs"));
 
-                playerData.put(Age, rs.getInt("age"));
+                playerData.put(AGE, rs.getInt("age"));
 
-                playerData.put(Gender, rs.getString("gender"));
+                playerData.put(GENDER, rs.getString("gender"));
 
-                playerData.put(State, rs.getString("state"));
+                playerData.put(STATE, rs.getString("state"));
 
             }
             playerTestInfo.put(playerName, playerData);
@@ -352,13 +353,13 @@ public class PlayerAppDao {
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
-                playerData.put(Id, rs.getInt("player_id"));
+                playerData.put(ID, rs.getInt("player_id"));
 
-                playerData.put(Age, rs.getInt("age"));
+                playerData.put(AGE, rs.getInt("age"));
 
-                playerData.put(Gender, rs.getString("gender"));
+                playerData.put(GENDER, rs.getString("gender"));
 
-                playerData.put(State, rs.getString("state"));
+                playerData.put(STATE, rs.getString("state"));
             }
             playerPersonalInfo.put(name, playerData);
             if (playerData.isEmpty()){
@@ -397,19 +398,19 @@ public class PlayerAppDao {
 
                 Map<String,Object> playerData = new LinkedHashMap<>();
 
-                playerData.put(Id, rs.getInt("id"));
+                playerData.put(ID, rs.getInt("id"));
 
-                playerData.put(PlayerName,rs.getString("player_name"));
+                playerData.put(PLAYERNAME,rs.getString("player_name"));
 
-                playerData.put(playerSpecification, rs.getString("player_specification"));
+                playerData.put(PLAYERSPECIFICATION, rs.getString("player_specification"));
 
-                playerData.put(TotalMatches, rs.getInt("player_total_matches"));
+                playerData.put(TOTALMATCHES, rs.getInt("player_total_matches"));
 
-                playerData.put(Age, rs.getInt("age"));
+                playerData.put(AGE, rs.getInt("age"));
 
-                playerData.put(Gender, rs.getString("gender"));
+                playerData.put(GENDER, rs.getString("gender"));
 
-                playerData.put(State, rs.getString("state"));
+                playerData.put(STATE, rs.getString("state"));
 
                 players.add(playerData);
             }
@@ -450,17 +451,17 @@ public class PlayerAppDao {
 
                 Map<String,Object> playerData = new LinkedHashMap<>();
 
-                playerData.put(Id, rs.getInt("id"));
+                playerData.put(ID, rs.getInt("id"));
 
-                playerData.put(PlayerName,rs.getString("player_name"));
+                playerData.put(PLAYERNAME,rs.getString("player_name"));
 
-                playerData.put(playerSpecification, rs.getString("player_specification"));
+                playerData.put(PLAYERSPECIFICATION, rs.getString("player_specification"));
 
-                playerData.put(TotalMatches, rs.getInt("player_total_matches"));
+                playerData.put(TOTALMATCHES, rs.getInt("player_total_matches"));
 
-                playerData.put(TotalCenturies,rs.getInt("player_centuries"));
+                playerData.put(TOTALCENTURIES,rs.getInt("player_centuries"));
 
-                playerData.put(Age,rs.getInt("age"));
+                playerData.put(AGE,rs.getInt("age"));
 
                 players.add(playerData);
             }
@@ -502,17 +503,17 @@ public class PlayerAppDao {
 
                     Map<String,Object> playerData = new LinkedHashMap<>();
 
-                    playerData.put(Id, rs.getInt("id"));
+                    playerData.put(ID, rs.getInt("id"));
 
-                    playerData.put(PlayerName,rs.getString("player_name"));
+                    playerData.put(PLAYERNAME,rs.getString("player_name"));
 
-                    playerData.put(playerSpecification, rs.getString("player_specification"));
+                    playerData.put(PLAYERSPECIFICATION, rs.getString("player_specification"));
 
-                    playerData.put(TotalOdiMatches, rs.getInt("total_ODI_matches"));
+                    playerData.put(TOTALODIMATCHES, rs.getInt("total_ODI_matches"));
 
-                    playerData.put(TotalODIWickets, rs.getInt("total_odi_wickets"));
+                    playerData.put(TOTALODIWICKETS, rs.getInt("total_odi_wickets"));
 
-                    playerData.put(Age,rs.getInt("age"));
+                    playerData.put(AGE,rs.getInt("age"));
 
                     players.add(playerData);
                 }
