@@ -373,10 +373,8 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Object> fetch5PlayerDataByGender(String gender) throws SQLException {
-        List<Object> players = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
-
         Map<String, Object> top5experiencedPlayerInfo = new LinkedHashMap<>();
         try {
             if (gender == null || gender.isEmpty()) {
@@ -392,7 +390,7 @@ public class PlayerAppDao {
             ps = conn.prepareStatement(query);
             ps.setString(1, gender);
             ResultSet rs = ps.executeQuery();
-
+            List<Object> players = new ArrayList<>();
             while (rs.next()) {
 
                 Map<String,Object> playerData = new LinkedHashMap<>();
@@ -428,7 +426,6 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Object> fetch5PlayerInfoByGender(String gender) throws SQLException {
-        List<Object> players = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -446,7 +443,7 @@ public class PlayerAppDao {
             ps = conn.prepareStatement(query);
             ps.setString(1, gender);
             ResultSet rs = ps.executeQuery();
-
+            List<Object> players = new ArrayList<>();
             while (rs.next()) {
 
                 Map<String,Object> playerData = new LinkedHashMap<>();
@@ -465,7 +462,6 @@ public class PlayerAppDao {
 
                 players.add(playerData);
             }
-
             if (players.isEmpty()){
                 log.error("player is not available with gender : {}" ,gender);
                 throw new IllegalArgumentException("Please provide a valid gender, invalid gender :{}"+ gender);
@@ -521,7 +517,7 @@ public class PlayerAppDao {
                     log.error("Players are not available with  gender : {} ",gender);
                     throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
                 }
-            top3OdiWicketTakers.put(gender, players);
+                top3OdiWicketTakers.put(gender, players);
 
             } finally {
                 DBUtil.close(ps, conn);

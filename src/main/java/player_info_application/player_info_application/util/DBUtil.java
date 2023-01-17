@@ -30,6 +30,5 @@ public class DBUtil {
     public static void close(Statement st, Connection conn) {
         close(null, st, conn);
     }
-
 }
 
