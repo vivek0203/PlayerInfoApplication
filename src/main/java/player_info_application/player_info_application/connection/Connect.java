@@ -2,16 +2,21 @@ package player_info_application.player_info_application.connection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connect {
     static Connection conn;
+
     private static final Logger logger = LoggerFactory.getLogger(Connect.class);
     public static Connection createConnection(){
-            try {
 
+        try
+        {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 String url = "jdbc:mysql://localhost:3306/project";
                 String user = "root";
@@ -22,6 +27,7 @@ public class Connect {
             } catch (ClassNotFoundException | SQLException e) {
                 logger.error("Error occurred during the database connection",e);
             }
+
         return conn;
     }
 }
