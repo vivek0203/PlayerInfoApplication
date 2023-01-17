@@ -53,8 +53,8 @@ public class PlayerAppDao {
 
         try {
             if (playerName == null || playerName.isEmpty()) {
-                log.error("Please provide a valid Player Name, invalid Player Name null or empty ::{}", playerName);
-                throw new IllegalArgumentException("Please provide a valid Player Name, invalid Player Name null or empty :" + playerName);
+                log.error("Please provide a valid Player Name, invalid Player Name null or empty..");
+                throw new IllegalArgumentException("Please provide a valid Player Name, invalid Player Name null or empty..");
             }
             conn = Connect.createConnection();
 
@@ -146,8 +146,7 @@ public class PlayerAppDao {
 
                 playerData.put(TOTALHATTRICKS,rs.getInt("player_total_hatricks"));
 
-                playerData.put(TOTALODIMATCHES
-                        , rs.getInt("total_ODI_matches"));
+                playerData.put(TOTALODIMATCHES, rs.getInt("total_ODI_matches"));
 
                 playerData.put(TOTALTESTMATCHES, rs.getInt("total_Test_matches"));
 
@@ -414,11 +413,12 @@ public class PlayerAppDao {
 
                 players.add(playerData);
             }
-           top5experiencedPlayerInfo.put(gender, players);
+
             if (players.isEmpty()){
                 log.error("player is not available with this gender : {}",gender);
                 throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
             }
+            top5experiencedPlayerInfo.put(gender, players);
         } finally {
             DBUtil.close(ps, conn);
 
@@ -466,11 +466,11 @@ public class PlayerAppDao {
                 players.add(playerData);
             }
 
-            top5CenturyScorerInfo.put(gender, players);
             if (players.isEmpty()){
                 log.error("player is not available with gender : {}" ,gender);
                 throw new IllegalArgumentException("Please provide a valid gender, invalid gender :{}"+ gender);
             }
+            top5CenturyScorerInfo.put(gender, players);
         } finally {
             DBUtil.close(ps, conn);
         }
@@ -517,13 +517,11 @@ public class PlayerAppDao {
 
                     players.add(playerData);
                 }
-
-                top3OdiWicketTakers.put(gender, players);
-
                 if (players.isEmpty()){
                     log.error("Players are not available with  gender : {} ",gender);
                     throw new IllegalArgumentException("Please provide a valid gender, invalid gender :" + gender);
                 }
+            top3OdiWicketTakers.put(gender, players);
 
             } finally {
                 DBUtil.close(ps, conn);

@@ -5,17 +5,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.testng.annotations.Test;
+import player_info_application.player_info_application.connection.Connect;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
 import static org.testng.Assert.*;
 
-@SuppressWarnings("AccessStaticViaInstance")
 public class TestPlayerAppDao {
 
     private static final Logger log = LoggerFactory.getLogger(TestPlayerAppDao.class);
     private PlayerAppDao playerAppDao;
+
     @Test(priority = 1)
     public void testFetchPlayerCareerDataByName()  {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
@@ -37,7 +40,7 @@ public class TestPlayerAppDao {
             playerAppDao.fetchPlayerCareerData("Hark Pandya");
         }catch (IllegalArgumentException | SQLException e){
             assert true;
-            log.error("Invalid playerName");
+            log.info("Invalid playerName");
         }
     }
     @Test(priority = 3)
@@ -88,7 +91,9 @@ public class TestPlayerAppDao {
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
+
     }
+
     @Test(priority = 7)
     public void testFetchPlayerT20iInfoByInvalidName() {
         log.debug("Executing testFetchPlayerT20iInfoByInvalidName()...");
@@ -280,7 +285,7 @@ public class TestPlayerAppDao {
     public void testFetch5PlayerDataByInvalidGender() {
         log.debug("Executing testFetch5PlayerDataByInvalidGender()...");
         try {
-            playerAppDao.fetch5PlayerDataByGender("me");
+            playerAppDao.fetch5PlayerDataByGender("mel");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
             log.info("Invalid Gender");
@@ -345,7 +350,6 @@ public class TestPlayerAppDao {
     @Test(priority = 29)
     public void testFetch5PlayerInfoByGenderEmpty() {
         log.debug("Executing testFetch5PlayerInfoByGenderEmpty()...");
-
         try
         {
             playerAppDao.fetch5PlayerInfoByGender("");
@@ -380,7 +384,6 @@ public class TestPlayerAppDao {
     @Test(priority = 32)
     public void testFetch3PlayerInfoByGenderNull() {
         log.debug("Executing testFetch3PlayerInfoByGenderNull()...");
-
         try{
             playerAppDao.fetch3PlayerInfoByGender(null);
         } catch (IllegalArgumentException| SQLException Exception ) {
@@ -396,7 +399,6 @@ public class TestPlayerAppDao {
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
-
     }
 
     public void setPlayerAppDao(PlayerAppDao playerAppDao) {
