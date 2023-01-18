@@ -273,8 +273,6 @@ public class TestPlayerAppDao {
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-
-
     }
     @Test(priority = 23)
     public void testFetch5PlayerDataByInvalidGender() {

@@ -479,10 +479,6 @@ public class PlayerAppDao {
 
                 players.add(playerData);
             }
-            if (players.isEmpty()){
-                log.error("player is not available with gender : {}" ,gender);
-                throw new IllegalArgumentException("Please provide a valid gender, invalid gender :{}"+ gender);
-            }
             top5CenturyScorerInfo.put(gender, players);
         } finally {
             DBUtil.close(ps, conn);
@@ -490,9 +486,7 @@ public class PlayerAppDao {
 
         }
         return top5CenturyScorerInfo;
-
     }
-
     public static Map<String, Object> fetch3PlayerInfoByGender(String gender) throws SQLException {
         Map<String, Object> top3OdiWicketTakers = new LinkedHashMap<>();
         Connection conn = null;
@@ -530,10 +524,6 @@ public class PlayerAppDao {
                     playerData.put(AGE,rs.getInt("age"));
 
                     players.add(playerData);
-                }
-                if (players.isEmpty()){
-                    log.error("Players are not available with  gender : {} ",gender);
-                    throw new IllegalArgumentException("Please provide a valid gender..");
                 }
                 top3OdiWicketTakers.put(gender, players);
 

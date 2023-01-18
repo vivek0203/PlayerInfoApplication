@@ -11,7 +11,6 @@ import java.sql.SQLException;
 
 public class Connect {
     static Connection conn;
-
     private static final Logger logger = LoggerFactory.getLogger(Connect.class);
     public static Connection createConnection(){
 
