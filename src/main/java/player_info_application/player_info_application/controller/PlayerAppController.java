@@ -1,5 +1,6 @@
 package player_info_application.player_info_application.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import player_info_application.player_info_application.dao.PlayerAppDao;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api/player_info_application")
 public class PlayerAppController {
 
     @GetMapping("/player_career_info")
@@ -21,7 +23,7 @@ public class PlayerAppController {
 
     }
 
-    @GetMapping("/player_full_info")
+    @GetMapping()
     public  JSONObject getFirst10PlayerData() {
         try {
             return PlayerAppDao.get10PlayerData();
