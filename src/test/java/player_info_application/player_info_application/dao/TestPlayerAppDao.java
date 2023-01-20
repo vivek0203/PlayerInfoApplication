@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import static org.testng.Assert.*;
 
@@ -393,7 +395,65 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
+    @Test(priority = 34)
+    public void  testFetchAnyNoOfPlayerInfoByName(){
+        log.debug("Executing testFetchAnyNoOfPlayerInfo()...");
+        Map<List<String> , Object> getPlayersInfo;
+        try {
+            List<String> playersName = new ArrayList<>();
+            playersName.add("Virat Kohli");
+            playersName.add("Rohit Sharma");
+            playersName.add("suryakumar yadav");
+            playersName.add("Harmanpreet Kaur");
+            getPlayersInfo = playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
+            assertThat(getPlayersInfo).isNotNull();
+            assertThat(getPlayersInfo.size()).isEqualTo(1);
+            log.info("Players Information : {}",getPlayersInfo);
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
 
+
+    }
+    @Test(priority = 35)
+    public void  testFetchAnyNoOfPlayerInfoByAllInvalidNames(){
+        log.debug("Executing testFetchAnyNoOfPlayerInfoByAllInvalidNames()...");
+        try {
+            List<String> playersName = new ArrayList<>();
+            playersName.add("Vat Kohli");
+            playersName.add("Roit Sharma");
+            playersName.add("suryakumar yav");
+            playersName.add("Harmnpreet aur");
+            playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
+        } catch (SQLException | IllegalArgumentException e) {
+            assert true;
+            log.info("invalid player name");
+        }
+    }
+    @Test(priority = 36)
+    public void  testFetchAnyNoOfPlayerInfoByAllNameNull() {
+        log.debug("Executing testFetchAnyNoOfPlayerInfoByAllNameNull()...");
+        try {
+            List<String> playersName = new ArrayList<>();
+            playersName.add(null);
+            playersName.add(null);
+            playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
+        } catch (SQLException | IllegalArgumentException e) {
+            assert true;
+        }
+    }
+    @Test(priority = 37)
+    public void  testFetchAnyNoOfPlayerInfoByAllNameEmpty() {
+        log.debug("Executing testFetchAnyNoOfPlayerInfoByAllNameNull()...");
+        try {
+            List<String> playersName = new ArrayList<>();
+            playersName.add(" ");
+            playersName.add(" ");
+            playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
+        } catch (SQLException | IllegalArgumentException e) {
+            assert true;
+        }
+    }
     public void setPlayerAppDao(PlayerAppDao playerAppDao) {
         this.playerAppDao = playerAppDao;
     }

@@ -7,16 +7,9 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.sql.*;
+import java.util.*;
 
 @Repository
 public class PlayerAppDao {
@@ -533,5 +526,96 @@ public class PlayerAppDao {
             }
             return top3OdiWicketTakers;
         }
+        public static Map<List<String> , Object> fetchAnyNoOfPlayerInfo(List<String> playerName) throws SQLException {
+            Connection conn = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Map<List<String> , Object> playerDetails = new HashMap<>();
+            try {
+                conn = Connect.createConnection();
+
+                String query = createQuery(playerName.size());
+                log.debug("Executing fetchAnyNoOfPlayerInfo Query : {} ", query);
+                ps = conn.prepareStatement(query);
+
+                int parameterIndex = 1;
+                for (Iterator < String > iterator = playerName.iterator(); iterator.hasNext();) {
+                    String name =  iterator.next();
+                    ps.setString(parameterIndex++, name);
+                }
+                rs= ps.executeQuery();
+                log.debug(" Parameter: {}",playerName );
+                List<Object> players = new ArrayList<>();
+                while (rs.next()) {
+                    Map<String ,Object> playerData = new LinkedHashMap<>();
+
+                    playerData.put(ID, rs.getInt("id"));
+
+                    playerData.put(PLAYERNAME,rs.getString("player_name"));
+
+                    playerData.put(PLAYERSPECIFICATION, rs.getString("player_specification"));
+
+                    playerData.put(TOTALMATCHES,rs.getInt("player_total_matches"));
+
+                    playerData.put(TOTALCENTURIES,rs.getInt("player_centuries"));
+
+                    playerData.put(TOTALHALFCENTURIES,rs.getInt("player_half_centuries"));
+
+                    playerData.put(TOTAL5WICKETSHAUL,rs.getInt("player_five_wickets"));
+
+                    playerData.put(TOTALHATTRICKS,rs.getInt("player_total_hatricks"));
+
+                    playerData.put(TOTALODIMATCHES, rs.getInt("total_ODI_matches"));
+
+                    playerData.put(TOTALTESTMATCHES, rs.getInt("total_Test_matches"));
+
+                    playerData.put(TOTALT20IMATCHES, rs.getInt("total_T20i_matches"));
+
+                    playerData.put(TOTALODIWICKETS, rs.getInt("total_odi_wickets"));
+
+                    playerData.put(TOTALT20IWICKETS, rs.getInt("total_t20i_wickets"));
+
+                    playerData.put(TOTALTESTWICKETS, rs.getInt("total_test_wickets"));
+
+                    playerData.put(TOTALODIRUNS, rs.getInt("player_odi_runs"));
+
+                    playerData.put(TOTALT20IRUNS, rs.getInt("player_t20i_runs"));
+
+                    playerData.put(TOTALTESTRUNS, rs.getInt("player_test_runs"));
+
+                    playerData.put(AGE, rs.getInt("age"));
+
+                    playerData.put(GENDER, rs.getString("gender"));
+
+                    playerData.put(STATE, rs.getString("state"));
+
+                    players.add(playerData);
+                }
+                if (players.isEmpty()) {
+                    log.error(" Players are not available with this names : {}", playerName);
+                    throw new IllegalArgumentException("Please provide a valid Player Names, invalid Player Names :" + playerName);
+                }
+                playerDetails.put(playerName,players);
+
+
+            } finally {
+                DBUtil.close(ps,conn);
+                DBUtil.close(rs,conn);
+            }
+
+            return playerDetails;
+        }
+    private static String createQuery(int length) {
+        String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.id = ppi.player_id where player_name in( ";
+        StringBuilder queryBuilder = new StringBuilder(query);
+        for (int i = 0; i < length; i++) {
+            queryBuilder.append("?");
+            if (i != length - 1)
+                queryBuilder.append(",");
+        }
+        queryBuilder.append(")");
+        return queryBuilder.toString();
+    }
 }
+
 

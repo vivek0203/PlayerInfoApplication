@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,7 +23,6 @@ public class PlayerAppController {
         }
 
     }
-
     @GetMapping()
     public  JSONObject getFirst10PlayerData() {
         try {
@@ -31,7 +31,6 @@ public class PlayerAppController {
             throw new IllegalArgumentException(e);
         }
     }
-
     @GetMapping("/player_t20i_info")
     public Map<String, Object> fetchPlayerT20iInfoByName(@RequestParam String  playerName) {
 
@@ -59,7 +58,6 @@ public class PlayerAppController {
             throw new IllegalArgumentException(e);
         }
     }
-
     @GetMapping("/players_personal_info")
    public Map<String, Object> fetchPlayerPersonalInfoByName(@RequestParam String  name)
     {
@@ -69,7 +67,6 @@ public class PlayerAppController {
             throw new IllegalArgumentException(e);
         }
     }
-
     @GetMapping("/top_5_experienced_players_data")
     public Map<String, Object> fetchTop5ExperiencedPlayerDataByGender(@RequestParam String gender)
     {
@@ -79,7 +76,6 @@ public class PlayerAppController {
             throw new IllegalArgumentException(e);
         }
     }
-
     @GetMapping("/top_5_century_scorer_info")
     public  Map<String, Object> fetchTop5CenturyScorerInfoByGender(@RequestParam String gender) {
         try {
@@ -88,11 +84,18 @@ public class PlayerAppController {
             throw new IllegalArgumentException(e);
         }
     }
-
     @GetMapping("/top_3_ODI_wicket_takers_info")
     public  Map<String, Object> fetchTop3ODIWicketTakersInfoByGender(@RequestParam String gender) {
         try {
             return PlayerAppDao.fetch3PlayerInfoByGender(gender);
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+    @GetMapping("/any_no_of_player_info")
+    public static Map<List<String>, Object> fetchAnyNoOfPlayerInfo( @RequestParam List<String> playerName){
+        try {
+            return PlayerAppDao.fetchAnyNoOfPlayerInfo(playerName);
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
