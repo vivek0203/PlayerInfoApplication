@@ -1,6 +1,5 @@
 package player_info_application.player_info_application.dao;
 
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -19,7 +18,7 @@ public class TestPlayerAppDao {
     @Test(priority = 1)
     public void testFetchPlayerCareerDataByName()  {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
-        Map<String , Object>  getPlayerData;
+        Map<String, Map<String,Object>>   getPlayerData;
         try {
             getPlayerData = playerAppDao.fetchPlayerCareerData("Hardik pandya");
             assertNotNull(getPlayerData);
@@ -62,12 +61,12 @@ public class TestPlayerAppDao {
     @Test(priority = 5)
     public void testGet10PlayerData() {
         log.debug("Executing testGet10PlayerData()...");
-        JSONObject list10Players;
+        Map<String, Map<String, Object>> list10Players;
         try {
             list10Players = playerAppDao.get10PlayerData();
             assertThat(list10Players)
                     .isNotNull()
-                    .hasSize(1);
+                    .hasSize(10);
             log.info("PlayerFullInfo : {}", list10Players);
 
 
@@ -79,7 +78,7 @@ public class TestPlayerAppDao {
     @Test(priority = 6)
     public void testFetchPlayerT20iInfoByName() {
         log.debug("Executing testFetchPlayerT20iInfoByName()...");
-        Map<String,Object> getPlayerT20Info ;
+        Map<String, Map<String, Object>> getPlayerT20Info ;
         try {
             getPlayerT20Info = playerAppDao.fetchPlayerT20iInfoByName("Suryakumar Yadav");
             assertThat(getPlayerT20Info).isNotNull();
@@ -126,7 +125,7 @@ public class TestPlayerAppDao {
     @Test(priority = 10)
     public void testFetchPlayerODIInfoByName() {
         log.debug("Executing testFetchPlayerODIInfoByName()...");
-        Map<String,Object> getPlayerODIInfo;
+        Map<String, Map<String, Object>> getPlayerODIInfo;
         try {
             getPlayerODIInfo = playerAppDao.fetchPlayerODIInfoByName("Mithali Raj");
             assertThat(getPlayerODIInfo).isNotNull();
@@ -171,7 +170,7 @@ public class TestPlayerAppDao {
     @Test(priority = 14)
     public void testFetchPlayerTestInfoByName() {
         log.debug("Executing testFetchPlayerTestInfoByName()...");
-        Map<String,Object> getPlayerTestInfo ;
+        Map<String, Map<String, Object>> getPlayerTestInfo ;
         try {
             getPlayerTestInfo = playerAppDao.fetchPlayerTestInfoByName("Rohit sharma");
             assertThat(getPlayerTestInfo).isNotNull();
@@ -218,7 +217,7 @@ public class TestPlayerAppDao {
     @Test(priority = 18)
     public void testFetchPlayerPersonalDataByName() {
         log.debug("Executing testFetchPlayerPersonalDataByName()...");
-        Map<String,Object>  getPlayerPersonalInfo;
+        Map<String, Map<String, Object>>  getPlayerPersonalInfo;
         try {
             getPlayerPersonalInfo = playerAppDao.fetchPlayerPersonalDataByName("Rishabh Pant");
             assertThat(getPlayerPersonalInfo).isNotNull();
@@ -266,11 +265,11 @@ public class TestPlayerAppDao {
     @Test(priority = 22)
     public void testFetch5PlayerDataByGender() {
         log.debug("Executing testFetch5PlayerDataByGender()...");
-        Map<String,Object>get5PlayerInfo;
+        Map<String, Map<String, Object>>get5PlayerInfo;
         try{
             get5PlayerInfo = playerAppDao.fetch5PlayerDataByGender("Male");
             assertThat(get5PlayerInfo).isNotNull();
-            assertThat(get5PlayerInfo).hasSize(1);
+            assertThat(get5PlayerInfo).hasSize(5);
             log.info("Top5ExperiencedPlayerInfo : {} ",get5PlayerInfo);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
@@ -309,12 +308,12 @@ public class TestPlayerAppDao {
     @Test(priority = 26)
     public void testFetch5PlayerInfoByGender() {
         log.debug("Executing testFetch5PlayerInfoByGender()...");
-        Map<String, Object>get5PlayersData ;
+        Map<String, Map<String, Object>>get5PlayersData ;
         try
         {
             get5PlayersData = playerAppDao.fetch5PlayerInfoByGender("female");
             assertThat(get5PlayersData).isNotNull();
-            assertThat(get5PlayersData).hasSize(1);
+            assertThat(get5PlayersData).hasSize(5);
             log.info("Top5CenturyScorerInfo : {}",get5PlayersData);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
@@ -355,11 +354,11 @@ public class TestPlayerAppDao {
     @Test(priority = 30)
     public void testFetch3PlayerInfoByGender() {
         log.debug("Executing testFetch3PlayerInfoByGender()...");
-        Map<String, Object> get3PlayerData ;
+        Map<String, Map<String,Object> > get3PlayerData ;
         try{
             get3PlayerData =playerAppDao.fetch3PlayerInfoByGender("Female");
             assertNotNull(get3PlayerData);
-            assertThat(get3PlayerData).hasSize(1);
+            assertThat(get3PlayerData).hasSize(3);
 
             log.info(" Top3OdiWicketTakers : {}",get3PlayerData);
         } catch (SQLException | IllegalArgumentException e) {
@@ -398,7 +397,7 @@ public class TestPlayerAppDao {
     @Test(priority = 34)
     public void  testFetchAnyNoOfPlayerInfoByName(){
         log.debug("Executing testFetchAnyNoOfPlayerInfo()...");
-        Map<List<String> , Object> getPlayersInfo;
+        Map<List<String>, List<Map<String, Object>>> getPlayersInfo;
         try {
             List<String> playersName = new ArrayList<>();
             playersName.add("Virat Kohli");

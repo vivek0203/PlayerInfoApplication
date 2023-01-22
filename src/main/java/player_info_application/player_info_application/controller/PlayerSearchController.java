@@ -8,18 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/application.com")
-public class PlayerAppController {
+@RequestMapping("application.com/search/international")
+public class PlayerSearchController {
     @GetMapping()
-    public  Map<String, Map<String, Object>> getFirst10PlayerData() {
+    public static Map<List<String>, List<Map<String, Object>>> fetchAnyNoOfPlayerInfo(@RequestParam List<String> playerName){
         try {
-            return PlayerAppDao.get10PlayerData();
+            return PlayerAppDao.fetchAnyNoOfPlayerInfo(playerName);
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
     }
-
-
-
 }
-
