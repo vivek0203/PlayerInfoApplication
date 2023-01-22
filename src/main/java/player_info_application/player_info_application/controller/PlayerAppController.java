@@ -11,15 +11,12 @@ import java.util.Map;
 @RequestMapping("/application.com")
 public class PlayerAppController {
     @GetMapping()
-    public  Map<String, Map<String, Object>> getFirst10PlayerData() {
+    public static Map<String, Map<String, Object>> getFirst10PlayerData() {
         try {
             return PlayerAppDao.get10PlayerData();
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
     }
-
-
-
 }
 

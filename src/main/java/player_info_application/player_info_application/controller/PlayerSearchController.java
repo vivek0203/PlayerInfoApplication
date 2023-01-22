@@ -10,6 +10,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("application.com/search/international")
 public class PlayerSearchController {
+
     @GetMapping()
     public static Map<List<String>, List<Map<String, Object>>> fetchAnyNoOfPlayerInfo(@RequestParam List<String> playerName){
         try {

@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/application.com/personal/international")
+@RequestMapping("/application.com/personal-info")
 public class PlayerPersonalInfoController {
     @GetMapping()
-    public Map<String, Map<String, Object>> fetchPlayerPersonalInfoByName(@RequestParam String name)
+    public static Map<String, Map<String, Object>> fetchPlayerPersonalInfoByName(@RequestParam String name)
     {
         try {
             return PlayerAppDao.fetchPlayerPersonalDataByName(name);

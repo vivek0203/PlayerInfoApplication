@@ -14,7 +14,7 @@ import java.util.Map;
 public class PLayerRecordsController {
 
     @GetMapping("/top-experienced-players")
-    public Map<String, Map<String, Object>> fetchTop5ExperiencedPlayerDataByGender(@RequestParam String gender)
+    public static Map<String, Map<String, Object>> fetchTop5ExperiencedPlayerDataByGender(@RequestParam String gender)
     {
         try {
             return PlayerAppDao.fetch5PlayerDataByGender(gender);
@@ -23,7 +23,7 @@ public class PLayerRecordsController {
         }
     }
     @GetMapping("/top-century-scorer")
-    public  Map<String, Map<String, Object>> fetchTop5CenturyScorerInfoByGender(@RequestParam String gender) {
+    public static Map<String, Map<String, Object>> fetchTop5CenturyScorerInfoByGender(@RequestParam String gender) {
         try {
             return PlayerAppDao.fetch5PlayerInfoByGender(gender);
         } catch (SQLException e) {
@@ -31,7 +31,7 @@ public class PLayerRecordsController {
         }
     }
     @GetMapping("/top-ODI-wicket-takers")
-    public  Map<String,Map<String,Object>> fetchTop3ODIWicketTakersInfoByGender(@RequestParam String gender) {
+    public static Map<String,Map<String,Object>> fetchTop3ODIWicketTakersInfoByGender(@RequestParam String gender) {
         try {
             return PlayerAppDao.fetch3PlayerInfoByGender(gender);
         } catch (SQLException e) {
