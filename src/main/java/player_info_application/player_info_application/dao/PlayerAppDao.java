@@ -466,8 +466,7 @@ public class PlayerAppDao {
             ps = conn.prepareStatement(query);
 
             int parameterIndex = 1;
-            for (Iterator<String> iterator = playerName.iterator(); iterator.hasNext(); ) {
-                String name = iterator.next();
+            for (String name : playerName) {
                 ps.setString(parameterIndex++, name);
             }
             rs = ps.executeQuery();
