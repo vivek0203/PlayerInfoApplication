@@ -9,8 +9,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/application.com/international/career-info")
 public class PlayerCareerInfoController {
+
     @GetMapping()
-    public static Map<String, Map<String,Object>>  getPlayerCareerInfo(@RequestParam String playerName) {
+    public Map<String, Map<String,Object>>  getPlayerCareerInfo(@RequestParam String playerName) {
         try {
             return PlayerAppDao.fetchPlayerCareerData(playerName);
         } catch (SQLException e) {
@@ -18,7 +19,7 @@ public class PlayerCareerInfoController {
         }
     }
     @GetMapping("/t20i")
-    public static Map<String, Map<String, Object>> fetchPlayerT20iInfoByName(@RequestParam String  playerName) {
+    public Map<String, Map<String, Object>> fetchPlayerT20iInfoByName(@RequestParam String  playerName) {
 
         try {
             return PlayerAppDao.fetchPlayerT20iInfoByName(playerName);
@@ -27,7 +28,7 @@ public class PlayerCareerInfoController {
         }
     }
     @GetMapping("/odi")
-    public static Map<String, Map<String, Object>> fetchPlayerODIInfoByName(@RequestParam String  playerName)
+    public Map<String, Map<String, Object>> fetchPlayerODIInfoByName(@RequestParam String  playerName)
     {
         try {
             return PlayerAppDao.fetchPlayerODIInfoByName(playerName);

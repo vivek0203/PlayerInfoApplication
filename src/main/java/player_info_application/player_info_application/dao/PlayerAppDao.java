@@ -11,9 +11,7 @@ import java.util.*;
 
 @Repository
 public class PlayerAppDao {
-
     private static final Logger log = LoggerFactory.getLogger(PlayerAppDao.class);
-
     public static Map<String, Map<String,Object>> fetchPlayerCareerData(String playerName) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -75,7 +73,7 @@ public class PlayerAppDao {
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
         } finally {
-            DBUtil.close(rs,ps, conn);
+            DBUtil.close(rs, ps, conn);
         }
         return playerCareerInfo;
     }

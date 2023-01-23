@@ -11,7 +11,7 @@ import java.util.Map;
 @RequestMapping("application.com/international/search")
 public class PlayerSearchController {
     @GetMapping()
-    public static Map<List<String>, List<Map<String, Object>>> fetchAnyNoOfPlayerInfo(@RequestParam List<String> playerName){
+    public Map<List<String>, List<Map<String, Object>>> fetchAnyNoOfPlayerInfo(@RequestParam List<String> playerName){
         try {
             return PlayerAppDao.fetchAnyNoOfPlayerInfo(playerName);
         } catch (SQLException e) {

@@ -13,7 +13,7 @@ import static org.testng.Assert.*;
 public class TestPlayerAppDao {
 
     private static final Logger log = LoggerFactory.getLogger(TestPlayerAppDao.class);
-    private PlayerAppDao playerAppDao;
+    PlayerAppDao playerAppDao;
 
     @Test(priority = 1)
     public void testFetchPlayerCareerDataByName()  {
@@ -452,8 +452,5 @@ public class TestPlayerAppDao {
         } catch (SQLException | IllegalArgumentException e) {
             assert true;
         }
-    }
-    public void setPlayerAppDao(PlayerAppDao playerAppDao) {
-        this.playerAppDao = playerAppDao;
     }
 }
