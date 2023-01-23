@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/application.com/career-info/international")
+@RequestMapping("/application.com/international/career-info")
 public class PlayerCareerInfoController {
     @GetMapping()
     public static Map<String, Map<String,Object>>  getPlayerCareerInfo(@RequestParam String playerName) {

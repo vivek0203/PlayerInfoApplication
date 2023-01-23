@@ -18,5 +18,14 @@ public class PlayerAppController {
             throw new IllegalArgumentException(e);
         }
     }
+    @GetMapping("/personal-info")
+    public static Map<String, Map<String, Object>> fetchPlayerPersonalInfoByName(@RequestParam String name)
+    {
+        try {
+            return PlayerAppDao.fetchPlayerPersonalDataByName(name);
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
 }
 

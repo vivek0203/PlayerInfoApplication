@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/application.com/records/international")
+@RequestMapping("/application.com/international/records")
 public class PLayerRecordsController {
 
     @GetMapping("/top-experienced-players")

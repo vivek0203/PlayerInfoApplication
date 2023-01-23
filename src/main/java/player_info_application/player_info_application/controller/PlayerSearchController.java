@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("application.com/search/international")
+@RequestMapping("application.com/international/search")
 public class PlayerSearchController {
-
     @GetMapping()
     public static Map<List<String>, List<Map<String, Object>>> fetchAnyNoOfPlayerInfo(@RequestParam List<String> playerName){
         try {

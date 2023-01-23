@@ -19,7 +19,6 @@ public class PlayerAppDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Map<String, Map<String,Object>> playerCareerInfo = new LinkedHashMap<>();
-
         try {
             if (playerName == null || playerName.isEmpty()) {
                 log.error("Please provide a valid Player Name, invalid Player Name null or empty..");
@@ -37,7 +36,7 @@ public class PlayerAppDao {
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
-                playerData.put(PlayersData.ID, rs.getInt("id"));
+                playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
                 playerData.put(PlayersData.PLAYERSPECIFICATION, rs.getString("player_specification"));
 
@@ -71,19 +70,15 @@ public class PlayerAppDao {
 
                 playerCareerInfo.put(rs.getString("player_name"), playerData);
             }
-
             if (playerData.isEmpty()) {
                 log.error("player is not available with this name : {}", playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
-
         } finally {
             DBUtil.close(rs,ps, conn);
-
         }
         return playerCareerInfo;
     }
-
     public static Map<String, Map<String, Object>> get10PlayerData() throws SQLException {
 
         Connection conn = null;
@@ -93,7 +88,7 @@ public class PlayerAppDao {
         try {
             conn = Connect.createConnection();
             stmt = conn.createStatement();
-            String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.id = ppi.player_id  where id <= 10  ";
+            String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking  where ranking <= 10  ";
             log.debug("Executing get10PlayerData Query : {} ", query);
 
             rs = stmt.executeQuery(query);
@@ -101,7 +96,7 @@ public class PlayerAppDao {
             while (rs.next()) {
                 Map<String, Object> playerData = new LinkedHashMap<>();
 
-                playerData.put(PlayersData.ID, rs.getInt("id"));
+                playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
                 playerData.put(PlayersData.PLAYERSPECIFICATION, rs.getString("player_specification"));
 
@@ -141,17 +136,11 @@ public class PlayerAppDao {
 
                playerFullInfo.put(rs.getString("player_name"),playerData);
             }
-
-
         } finally {
             DBUtil.close(rs,stmt, conn);
-
         }
-
         return playerFullInfo;
-
     }
-
     public static Map<String, Map<String, Object>> fetchPlayerT20iInfoByName(String playerName) throws SQLException {
 
         Connection conn = null;
@@ -196,12 +185,9 @@ public class PlayerAppDao {
             }
         } finally {
             DBUtil.close(rs,ps, conn);
-
-
         }
         return playerT20iInfo;
     }
-
     public static Map<String, Map<String, Object>> fetchPlayerODIInfoByName(String playerName) throws SQLException {
         Map<String, Map<String, Object>> playerOdiInfo = new HashMap<>();
 
@@ -215,7 +201,7 @@ public class PlayerAppDao {
             }
             conn = Connect.createConnection();
 
-            String query = "Select pci.id, pci.player_name, pci.player_specification, pci.total_ODI_matches,pci.total_odi_wickets,pci.player_odi_runs, ppi.age,ppi.gender  from player_career_info pci left join player_personal_info ppi on pci.id = ppi.player_id  where player_name = ? ";
+            String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_ODI_matches,pci.total_odi_wickets,pci.player_odi_runs, ppi.age,ppi.gender  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name = ? ";
             log.debug("Executing fetchPlayerODIInfoByName Query : {} ", query);
             log.debug("Parameters : { Player_Name : {}} ", playerName);
             ps = conn.prepareStatement(query);
@@ -224,7 +210,7 @@ public class PlayerAppDao {
 
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
-                playerData.put(PlayersData.ID, rs.getInt("id"));
+                playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
                 playerData.put(PlayersData.PLAYERSPECIFICATION, rs.getString("player_specification"));
 
@@ -261,7 +247,7 @@ public class PlayerAppDao {
             }
             conn = Connect.createConnection();
 
-            String query = "Select pci.id, pci.player_name, pci.player_specification, pci.total_Test_matches,pci.total_test_wickets,pci.player_test_runs, ppi.age,ppi.gender,ppi.state  from player_career_info pci left join player_personal_info ppi on pci.id = ppi.player_id  where player_name = ? ";
+            String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_Test_matches,pci.total_test_wickets,pci.player_test_runs, ppi.age,ppi.gender,ppi.state  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name = ? ";
             log.debug("Executing fetchPlayerTestInfoByName2 Query : {} ", query);
             log.debug("Parameter : { PlayerName : {}} ", playerName);
             ps = conn.prepareStatement(query);
@@ -271,7 +257,7 @@ public class PlayerAppDao {
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
-                playerData.put(PlayersData.ID, rs.getInt("id"));
+                playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
                 playerData.put(PlayersData.PLAYERSPECIFICATION, rs.getString("player_specification"));
 
@@ -298,7 +284,6 @@ public class PlayerAppDao {
         }
         return playerTestInfo;
     }
-
     public static Map<String, Map<String, Object>> fetchPlayerPersonalDataByName(String name) throws SQLException {
         Map<String, Map<String, Object>> playerPersonalInfo = new HashMap<>();
         Connection conn = null;
@@ -324,7 +309,7 @@ public class PlayerAppDao {
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
 
-                playerData.put(PlayersData.ID, rs.getInt("player_id"));
+                playerData.put(PlayersData.RANK, rs.getInt("player_ranking"));
 
                 playerData.put(PlayersData.AGE, rs.getInt("age"));
 
@@ -343,7 +328,6 @@ public class PlayerAppDao {
         }
         return playerPersonalInfo;
     }
-
     public static Map<String, Map<String, Object>> fetch5PlayerDataByGender(String gender) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -356,7 +340,7 @@ public class PlayerAppDao {
             }
             conn = Connect.createConnection();
 
-            String query = "Select pci.id,pci.player_name,pci.player_specification,pci.player_total_matches,ppi.age,ppi.gender,ppi.state from player_career_info pci inner join player_personal_info ppi on pci.id = ppi.player_id  where gender = ? order by player_total_matches desc limit 5 ";
+            String query = "Select pci.ranking,pci.player_name,pci.player_specification,pci.player_total_matches,ppi.age,ppi.gender,ppi.state from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking where gender = ? order by player_total_matches desc limit 5 ";
             log.debug("Executing get10PlayerData Query : {} ", query);
             log.debug("Parameter : { Gender : {}} ", gender);
 
@@ -367,7 +351,7 @@ public class PlayerAppDao {
 
                 Map<String, Object> playerData = new LinkedHashMap<>();
 
-                playerData.put(PlayersData.ID, rs.getInt("id"));
+                playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
                 playerData.put(PlayersData.PLAYERSPECIFICATION, rs.getString("player_specification"));
 
@@ -402,7 +386,7 @@ public class PlayerAppDao {
             }
             conn = Connect.createConnection();
 
-            String query = "Select pci.id,pci.player_name,pci.player_specification,pci.player_total_matches,pci.player_centuries,ppi.age from player_career_info pci inner join player_personal_info ppi on pci.id = ppi.player_id  where gender = ? order by player_centuries desc limit 5 ";
+            String query = "Select pci.ranking,pci.player_name,pci.player_specification,pci.player_total_matches,pci.player_centuries,ppi.age from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking  where gender = ? order by player_centuries desc limit 5 ";
             log.debug("Executing get10PlayerData Query : {} ", query);
             log.debug("Parameters : { Gender : {}} ", gender);
             ps = conn.prepareStatement(query);
@@ -413,7 +397,7 @@ public class PlayerAppDao {
 
                 Map<String, Object> playerData = new LinkedHashMap<>();
 
-                playerData.put(PlayersData.ID, rs.getInt("id"));
+                playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
                 playerData.put(PlayersData.PLAYERSPECIFICATION, rs.getString("player_specification"));
 
@@ -431,11 +415,6 @@ public class PlayerAppDao {
         }
         return top5CenturyScorerInfo;
     }
-    /**
-     * @param gender
-     * @return
-     * @throws SQLException
-     */
     public static Map<String, Map<String, Object>> fetch3PlayerInfoByGender(String gender) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -448,7 +427,7 @@ public class PlayerAppDao {
             }
             conn = Connect.createConnection();
 
-            String query = "Select pci.id,pci.player_name,pci.player_specification,pci.total_ODI_matches,pci.total_odi_wickets,ppi.age from player_career_info pci inner join player_personal_info ppi on pci.id = ppi.player_id  where gender = ? order by total_odi_wickets desc limit 3";
+            String query = "Select pci.ranking,pci.player_name,pci.player_specification,pci.total_ODI_matches,pci.total_odi_wickets,ppi.age from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking  where gender = ? order by total_odi_wickets desc limit 3";
             log.debug("Executing get10PlayerData Query : {} ", query);
             log.debug("Parameters : { Gender : {}} ", gender);
             ps = conn.prepareStatement(query);
@@ -459,7 +438,7 @@ public class PlayerAppDao {
 
                 Map<String, Object> playerData = new LinkedHashMap<>();
 
-                playerData.put(PlayersData.ID, rs.getInt("id"));
+                playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
                 playerData.put(PlayersData.PLAYERSPECIFICATION, rs.getString("player_specification"));
 
@@ -500,7 +479,9 @@ public class PlayerAppDao {
             while (rs.next()) {
                 Map<String, Object> playerData = new LinkedHashMap<>();
 
-                playerData.put(PlayersData.ID, rs.getInt("id"));
+                playerData.put(PlayersData.PLAYERNAME, rs.getString("player_name"));
+
+                playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
                 playerData.put(PlayersData.PLAYERSPECIFICATION, rs.getString("player_specification"));
 
@@ -551,9 +532,8 @@ public class PlayerAppDao {
 
         return playerDetails;
     }
-
     private static String createQuery(int length) {
-        String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.id = ppi.player_id where player_name in( ";
+        String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking where player_name in( ";
         StringBuilder queryBuilder = new StringBuilder(query);
         for (int i = 0; i < length; i++) {
             queryBuilder.append("?");
