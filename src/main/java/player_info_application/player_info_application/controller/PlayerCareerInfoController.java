@@ -10,16 +10,16 @@ import java.util.Map;
 @RequestMapping("/application.com/international/career-info")
 public class PlayerCareerInfoController {
 
-    @GetMapping()
-    public Map<String, Map<String,Object>>  getPlayerCareerInfo(@RequestParam String playerName) {
+    @GetMapping("/{player_name}")
+    public Map<String, Map<String,Object>>  getPlayerCareerInfo(@PathVariable("player_name") String playerName) {
         try {
             return PlayerAppDao.fetchPlayerCareerData(playerName);
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         }
     }
-    @GetMapping("/t20i")
-    public Map<String, Map<String, Object>> fetchPlayerT20iInfoByName(@RequestParam String  playerName) {
+    @GetMapping("/t20i/{player_name}")
+    public Map<String, Map<String, Object>> fetchPlayerT20iInfoByName(@PathVariable("player_name") String  playerName) {
 
         try {
             return PlayerAppDao.fetchPlayerT20iInfoByName(playerName);
@@ -27,8 +27,8 @@ public class PlayerCareerInfoController {
             throw new IllegalArgumentException(e);
         }
     }
-    @GetMapping("/odi")
-    public Map<String, Map<String, Object>> fetchPlayerODIInfoByName(@RequestParam String  playerName)
+    @GetMapping("/odi/{player_name}")
+    public Map<String, Map<String, Object>> fetchPlayerODIInfoByName(@PathVariable("player_name") String  playerName)
     {
         try {
             return PlayerAppDao.fetchPlayerODIInfoByName(playerName);
@@ -36,8 +36,8 @@ public class PlayerCareerInfoController {
             throw new IllegalArgumentException(e);
         }
     }
-    @GetMapping("/test")
-    public static Map<String, Map<String, Object>> fetchPlayerTestInfoByName(@RequestParam String  playerName)
+    @GetMapping("/test/{player_name}")
+    public static Map<String, Map<String, Object>> fetchPlayerTestInfoByName(@PathVariable("player_name") String  playerName)
     {
         try {
             return PlayerAppDao.fetchPlayerTestInfoByName(playerName);

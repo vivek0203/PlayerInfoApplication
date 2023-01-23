@@ -16,8 +16,8 @@ public class PlayerAppController {
             throw new IllegalArgumentException(e);
         }
     }
-    @GetMapping("/personal-info")
-    public Map<String, Map<String, Object>> fetchPlayerPersonalInfoByName(@RequestParam String name)
+    @GetMapping("/personal-info/{name}")
+    public Map<String, Map<String, Object>> fetchPlayerPersonalInfoByName(@PathVariable("name") String name)
     {
         try {
             return PlayerAppDao.fetchPlayerPersonalDataByName(name);

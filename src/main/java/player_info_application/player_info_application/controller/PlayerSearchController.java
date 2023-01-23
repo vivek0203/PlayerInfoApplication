@@ -10,8 +10,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("application.com/international/search")
 public class PlayerSearchController {
-    @GetMapping()
-    public Map<List<String>, List<Map<String, Object>>> fetchAnyNoOfPlayerInfo(@RequestParam List<String> playerName){
+    @GetMapping("/{player_name}")
+    public Map<List<String>, List<Map<String, Object>>> fetchAnyNoOfPlayerInfo(@PathVariable("player_name") List<String> playerName){
         try {
             return PlayerAppDao.fetchAnyNoOfPlayerInfo(playerName);
         } catch (SQLException e) {

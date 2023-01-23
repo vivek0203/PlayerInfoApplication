@@ -22,8 +22,7 @@ public class PlayerAppDao {
                 log.error("Please provide a valid Player Name, invalid Player Name null or empty..");
                 throw new IllegalArgumentException("Please provide a valid Player Name, invalid Player Name null or empty..");
             }
-            conn = Connect.createConnection();
-
+            conn = Connect.getDataSource().getConnection();
             String query = "Select * from player_career_info where player_name = ? ";
             log.debug("Executing fetchPlayerCareerData Query : {} ", query);
             log.debug("Parameters : { PlayerName : {}} ", playerName);
@@ -84,7 +83,7 @@ public class PlayerAppDao {
         ResultSet rs = null;
         Map<String, Map<String, Object>> playerFullInfo = new LinkedHashMap<>();
         try {
-            conn = Connect.createConnection();
+            conn = Connect.getDataSource().getConnection();
             stmt = conn.createStatement();
             String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking  where ranking <= 10  ";
             log.debug("Executing get10PlayerData Query : {} ", query);
@@ -153,7 +152,7 @@ public class PlayerAppDao {
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :{}" + playerName);
             }
 
-            conn = Connect.createConnection();
+            conn = Connect.getDataSource().getConnection();
 
             String query = "Select player_name,player_specification,total_T20i_matches,total_t20i_wickets,player_t20i_runs  from player_career_info where player_name = ? ";
             log.debug("Executing fetchPlayerT20iInfoByName Query : {} ", query);
@@ -197,7 +196,7 @@ public class PlayerAppDao {
                 log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
             }
-            conn = Connect.createConnection();
+            conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_ODI_matches,pci.total_odi_wickets,pci.player_odi_runs, ppi.age,ppi.gender  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name = ? ";
             log.debug("Executing fetchPlayerODIInfoByName Query : {} ", query);
@@ -243,7 +242,7 @@ public class PlayerAppDao {
                 log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
             }
-            conn = Connect.createConnection();
+            conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_Test_matches,pci.total_test_wickets,pci.player_test_runs, ppi.age,ppi.gender,ppi.state  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name = ? ";
             log.debug("Executing fetchPlayerTestInfoByName2 Query : {} ", query);
@@ -294,7 +293,7 @@ public class PlayerAppDao {
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + name);
             }
 
-            conn = Connect.createConnection();
+            conn = Connect.getDataSource().getConnection();
 
             String query = "Select * from player_personal_info  where name = ?";
             log.debug("Executing fetchPlayerPersonalData Query : {} ", query);
@@ -336,7 +335,7 @@ public class PlayerAppDao {
                 log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + gender);
             }
-            conn = Connect.createConnection();
+            conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking,pci.player_name,pci.player_specification,pci.player_total_matches,ppi.age,ppi.gender,ppi.state from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking where gender = ? order by player_total_matches desc limit 5 ";
             log.debug("Executing get10PlayerData Query : {} ", query);
@@ -382,7 +381,7 @@ public class PlayerAppDao {
                 log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + gender);
             }
-            conn = Connect.createConnection();
+            conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking,pci.player_name,pci.player_specification,pci.player_total_matches,pci.player_centuries,ppi.age from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking  where gender = ? order by player_centuries desc limit 5 ";
             log.debug("Executing get10PlayerData Query : {} ", query);
@@ -423,7 +422,7 @@ public class PlayerAppDao {
                 log.error("Please provide a valid gender, invalid gender null or empty ::{}", gender);
                 throw new IllegalArgumentException("Please provide a valid gender, invalid gender null or empty :" + gender);
             }
-            conn = Connect.createConnection();
+            conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking,pci.player_name,pci.player_specification,pci.total_ODI_matches,pci.total_odi_wickets,ppi.age from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking  where gender = ? order by total_odi_wickets desc limit 3";
             log.debug("Executing get10PlayerData Query : {} ", query);
@@ -460,7 +459,7 @@ public class PlayerAppDao {
         ResultSet rs = null;
         Map<List<String>, List<Map<String, Object>>> playerDetails = new HashMap<>();
         try {
-            conn = Connect.createConnection();
+            conn = Connect.getDataSource().getConnection();
 
             String query = createQuery(playerName.size());
             log.debug("Executing fetchAnyNoOfPlayerInfo Query : {} ", query);
