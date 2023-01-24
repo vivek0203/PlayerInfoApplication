@@ -438,10 +438,11 @@ public class PlayerAppDao {
                 playerData.put(PlayersData.AGE, rs.getInt("age"));
 
                 top3OdiWicketTakers.put(rs.getString("player_name"), playerData);
-                if(top3OdiWicketTakers.isEmpty()){
-                    log.error("Player is not present with gender : {}",gender);
-                    throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
-                }
+
+            }
+            if(top3OdiWicketTakers.isEmpty()){
+                log.error("Player is not present with gender : {}",gender);
+                throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
             }
 
         } finally {
