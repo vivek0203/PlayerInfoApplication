@@ -376,7 +376,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetch3PlayerInfoInvalidByGender()...");
         Map<String, Map<String,Object> > get3PlayerData ;
         try{
-            get3PlayerData =playerAppDao.fetch3PlayerInfoByGender("Female");
+            get3PlayerData =playerAppDao.fetch3PlayerInfoByGender("Fee");
             assertNull(get3PlayerData);
         } catch (SQLException | IllegalArgumentException e) {
            assert  true;
