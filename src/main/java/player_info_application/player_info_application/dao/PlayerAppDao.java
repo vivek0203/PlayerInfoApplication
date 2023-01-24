@@ -1,7 +1,7 @@
 package player_info_application.player_info_application.dao;
 
 import player_info_application.player_info_application.connect.Connect;
-import player_info_application.player_info_application.entity.PlayersData;
+import player_info_application.player_info_application.pojo.PlayersData;
 import player_info_application.player_info_application.util.DBUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -524,7 +524,7 @@ public class PlayerAppDao {
                 players.add(playerData);
             }
             playerDetails.put(playerName, players);
-            if (playerDetails.isEmpty()) {
+            if (players.isEmpty()) {
                 log.error(" Players are not available with this names : {}", playerName);
                 throw new IllegalArgumentException("Please provide a valid Player Names, invalid Player Names :" + playerName);
             }
