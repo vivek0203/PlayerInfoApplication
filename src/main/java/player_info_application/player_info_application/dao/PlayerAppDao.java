@@ -28,7 +28,7 @@ public class PlayerAppDao {
             log.debug("Parameters : { PlayerName : {}} ", playerName);
 
             ps = conn.prepareStatement(query);
-            ps.setString(1,'%'+ playerName + '%');
+            ps.setString(1,"%"+ playerName + "%");
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -156,7 +156,7 @@ public class PlayerAppDao {
             log.debug("Parameters : { Player Name : {}} ", playerName);
 
             ps = conn.prepareStatement(query);
-            ps.setString(1, '%'+playerName+'%');
+            ps.setString(1, "%"+playerName+"%");
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -197,7 +197,7 @@ public class PlayerAppDao {
             log.debug("Executing fetchPlayerODIInfoByName Query : {} ", query);
             log.debug("Parameters : { Player_Name : {}} ", playerName);
             ps = conn.prepareStatement(query);
-            ps.setString(1, '%'+playerName+'%');
+            ps.setString(1, "%"+playerName+"%");
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -243,7 +243,7 @@ public class PlayerAppDao {
             log.debug("Executing fetchPlayerTestInfoByName2 Query : {} ", query);
             log.debug("Parameter : { PlayerName : {}} ", playerName);
             ps = conn.prepareStatement(query);
-            ps.setString(1, '%'+playerName+'%');
+            ps.setString(1, "%"+playerName+"%");
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -292,7 +292,7 @@ public class PlayerAppDao {
             log.debug("Executing fetchPlayerPersonalData Query : {} ", query);
             log.debug("Parameter : { Name : {}  } ", name);
             ps = conn.prepareStatement(query);
-            ps.setString(1,  '%'+ name + '%');
+            ps.setString(1,  "%"+ name + "%");
             rs = ps.executeQuery();
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
@@ -332,7 +332,7 @@ public class PlayerAppDao {
             log.debug("Parameter : { Gender : {}} ", gender);
 
             ps = conn.prepareStatement(query);
-            ps.setString(1, gender+'%');
+            ps.setString(1, gender+"%");
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -377,7 +377,7 @@ public class PlayerAppDao {
             log.debug("Executing get10PlayerData Query : {} ", query);
             log.debug("Parameters : { Gender : {}} ", gender);
             ps = conn.prepareStatement(query);
-            ps.setString(1, gender+'%');
+            ps.setString(1, gender+"%");
             rs = ps.executeQuery();
             Map<String, Object> playerData = new LinkedHashMap<>();
 
@@ -420,7 +420,7 @@ public class PlayerAppDao {
             log.debug("Executing get10PlayerData Query : {} ", query);
             log.debug("Parameters : { Gender : {}} ", gender);
             ps = conn.prepareStatement(query);
-            ps.setString(1, gender+'%');
+            ps.setString(1, gender+"%");
             rs = ps.executeQuery();
 
             while (rs.next()) {
