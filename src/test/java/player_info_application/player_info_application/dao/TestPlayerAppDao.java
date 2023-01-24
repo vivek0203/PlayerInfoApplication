@@ -324,13 +324,18 @@ public class TestPlayerAppDao {
     @Test(priority = 27)
     public void testFetch5PlayerInfoByInvalidGender() {
         log.debug("Executing testFetch5PlayerInfoByInvalidGender()...");
-        try {
-            playerAppDao.fetch5PlayerDataByGender("fael");
-        } catch (IllegalArgumentException| SQLException Exception ) {
+        Map<String, Map<String, Object>>get5PlayersData ;
+        try
+        {
+            get5PlayersData = playerAppDao.fetch5PlayerInfoByGender("fmle");
+            assertThat(get5PlayersData).isNull();
+
+        } catch (SQLException | IllegalArgumentException e) {
             assert true;
-            log.info("Invalid Gender");
+            log.error("Invalid Gender",e);
         }
-    }
+
+        }
     @Test(priority = 28)
     public void testFetch5PlayerInfoByGenderNull() {
         log.debug("Executing testFetch5PlayerInfoByGenderNull()...");
@@ -368,12 +373,14 @@ public class TestPlayerAppDao {
     }
     @Test(priority = 31)
     public void testFetch3PlayerInfoByInvalidGender() {
-        log.debug("Executing testFetch3PlayerInfoByInvalidGender()...");
-        try {
-            playerAppDao.fetch5PlayerDataByGender("Mael");
-        } catch (IllegalArgumentException| SQLException Exception ) {
-            assert true;
-            log.info("Invalid Gender");
+        log.debug("Executing testFetch3PlayerInfoInvalidByGender()...");
+        Map<String, Map<String,Object> > get3PlayerData ;
+        try{
+            get3PlayerData =playerAppDao.fetch3PlayerInfoByGender("Female");
+            assertNull(get3PlayerData);
+        } catch (SQLException | IllegalArgumentException e) {
+           assert  true;
+           log.error("Invalid Gender",e);
         }
     }
     @Test(priority = 32)
@@ -425,7 +432,7 @@ public class TestPlayerAppDao {
             playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
         } catch (SQLException | IllegalArgumentException e) {
             assert true;
-            log.info("invalid player name");
+            log.info("invalid player name",e);
         }
     }
     @Test(priority = 36)
