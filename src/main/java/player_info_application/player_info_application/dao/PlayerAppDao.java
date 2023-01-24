@@ -120,7 +120,7 @@ public class PlayerAppDao {
 
                 playerData.put(PlayersData.TOTALODIRUNS, rs.getInt("player_odi_runs"));
 
-                playerData.put(PlayersData.TOTALT20IRUNS, rs.getInt("player_t20i_runs"));
+                 playerData.put(PlayersData.TOTALT20IRUNS, rs.getInt("player_t20i_runs"));
 
                 playerData.put(PlayersData.TOTALTESTRUNS, rs.getInt("player_test_runs"));
 
@@ -395,10 +395,7 @@ public class PlayerAppDao {
 
                 top5CenturyScorerInfo.put(rs.getString("player_name"),playerData);
             }
-            if(top5CenturyScorerInfo.isEmpty()){
-                log.error("Player is not present with gender : {}",gender);
-                throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
-            }
+
         } finally {
             DBUtil.close(rs, ps, conn);
         }
@@ -438,14 +435,8 @@ public class PlayerAppDao {
                 playerData.put(PlayersData.AGE, rs.getInt("age"));
 
                 top3OdiWicketTakers.put(rs.getString("player_name"), playerData);
-
             }
-            if(top3OdiWicketTakers.isEmpty()){
-                log.error("Player is not present with gender : {}",gender);
-                throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
-            }
-
-        } finally {
+           } finally {
             DBUtil.close(rs, ps, conn);
         }
         return top3OdiWicketTakers;
