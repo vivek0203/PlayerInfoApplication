@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import static org.testng.Assert.*;
 
+@SuppressWarnings("AccessStaticViaInstance")
 public class TestPlayerAppDao {
 
     private static final Logger log = LoggerFactory.getLogger(TestPlayerAppDao.class);
@@ -420,9 +421,9 @@ public class TestPlayerAppDao {
         try {
             List<String> playersName = new ArrayList<>();
             playersName.add("Koi");
-            //playersName.add("Roit Srma");
-           // playersName.add("sryamar yv");
-            //playersName.add("Harmet ur");
+            playersName.add("Roit Srma");
+            playersName.add("sryamar yv");
+            playersName.add("Harmet ur");
             playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
         } catch (SQLException | IllegalArgumentException e) {
             assert true;
