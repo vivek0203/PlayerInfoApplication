@@ -409,7 +409,7 @@ public class TestPlayerAppDao {
             assertThat(getPlayersInfo).isNotNull();
             assertThat(getPlayersInfo.size()).isEqualTo(1);
             log.info("Players Information : {}",getPlayersInfo);
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
     }
@@ -448,7 +448,7 @@ public class TestPlayerAppDao {
             playersName.add("");
             playersName.add("");
             playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             assert true;
         }
     }

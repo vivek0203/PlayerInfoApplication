@@ -455,11 +455,10 @@ public class PlayerAppDao {
         ResultSet rs = null;
         Map<List<String>, List<Map<String, Object>>> playerDetails = new HashMap<>();
         try {
-
             conn = Connect.getDataSource().getConnection();
-
             String query = createQuery(playerName.size());
             log.debug("Executing fetchAnyNoOfPlayerInfo Query : {} ", query);
+            log.debug(" Parameter: {}", playerName);
             ps = conn.prepareStatement(query);
 
             int parameterIndex = 1;
@@ -467,11 +466,6 @@ public class PlayerAppDao {
                 String name = iterator.next();
                 ps.setString(parameterIndex++,name);
             }
-            if (playerName == null || playerName.isEmpty()) {
-                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
-                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
-            }
-            log.debug(" Parameter: {}", playerName);
             rs = ps.executeQuery();
             List<Map<String, Object>> players = new ArrayList<>();
 
@@ -519,11 +513,12 @@ public class PlayerAppDao {
                 playerData.put(PlayersData.STATE, rs.getString("state"));
 
                 players.add(playerData);
-                playerDetails.put(playerName, players);
 
+                playerDetails.put(playerName, players);
             }
             if (players.isEmpty()) {
                 log.error(" Players are not available with this names : {}", playerName);
+                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
         } finally {
             DBUtil.close(rs, ps, conn);
