@@ -1,4 +1,4 @@
-package player_info_application.player_info_application.connect;
+package player_info_application.player_info_application.connection;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.slf4j.Logger;

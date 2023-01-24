@@ -1,6 +1,6 @@
 package player_info_application.player_info_application.dao;
 
-import player_info_application.player_info_application.connect.Connect;
+import player_info_application.player_info_application.connection.Connect;
 import player_info_application.player_info_application.pojo.PlayersData;
 import player_info_application.player_info_application.dbutil.DBUtil;
 import org.slf4j.Logger;
