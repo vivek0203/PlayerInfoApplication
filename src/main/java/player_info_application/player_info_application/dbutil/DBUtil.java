@@ -1,4 +1,4 @@
-package player_info_application.player_info_application.util;
+package player_info_application.player_info_application.dbutil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
