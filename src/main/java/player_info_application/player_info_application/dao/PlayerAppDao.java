@@ -282,25 +282,20 @@ public class PlayerAppDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-
             if (name == null || name.isEmpty()) {
                 log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", name);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + name);
             }
-
             conn = Connect.getDataSource().getConnection();
 
             String query = "Select * from player_personal_info  where name like ?";
             log.debug("Executing fetchPlayerPersonalData Query : {} ", query);
             log.debug("Parameter : { Name : {}  } ", name);
-
             ps = conn.prepareStatement(query);
             ps.setString(1,  '%'+ name + '%');
             rs = ps.executeQuery();
-
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
-
                 playerData.put(PlayersData.RANK, rs.getInt("player_ranking"));
 
                 playerData.put(PlayersData.AGE, rs.getInt("age"));
@@ -308,9 +303,9 @@ public class PlayerAppDao {
                 playerData.put(PlayersData.GENDER, rs.getString("gender"));
 
                 playerData.put(PlayersData.STATE, rs.getString("state"));
+
                 playerPersonalInfo.put(rs.getString("name"), playerData);
             }
-
            if (playerData.isEmpty()) {
                 log.error("player is not available with this name : {}", name);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + name);
@@ -370,7 +365,6 @@ public class PlayerAppDao {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-
         Map<String, Map<String, Object>> top5CenturyScorerInfo = new LinkedHashMap<>();
         try {
             if (gender == null || gender.isEmpty()) {
@@ -385,7 +379,6 @@ public class PlayerAppDao {
             ps = conn.prepareStatement(query);
             ps.setString(1, gender+'%');
             rs = ps.executeQuery();
-
             while (rs.next()) {
 
                 Map<String, Object> playerData = new LinkedHashMap<>();
@@ -462,10 +455,7 @@ public class PlayerAppDao {
         ResultSet rs = null;
         Map<List<String>, List<Map<String, Object>>> playerDetails = new HashMap<>();
         try {
-            if (playerName == null || playerName.isEmpty()) {
-                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
-                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
-            }
+
             conn = Connect.getDataSource().getConnection();
 
             String query = createQuery(playerName.size());
@@ -473,14 +463,20 @@ public class PlayerAppDao {
             ps = conn.prepareStatement(query);
 
             int parameterIndex = 1;
-            for (String name : playerName) {
-                ps.setString(parameterIndex++, '%'+name+'%');
+            for (Iterator < String > iterator = playerName.iterator(); iterator.hasNext();) {
+                String name = iterator.next();
+                ps.setString(parameterIndex++,name);
             }
-            rs = ps.executeQuery();
+            if (playerName == null || playerName.isEmpty()) {
+                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
+                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
+            }
             log.debug(" Parameter: {}", playerName);
+            rs = ps.executeQuery();
             List<Map<String, Object>> players = new ArrayList<>();
-            Map<String, Object> playerData = new LinkedHashMap<>();
+
             while (rs.next()) {
+                Map<String, Object> playerData = new LinkedHashMap<>();
 
                 playerData.put(PlayersData.PLAYERNAME, rs.getString("player_name"));
 
@@ -523,11 +519,11 @@ public class PlayerAppDao {
                 playerData.put(PlayersData.STATE, rs.getString("state"));
 
                 players.add(playerData);
+                playerDetails.put(playerName, players);
+
             }
-            playerDetails.put(playerName, players);
             if (players.isEmpty()) {
                 log.error(" Players are not available with this names : {}", playerName);
-                throw new IllegalArgumentException("Please provide a valid Player Names, invalid Player Names :" + playerName);
             }
         } finally {
             DBUtil.close(rs, ps, conn);
@@ -535,10 +531,10 @@ public class PlayerAppDao {
         return playerDetails;
     }
     private static String createQuery(int length) {
-        String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking where player_name in( ";
+        String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking where player_name in(";
         StringBuilder queryBuilder = new StringBuilder(query);
         for (int i = 0; i < length; i++) {
-            queryBuilder.append("player_name like ?");
+            queryBuilder.append("?");
             if (i != length - 1)
                 queryBuilder.append(",");
         }
