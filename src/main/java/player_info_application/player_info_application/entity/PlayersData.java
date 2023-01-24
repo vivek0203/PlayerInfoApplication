@@ -1,4 +1,4 @@
-package player_info_application.player_info_application.pojo;
+package player_info_application.player_info_application.entity;
 
 
 public class PlayersData {
