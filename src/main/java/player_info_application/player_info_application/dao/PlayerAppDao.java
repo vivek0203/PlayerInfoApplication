@@ -334,9 +334,8 @@ public class PlayerAppDao {
             ps = conn.prepareStatement(query);
             ps.setString(1, gender+'%');
             rs = ps.executeQuery();
+            Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
-
-                Map<String, Object> playerData = new LinkedHashMap<>();
 
                 playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
@@ -352,7 +351,7 @@ public class PlayerAppDao {
 
                 top5experiencedPlayerInfo.put(rs.getString("player_name"), playerData);
             }
-            if(top5experiencedPlayerInfo.isEmpty()){
+            if(playerData.isEmpty()){
                 log.error("Player is not present with gender : {}",gender);
                 throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
             }
@@ -379,9 +378,9 @@ public class PlayerAppDao {
             ps = conn.prepareStatement(query);
             ps.setString(1, gender+'%');
             rs = ps.executeQuery();
-            while (rs.next()) {
+            Map<String, Object> playerData = new LinkedHashMap<>();
 
-                Map<String, Object> playerData = new LinkedHashMap<>();
+            while (rs.next()) {
 
                 playerData.put(PlayersData.RANK, rs.getInt("ranking"));
 
@@ -394,8 +393,7 @@ public class PlayerAppDao {
                 playerData.put(PlayersData.AGE, rs.getInt("age"));
 
                 top5CenturyScorerInfo.put(rs.getString("player_name"),playerData);
-            }
-            if(top5CenturyScorerInfo.isEmpty()){
+            }if(playerData.isEmpty()){
                 log.error("Player is not present with gender : {}",gender);
                 throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
             }
@@ -438,10 +436,6 @@ public class PlayerAppDao {
                 playerData.put(PlayersData.AGE, rs.getInt("age"));
 
                 top3OdiWicketTakers.put(rs.getString("player_name"), playerData);
-            }
-            if(top3OdiWicketTakers.isEmpty()){
-                log.error("Player is not present with gender : {}",gender);
-                throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
             }
            } finally {
             DBUtil.close(rs, ps, conn);

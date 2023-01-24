@@ -325,7 +325,7 @@ public class TestPlayerAppDao {
     public void testFetch5PlayerInfoByInvalidGender() {
         log.debug("Executing testFetch5PlayerInfoByInvalidGender()...");
         try {
-            playerAppDao.fetch5PlayerDataByGender("fmael");
+            playerAppDao.fetch5PlayerDataByGender("fael");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
             log.info("Invalid Gender");
