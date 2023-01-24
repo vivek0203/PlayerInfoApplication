@@ -10,19 +10,17 @@ import java.util.List;
 import java.util.Map;
 import static org.testng.Assert.*;
 
-@SuppressWarnings("AccessStaticViaInstance")
+
 public class TestPlayerAppDao {
 
     private static final Logger log = LoggerFactory.getLogger(TestPlayerAppDao.class);
-
-   PlayerAppDao playerAppDao;
 
     @Test(priority = 1)
     public void testFetchPlayerCareerDataByName()  {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
         Map<String, Map<String,Object>>   getPlayerData;
         try {
-            getPlayerData = playerAppDao.fetchPlayerCareerData("Hardik");
+            getPlayerData = PlayerAppDao.fetchPlayerCareerData("Hardik");
             assertNotNull(getPlayerData);
             assertThat(getPlayerData).hasSize(1);
             log.info("PlayerCareerInfo : {}",getPlayerData);
@@ -35,7 +33,7 @@ public class TestPlayerAppDao {
     public void testFetchPlayerCareerDataByInvalidName()  {
         log.debug("Executing testFetchPlayerCareerDataByInvalidName()...");
         try {
-            playerAppDao.fetchPlayerCareerData("Hark Pndya");
+            PlayerAppDao.fetchPlayerCareerData("Hark Pndya");
         }catch (IllegalArgumentException | SQLException e){
             assert true;
             log.info("Invalid playerName");
@@ -45,7 +43,7 @@ public class TestPlayerAppDao {
     public void testFetchPlayerCareerDataByNameNull() {
         log.debug("Executing testFetchPlayerCareerDataByNameNull()...");
         try {
-            playerAppDao.fetchPlayerCareerData(null);
+            PlayerAppDao.fetchPlayerCareerData(null);
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -55,7 +53,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerCareerDataByNameEmpty()...");
 
         try {
-            playerAppDao.fetchPlayerCareerData("");
+           PlayerAppDao.fetchPlayerCareerData("");
         } catch (IllegalArgumentException | SQLException e) {
             assert true;
         }
@@ -65,7 +63,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testGet10PlayerData()...");
         Map<String, Map<String, Object>> list10Players;
         try {
-            list10Players = playerAppDao.get10PlayerData();
+            list10Players =PlayerAppDao.get10PlayerData();
             assertThat(list10Players)
                     .isNotNull()
                     .hasSize(10);
@@ -82,7 +80,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerT20iInfoByName()...");
         Map<String, Map<String, Object>> getPlayerT20Info ;
         try {
-            getPlayerT20Info = playerAppDao.fetchPlayerT20iInfoByName("Yadav");
+            getPlayerT20Info = PlayerAppDao.fetchPlayerT20iInfoByName("Yadav");
             assertThat(getPlayerT20Info).isNotNull();
             assertThat(getPlayerT20Info).hasSize(3);
             log.info("PlayerT20Data : {}",getPlayerT20Info);
@@ -96,7 +94,7 @@ public class TestPlayerAppDao {
     public void testFetchPlayerT20iInfoByInvalidName() {
         log.debug("Executing testFetchPlayerT20iInfoByInvalidName()...");
          try {
-            playerAppDao.fetchPlayerT20iInfoByName("Sur dav");
+            PlayerAppDao.fetchPlayerT20iInfoByName("Sur dav");
         }catch (IllegalArgumentException | SQLException e){
             assert true;
             log.info("Invalid playerName");
@@ -107,7 +105,7 @@ public class TestPlayerAppDao {
     public void testFetchPlayerT20iInfoByNameNull() {
         log.debug("Executing testFetchPlayerT20iInfoByNameNull()...");
         try {
-            playerAppDao.fetchPlayerT20iInfoByName(null);
+            PlayerAppDao.fetchPlayerT20iInfoByName(null);
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -118,7 +116,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerT20iInfoByNameEmpty()...");
 
         try {
-            playerAppDao.fetchPlayerT20iInfoByName("");
+            PlayerAppDao.fetchPlayerT20iInfoByName("");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -129,7 +127,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerODIInfoByName()...");
         Map<String, Map<String, Object>> getPlayerODIInfo;
         try {
-            getPlayerODIInfo = playerAppDao.fetchPlayerODIInfoByName("Raj");
+            getPlayerODIInfo = PlayerAppDao.fetchPlayerODIInfoByName("Raj");
             assertThat(getPlayerODIInfo).isNotNull();
             assertThat(getPlayerODIInfo).hasSize(3);
             log.info("playerOdiData : {}",getPlayerODIInfo);
@@ -143,7 +141,7 @@ public class TestPlayerAppDao {
     public void testFetchPlayerODIInfoByInvalidName() {
         log.debug("Executing testFetchPlayerODIInfoByInvalidName()...");
         try {
-            playerAppDao.fetchPlayerODIInfoByName("Mita rj");
+            PlayerAppDao.fetchPlayerODIInfoByName("Mita rj");
         }catch (IllegalArgumentException | SQLException e){
             assert true;
             log.info("Invalid playerName");
@@ -153,7 +151,7 @@ public class TestPlayerAppDao {
     public void testFetchPlayerODIInfoByNameNull() {
         log.debug("Executing testFetchPlayerODIInfoByNameNull()...");
         try {
-            playerAppDao.fetchPlayerODIInfoByName(null);
+            PlayerAppDao.fetchPlayerODIInfoByName(null);
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -163,7 +161,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerODIInfoByNameEmpty()...");
 
             try {
-            playerAppDao.fetchPlayerODIInfoByName("");
+                PlayerAppDao.fetchPlayerODIInfoByName("");
             } catch (IllegalArgumentException| SQLException Exception ) {
                 assert true;
             }
@@ -174,7 +172,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerTestInfoByName()...");
         Map<String, Map<String, Object>> getPlayerTestInfo ;
         try {
-            getPlayerTestInfo = playerAppDao.fetchPlayerTestInfoByName("sharma");
+            getPlayerTestInfo = PlayerAppDao.fetchPlayerTestInfoByName("sharma");
             assertThat(getPlayerTestInfo).isNotNull();
             assertThat(getPlayerTestInfo).hasSize(2);
             log.info("PlayerTestData : {}",getPlayerTestInfo);
@@ -189,7 +187,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerTestInfoByNameNull()...");
 
         try {
-            playerAppDao.fetchPlayerTestInfoByName(null);
+            PlayerAppDao.fetchPlayerTestInfoByName(null);
         }catch (IllegalArgumentException | SQLException e){
             assert true;
         }
@@ -199,7 +197,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerTestInfoByInvalidName()...");
 
         try {
-            playerAppDao.fetchPlayerTestInfoByName("yuzvend chal");
+            PlayerAppDao.fetchPlayerTestInfoByName("yuzvend chal");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
             log.info("Invalid playerName");
@@ -210,7 +208,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerTestInfoByNameEmpty()...");
 
         try {
-          playerAppDao.fetchPlayerTestInfoByName("");
+            PlayerAppDao.fetchPlayerTestInfoByName("");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -221,7 +219,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerPersonalDataByName()...");
         Map<String, Map<String, Object>>  getPlayerPersonalInfo;
         try {
-            getPlayerPersonalInfo = playerAppDao.fetchPlayerPersonalDataByName("Pant");
+            getPlayerPersonalInfo = PlayerAppDao.fetchPlayerPersonalDataByName("Pant");
             assertThat(getPlayerPersonalInfo).isNotNull();
             assertThat(getPlayerPersonalInfo).hasSize(1);
             log.info("PlayerPersonalInfo : {}",getPlayerPersonalInfo);
@@ -233,21 +231,18 @@ public class TestPlayerAppDao {
     @Test(priority = 19)
     public void testFetchPlayerPersonalDataByNameInvalidName() {
         log.debug("Executing testFetchPlayerCareerDataByInvalidName()...");
-
         try {
-            playerAppDao.fetchPlayerPersonalDataByName("Vir Koli");
+            PlayerAppDao.fetchPlayerPersonalDataByName("Vir Koli");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
             log.info("Invalid playerName");
         }
-
-
     }
     @Test(priority = 20)
     public void testFetchPlayerPersonalDataByNameNull() {
         log.debug("Executing testFetchPlayerPersonalDataByNameNul()...");
         try {
-            playerAppDao.fetchPlayerPersonalDataByName(null);
+            PlayerAppDao.fetchPlayerPersonalDataByName(null);
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -258,7 +253,7 @@ public class TestPlayerAppDao {
     public void testFetchPlayerPersonalDataByNameEmpty() {
         log.debug("Executing testFetchPlayerPersonalDataByNameEmpty()...");
         try {
-            playerAppDao.fetchPlayerPersonalDataByName("");
+            PlayerAppDao.fetchPlayerPersonalDataByName("");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -269,7 +264,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetch5PlayerDataByGender()...");
         Map<String, Map<String, Object>>get5PlayerInfo;
         try{
-            get5PlayerInfo = playerAppDao.fetch5PlayerDataByGender("Mal");
+            get5PlayerInfo = PlayerAppDao.fetch5PlayerDataByGender("Mal");
             assertThat(get5PlayerInfo).isNotNull();
             assertThat(get5PlayerInfo).hasSize(5);
             log.info("Top5ExperiencedPlayerInfo : {} ",get5PlayerInfo);
@@ -281,7 +276,7 @@ public class TestPlayerAppDao {
     public void testFetch5PlayerDataByInvalidGender() {
         log.debug("Executing testFetch5PlayerDataByInvalidGender()...");
         try {
-            playerAppDao.fetch5PlayerDataByGender("el");
+            PlayerAppDao.fetch5PlayerDataByGender("mel");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
             log.info("Invalid Gender");
@@ -290,9 +285,8 @@ public class TestPlayerAppDao {
     @Test(priority = 24)
     public void testFetch5PlayerDataByGenderNull() {
         log.debug("Executing testFetch5PlayerDataByGender()...");
-
         try{
-            playerAppDao.fetch5PlayerDataByGender(null);
+            PlayerAppDao.fetch5PlayerDataByGender(null);
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -301,7 +295,7 @@ public class TestPlayerAppDao {
     public void testFetch5PlayerDataByGenderEmpty() {
         log.debug("Executing testFetch5PlayerDataByGender()...");
         try{
-            playerAppDao.fetch5PlayerDataByGender("");
+            PlayerAppDao.fetch5PlayerDataByGender("");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -313,7 +307,7 @@ public class TestPlayerAppDao {
         Map<String, Map<String, Object>>get5PlayersData ;
         try
         {
-            get5PlayersData = playerAppDao.fetch5PlayerInfoByGender("fema");
+            get5PlayersData = PlayerAppDao.fetch5PlayerInfoByGender("fema");
             assertThat(get5PlayersData).isNotNull();
             assertThat(get5PlayersData).hasSize(5);
             log.info("Top5CenturyScorerInfo : {}",get5PlayersData);
@@ -326,7 +320,7 @@ public class TestPlayerAppDao {
     public void testFetch5PlayerInfoByInvalidGender() {
         log.debug("Executing testFetch5PlayerInfoByInvalidGender()...");
         try {
-            playerAppDao.fetch5PlayerDataByGender("fmael");
+            PlayerAppDao.fetch5PlayerDataByGender("fma");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
             log.info("Invalid Gender");
@@ -337,7 +331,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetch5PlayerInfoByGenderNull()...");
         try
         {
-            playerAppDao.fetch5PlayerInfoByGender(null);
+            PlayerAppDao.fetch5PlayerInfoByGender(null);
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -348,7 +342,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetch5PlayerInfoByGenderEmpty()...");
         try
         {
-            playerAppDao.fetch5PlayerInfoByGender("");
+            PlayerAppDao.fetch5PlayerInfoByGender("");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -358,7 +352,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetch3PlayerInfoByGender()...");
         Map<String, Map<String,Object> > get3PlayerData ;
         try{
-            get3PlayerData =playerAppDao.fetch3PlayerInfoByGender("Female");
+            get3PlayerData =PlayerAppDao.fetch3PlayerInfoByGender("Female");
             assertNotNull(get3PlayerData);
             assertThat(get3PlayerData).hasSize(3);
 
@@ -371,7 +365,7 @@ public class TestPlayerAppDao {
     public void testFetch3PlayerInfoByInvalidGender() {
         log.debug("Executing testFetch3PlayerInfoByInvalidGender()...");
         try {
-            playerAppDao.fetch5PlayerDataByGender("Mael");
+            PlayerAppDao.fetch5PlayerDataByGender("Mael");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
             log.info("Invalid Gender");
@@ -381,7 +375,7 @@ public class TestPlayerAppDao {
     public void testFetch3PlayerInfoByGenderNull() {
         log.debug("Executing testFetch3PlayerInfoByGenderNull()...");
         try{
-            playerAppDao.fetch3PlayerInfoByGender(null);
+            PlayerAppDao.fetch3PlayerInfoByGender(null);
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -391,7 +385,7 @@ public class TestPlayerAppDao {
     public void testFetch3PlayerInfoByGenderEmpty() {
         log.debug("Executing testFetch3PlayerInfoByGenderEmpty()...");
         try{
-            playerAppDao.fetch3PlayerInfoByGender("");
+            PlayerAppDao.fetch3PlayerInfoByGender("");
         } catch (IllegalArgumentException| SQLException Exception ) {
             assert true;
         }
@@ -406,7 +400,7 @@ public class TestPlayerAppDao {
             playersName.add("Sharma");
             playersName.add("suryakumar");
             playersName.add("Harman");
-            getPlayersInfo = playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
+            getPlayersInfo = PlayerAppDao.fetchAnyNoOfPlayerInfo(playersName);
             assertThat(getPlayersInfo).isNotNull();
             assertThat(getPlayersInfo.size()).isEqualTo(1);
             log.info("Players Information : {}",getPlayersInfo);
@@ -425,7 +419,7 @@ public class TestPlayerAppDao {
             playersName.add("Roit Srma");
             playersName.add("sryamar yv");
             playersName.add("Harmet ur");
-            playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
+            PlayerAppDao.fetchAnyNoOfPlayerInfo(playersName);
         } catch (SQLException | IllegalArgumentException e) {
             assert true;
             log.info("invalid player name");
@@ -438,7 +432,7 @@ public class TestPlayerAppDao {
             List<String> playersName = new ArrayList<>();
             playersName.add(null);
             playersName.add(null);
-            playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
+            PlayerAppDao.fetchAnyNoOfPlayerInfo(playersName);
         } catch (SQLException | IllegalArgumentException e) {
             assert true;
         }
@@ -450,7 +444,7 @@ public class TestPlayerAppDao {
             List<String> playersName = new ArrayList<>();
             playersName.add(" ");
             playersName.add(" ");
-            playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
+            PlayerAppDao.fetchAnyNoOfPlayerInfo(playersName);
         } catch (SQLException | IllegalArgumentException e) {
             assert true;
         }
