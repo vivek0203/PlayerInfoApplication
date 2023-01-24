@@ -1,6 +1,6 @@
 package player_info_application.player_info_application.dao;
 
-import player_info_application.player_info_application.connection.Connect;
+import player_info_application.player_info_application.connect.Connect;
 import player_info_application.player_info_application.entity.PlayersData;
 import player_info_application.player_info_application.util.DBUtil;
 import org.slf4j.Logger;
@@ -523,11 +523,11 @@ public class PlayerAppDao {
 
                 players.add(playerData);
             }
-            if (playerData.isEmpty()) {
+            playerDetails.put(playerName, players);
+            if (playerDetails.isEmpty()) {
                 log.error(" Players are not available with this names : {}", playerName);
                 throw new IllegalArgumentException("Please provide a valid Player Names, invalid Player Names :" + playerName);
             }
-            playerDetails.put(playerName, players);
         } finally {
             DBUtil.close(rs, ps, conn);
         }

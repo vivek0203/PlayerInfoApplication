@@ -1,4 +1,4 @@
-package player_info_application.player_info_application.connection;
+package player_info_application.player_info_application.connect;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.slf4j.Logger;
@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.Properties;
 
 public class
