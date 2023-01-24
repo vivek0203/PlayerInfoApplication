@@ -11,13 +11,13 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.Properties;
 
-public class Connect {
+public class
+Connect {
     private static final Logger log = LoggerFactory.getLogger(Connect.class);
     private static final String DB_USERNAME="db.username";
     private static final String DB_PASSWORD="db.password";
     private static final String DB_URL ="db.url";
     private static final String DB_DRIVER_CLASS="driver.class.name";
-
     private static Properties properties = null;
     private static ComboPooledDataSource dataSource;
     static{
@@ -41,7 +41,6 @@ public class Connect {
            log.error("Error occurred while creating the connection with db" );
         }
     }
-
     public static DataSource getDataSource(){
         return dataSource;
     }
