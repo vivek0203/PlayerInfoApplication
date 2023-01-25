@@ -37,7 +37,8 @@ public class TestPlayerAppDao {
             playerAppDao.fetchPlayerCareerData("Hark Pndya");
         }catch (IllegalArgumentException | SQLException e){
             assert true;
-            log.info("Invalid playerName");
+            log.error("Invalid playerName",e);
+
         }
     }
     @Test(priority = 3)
@@ -98,7 +99,7 @@ public class TestPlayerAppDao {
             playerAppDao.fetchPlayerT20iInfoByName("Sur dav");
         }catch (IllegalArgumentException | SQLException e){
             assert true;
-            log.info("Invalid playerName");
+             log.error("Invalid playerName",e);
         }
 
     }
@@ -145,7 +146,7 @@ public class TestPlayerAppDao {
             playerAppDao.fetchPlayerODIInfoByName("Mita rj");
         }catch (IllegalArgumentException | SQLException e){
             assert true;
-            log.info("Invalid playerName");
+            log.error("Invalid playerName",e);
         }
     }
     @Test(priority = 12)
@@ -199,9 +200,9 @@ public class TestPlayerAppDao {
 
         try {
             playerAppDao.fetchPlayerTestInfoByName("yuzvend chal");
-        } catch (IllegalArgumentException| SQLException Exception ) {
+        } catch (IllegalArgumentException| SQLException e) {
             assert true;
-            log.info("Invalid playerName");
+            log.error("Invalid playerName",e);
         }
     }
     @Test(priority = 17)
@@ -235,9 +236,9 @@ public class TestPlayerAppDao {
 
         try {
             playerAppDao.fetchPlayerPersonalDataByName("Vir Koli");
-        } catch (IllegalArgumentException| SQLException Exception ) {
+        } catch (IllegalArgumentException| SQLException e ) {
             assert true;
-            log.info("Invalid playerName");
+            log.error("Invalid playerName",e);
         }
 
 
@@ -281,9 +282,9 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetch5PlayerDataByInvalidGender()...");
         try {
             playerAppDao.fetch5PlayerDataByGender("el");
-        } catch (IllegalArgumentException| SQLException Exception ) {
+        } catch (IllegalArgumentException | SQLException e) {
             assert true;
-            log.info("Invalid Gender");
+            log.error("Invalid Gender",e);
         }
     }
     @Test(priority = 24)
