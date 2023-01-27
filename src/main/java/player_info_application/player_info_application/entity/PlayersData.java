@@ -24,8 +24,4 @@ public class PlayersData {
     public static final String GENDER = "Gender";
     public static final String STATE = "State";
 
-
- public PlayersData() {
- }
-
 }
