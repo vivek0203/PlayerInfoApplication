@@ -13,9 +13,6 @@ import java.util.*;
 public class PlayerAppDao {
     private static final Logger log = LoggerFactory.getLogger(PlayerAppDao.class);
 
-    public PlayerAppDao() {
-    }
-
     public static Map<String, Map<String,Object>> fetchPlayerCareerData(String playerName) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
