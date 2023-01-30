@@ -1,6 +1,6 @@
 
 
-CREATE TABLE player_career_info (
+CREATE  TABLE IF NOT EXISTS player_career_info (
   ranking int(6) NOT NULL AUTO_INCREMENT,
   player_name varchar(20) NOT NULL,
   player_specification varchar(20) DEFAULT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE player_career_info (
 
 
 
-CREATE TABLE player_personal_info(
+CREATE TABLE IF NOT EXISTS player_personal_info(
   player_ranking int(6) NOT NULL AUTO_INCREMENT,
   name varchar(20) NOT NULL,
   age int(2) NOT NULL,
