@@ -13,11 +13,11 @@ import java.util.*;
 public class PlayerAppDao {
     private static final Logger log = LoggerFactory.getLogger(PlayerAppDao.class);
 
-    public static Map<String, Map<String,Object>> fetchPlayerCareerData(String playerName) throws SQLException {
+    public static Map<String, Map<String, Object>> fetchPlayerCareerData(String playerName) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Map<String, Map<String,Object>> playerCareerInfo = new LinkedHashMap<>();
+        Map<String, Map<String, Object>> playerCareerInfo = new LinkedHashMap<>();
         try {
             if (playerName == null || playerName.isEmpty()) {
                 log.error("Please provide a valid Player Name, invalid Player Name null or empty..");
@@ -29,7 +29,7 @@ public class PlayerAppDao {
             log.debug("Parameters : { PlayerName : {}} ", playerName);
 
             ps = conn.prepareStatement(query);
-            ps.setString(1,"%"+ playerName + "%");
+            ps.setString(1, "%" + playerName + "%");
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -77,6 +77,7 @@ public class PlayerAppDao {
         }
         return playerCareerInfo;
     }
+
     public static Map<String, Map<String, Object>> get10PlayerData() throws SQLException {
         Connection conn = null;
         Statement stmt = null;
@@ -121,7 +122,7 @@ public class PlayerAppDao {
 
                 playerData.put(PlayersData.TOTALODIRUNS, rs.getInt("player_odi_runs"));
 
-                 playerData.put(PlayersData.TOTALT20IRUNS, rs.getInt("player_t20i_runs"));
+                playerData.put(PlayersData.TOTALT20IRUNS, rs.getInt("player_t20i_runs"));
 
                 playerData.put(PlayersData.TOTALTESTRUNS, rs.getInt("player_test_runs"));
 
@@ -131,13 +132,14 @@ public class PlayerAppDao {
 
                 playerData.put(PlayersData.STATE, rs.getString("state"));
 
-               playerFullInfo.put(rs.getString("player_name"),playerData);
+                playerFullInfo.put(rs.getString("player_name"), playerData);
             }
         } finally {
-            DBUtil.close(rs,stmt, conn);
+            DBUtil.close(rs, stmt, conn);
         }
         return playerFullInfo;
     }
+
     public static Map<String, Map<String, Object>> fetchPlayerT20iInfoByName(String playerName) throws SQLException {
 
         Connection conn = null;
@@ -157,7 +159,7 @@ public class PlayerAppDao {
             log.debug("Parameters : { Player Name : {}} ", playerName);
 
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%"+playerName+"%");
+            ps.setString(1, "%" + playerName + "%");
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -178,10 +180,11 @@ public class PlayerAppDao {
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
         } finally {
-            DBUtil.close(rs,ps, conn);
+            DBUtil.close(rs, ps, conn);
         }
         return playerT20iInfo;
     }
+
     public static Map<String, Map<String, Object>> fetchPlayerODIInfoByName(String playerName) throws SQLException {
         Map<String, Map<String, Object>> playerOdiInfo = new HashMap<>();
         Connection conn = null;
@@ -198,7 +201,7 @@ public class PlayerAppDao {
             log.debug("Executing fetchPlayerODIInfoByName Query : {} ", query);
             log.debug("Parameters : { Player_Name : {}} ", playerName);
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%"+playerName+"%");
+            ps.setString(1, "%" + playerName + "%");
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -224,10 +227,11 @@ public class PlayerAppDao {
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + playerName);
             }
         } finally {
-            DBUtil.close(rs,ps, conn);
+            DBUtil.close(rs, ps, conn);
         }
         return playerOdiInfo;
     }
+
     public static Map<String, Map<String, Object>> fetchPlayerTestInfoByName(String playerName) throws SQLException {
         Map<String, Map<String, Object>> playerTestInfo = new HashMap<>();
         Connection conn = null;
@@ -244,7 +248,7 @@ public class PlayerAppDao {
             log.debug("Executing fetchPlayerTestInfoByName2 Query : {} ", query);
             log.debug("Parameter : { PlayerName : {}} ", playerName);
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%"+playerName+"%");
+            ps.setString(1, "%" + playerName + "%");
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -277,6 +281,7 @@ public class PlayerAppDao {
         }
         return playerTestInfo;
     }
+
     public static Map<String, Map<String, Object>> fetchPlayerPersonalDataByName(String name) throws SQLException {
         Map<String, Map<String, Object>> playerPersonalInfo = new HashMap<>();
         Connection conn = null;
@@ -293,7 +298,7 @@ public class PlayerAppDao {
             log.debug("Executing fetchPlayerPersonalData Query : {} ", query);
             log.debug("Parameter : { Name : {}  } ", name);
             ps = conn.prepareStatement(query);
-            ps.setString(1,  "%"+ name + "%");
+            ps.setString(1, "%" + name + "%");
             rs = ps.executeQuery();
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {
@@ -307,7 +312,7 @@ public class PlayerAppDao {
 
                 playerPersonalInfo.put(rs.getString("name"), playerData);
             }
-           if (playerData.isEmpty()) {
+            if (playerData.isEmpty()) {
                 log.error("player is not available with this name : {}", name);
                 throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName :" + name);
             }
@@ -316,6 +321,7 @@ public class PlayerAppDao {
         }
         return playerPersonalInfo;
     }
+
     public static Map<String, Map<String, Object>> fetch5PlayerDataByGender(String gender) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -333,7 +339,7 @@ public class PlayerAppDao {
             log.debug("Parameter : { Gender : {}} ", gender);
 
             ps = conn.prepareStatement(query);
-            ps.setString(1, gender+"%");
+            ps.setString(1, gender + "%");
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -353,15 +359,16 @@ public class PlayerAppDao {
 
                 top5experiencedPlayerInfo.put(rs.getString("player_name"), playerData);
             }
-            if(top5experiencedPlayerInfo.isEmpty()){
-                log.error("Player is not present with gender : {}",gender);
-                throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
+            if (top5experiencedPlayerInfo.isEmpty()) {
+                log.error("Player is not present with gender : {}", gender);
+                throw new IllegalArgumentException("Please provide valid gender,invalid gender:" + gender);
             }
         } finally {
             DBUtil.close(rs, ps, conn);
         }
         return top5experiencedPlayerInfo;
     }
+
     public static Map<String, Map<String, Object>> fetch5PlayerInfoByGender(String gender) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -378,7 +385,7 @@ public class PlayerAppDao {
             log.debug("Executing get10PlayerData Query : {} ", query);
             log.debug("Parameters : { Gender : {}} ", gender);
             ps = conn.prepareStatement(query);
-            ps.setString(1, gender+"%");
+            ps.setString(1, gender + "%");
             rs = ps.executeQuery();
             Map<String, Object> playerData = new LinkedHashMap<>();
 
@@ -394,17 +401,18 @@ public class PlayerAppDao {
 
                 playerData.put(PlayersData.AGE, rs.getInt("age"));
 
-                top5CenturyScorerInfo.put(rs.getString("player_name"),playerData);
+                top5CenturyScorerInfo.put(rs.getString("player_name"), playerData);
             }
-            if(top5CenturyScorerInfo.isEmpty()){
-                log.error("Player is not present with gender : {}",gender);
-                throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
+            if (top5CenturyScorerInfo.isEmpty()) {
+                log.error("Player is not present with gender : {}", gender);
+                throw new IllegalArgumentException("Please provide valid gender,invalid gender:" + gender);
             }
         } finally {
             DBUtil.close(rs, ps, conn);
         }
         return top5CenturyScorerInfo;
     }
+
     public static Map<String, Map<String, Object>> fetch3PlayerInfoByGender(String gender) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -421,7 +429,7 @@ public class PlayerAppDao {
             log.debug("Executing get10PlayerData Query : {} ", query);
             log.debug("Parameters : { Gender : {}} ", gender);
             ps = conn.prepareStatement(query);
-            ps.setString(1, gender+"%");
+            ps.setString(1, gender + "%");
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -440,15 +448,16 @@ public class PlayerAppDao {
 
                 top3OdiWicketTakers.put(rs.getString("player_name"), playerData);
             }
-            if(top3OdiWicketTakers.isEmpty()){
-                log.error("Player is not present with gender : {}",gender);
-                throw new IllegalArgumentException("Please provide valid gender,invalid gender:"+gender);
+            if (top3OdiWicketTakers.isEmpty()) {
+                log.error("Player is not present with gender : {}", gender);
+                throw new IllegalArgumentException("Please provide valid gender,invalid gender:" + gender);
             }
-           } finally {
+        } finally {
             DBUtil.close(rs, ps, conn);
         }
         return top3OdiWicketTakers;
     }
+
     public static Map<List<String>, List<Map<String, Object>>> fetchAnyNoOfPlayerInfo(List<String> playerName) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -462,9 +471,8 @@ public class PlayerAppDao {
             ps = conn.prepareStatement(query);
 
             int parameterIndex = 1;
-            for (Iterator < String > iterator = playerName.iterator(); iterator.hasNext();) {
-                String name = iterator.next();
-                ps.setString(parameterIndex++,name);
+            for (String name : playerName) {
+                ps.setString(parameterIndex++, name);
             }
             rs = ps.executeQuery();
             List<Map<String, Object>> players = new ArrayList<>();
@@ -525,10 +533,11 @@ public class PlayerAppDao {
         }
         return playerDetails;
     }
-    private static String createQuery(int length) {
-        String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi" +
-                " on pci.ranking = ppi.player_ranking where pci.player_name in(";
-        StringBuilder queryBuilder = new StringBuilder(query);
+
+     private static String createQuery(int length) {
+String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi" +
+                    " on pci.ranking = ppi.player_ranking where pci.player_name in(";
+      StringBuilder queryBuilder = new StringBuilder(query);
         for (int i = 0; i < length; i++) {
             queryBuilder.append("?");
             if (i != length - 1)
