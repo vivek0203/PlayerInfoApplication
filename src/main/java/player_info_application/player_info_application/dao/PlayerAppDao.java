@@ -535,9 +535,9 @@ public class PlayerAppDao {
     }
 
      private static String createQuery(int length) {
-String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi" +
+        String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi" +
                     " on pci.ranking = ppi.player_ranking where pci.player_name in(";
-      StringBuilder queryBuilder = new StringBuilder(query);
+        StringBuilder queryBuilder = new StringBuilder(query);
         for (int i = 0; i < length; i++) {
             queryBuilder.append("?");
             if (i != length - 1)
