@@ -28,11 +28,5 @@ public class DBUtil {
             logger.error("Error occurred while closing db connection artifacts", e);
         }
     }
-    public static void close(Statement st, Connection conn) {
-        close(null, st, conn);
-    }
-    public static void close(ResultSet rs, Connection conn){
-        close(rs,null, conn);
-    }
 }
 
