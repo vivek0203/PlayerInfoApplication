@@ -457,16 +457,18 @@ public class PlayerAppDao {
         }
         return top3OdiWicketTakers;
     }
-
     public static Map<List<String>, List<Map<String, Object>>> fetchAnyNoOfPlayerInfo(List<String> playerName) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+
         Map<List<String>, List<Map<String, Object>>> playerDetails = new HashMap<>();
         try {
             conn = Connect.getDataSource().getConnection();
+
             String query1 = "Select * from project.player_career_info inner join project.player_personal_info on ranking = player_ranking WHERE";
             StringBuilder query = new StringBuilder(query1);
+
             int length = playerName.size();
             for (int i = 0; i < length; i++) {
                 query.append(" player_name LIKE");
@@ -483,8 +485,8 @@ public class PlayerAppDao {
                 ps.setString(parameterIndex++, "%" + name + "%");
             }
             rs = ps.executeQuery();
-            List<Map<String, Object>> players = new ArrayList<>();
 
+            List<Map<String, Object>> players = new ArrayList<>();
             while (rs.next()) {
                 Map<String, Object> playerData = new LinkedHashMap<>();
 
@@ -541,6 +543,5 @@ public class PlayerAppDao {
         }
         return playerDetails;
     }
-
 }
 
