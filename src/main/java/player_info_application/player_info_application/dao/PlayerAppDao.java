@@ -465,14 +465,22 @@ public class PlayerAppDao {
         Map<List<String>, List<Map<String, Object>>> playerDetails = new HashMap<>();
         try {
             conn = Connect.getDataSource().getConnection();
-            String query = createQuery(playerName.size());
+            String query1 = "Select * from project.player_career_info inner join project.player_personal_info on ranking = player_ranking WHERE";
+            StringBuilder query = new StringBuilder(query1);
+            int length = playerName.size();
+            for (int i = 0; i < length; i++) {
+                query.append(" player_name LIKE");
+                query.append(" ?");
+                if (i != length - 1)
+                    query.append(" OR");
+            }
             log.debug("Executing fetchAnyNoOfPlayerInfo Query : {} ", query);
             log.debug(" Parameter: {}", playerName);
-            ps = conn.prepareStatement(query);
+            ps = conn.prepareStatement(query.toString());
 
             int parameterIndex = 1;
             for (String name : playerName) {
-                ps.setString(parameterIndex++, name);
+                ps.setString(parameterIndex++, "%" + name + "%");
             }
             rs = ps.executeQuery();
             List<Map<String, Object>> players = new ArrayList<>();
@@ -534,18 +542,5 @@ public class PlayerAppDao {
         return playerDetails;
     }
 
-     private static String createQuery(int length) {
-        String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi" +
-                    " on pci.ranking = ppi.player_ranking where pci.player_name in(";
-        StringBuilder queryBuilder = new StringBuilder(query);
-        for (int i = 0; i < length; i++) {
-            queryBuilder.append("?");
-            if (i != length - 1)
-                queryBuilder.append(",");
-        }
-        queryBuilder.append(")");
-        return queryBuilder.toString();
-    }
 }
-
 

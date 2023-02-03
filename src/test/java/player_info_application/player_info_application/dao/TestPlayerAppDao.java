@@ -409,10 +409,8 @@ public class TestPlayerAppDao {
         Map<List<String>, List<Map<String, Object>>> getPlayersInfo;
         try {
             List<String> playersName = new ArrayList<>();
-            playersName.add("Virat kohli");
-            playersName.add("Rohit Sharma");
-            playersName.add("suryakumar yadav");
-            playersName.add("Harmanpreet Kaur");
+            playersName.add("Vi");
+            playersName.add("rma");
             getPlayersInfo = playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
             assertThat(getPlayersInfo).isNotNull();
             assertThat(getPlayersInfo.size()).isEqualTo(1);
