@@ -15,7 +15,7 @@ public class PlayerAppDao {
 
     public static Map<String, Map<String, Object>> fetchPlayerCareerData(String playerName) throws SQLException {
         if (playerName == null || playerName.isEmpty()) {
-            log.error("Please provide a valid Player Name, invalid Player Name null or empty : {}",playerName);
+            log.error("Please provide a valid Player Name, invalid Player Name null or empty..",playerName);
             throw new IllegalArgumentException("Please provide a valid Player Name, invalid Player Name null or empty:{}"+playerName);
         }
         Connection conn = null;
