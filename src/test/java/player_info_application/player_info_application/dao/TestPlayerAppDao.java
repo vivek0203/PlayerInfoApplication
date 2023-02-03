@@ -38,7 +38,6 @@ public class TestPlayerAppDao {
         }catch (IllegalArgumentException | SQLException e){
             assert true;
             log.error("Invalid playerName",e);
-
         }
     }
     @Test(priority = 3)
@@ -70,13 +69,10 @@ public class TestPlayerAppDao {
                     .isNotNull()
                     .hasSize(10);
             log.info("PlayerFullInfo : {}", list10Players);
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
     @Test(priority = 6)
     public void testFetchPlayerT20iInfoByName() {
         log.debug("Executing testFetchPlayerT20iInfoByName()...");
@@ -89,9 +85,7 @@ public class TestPlayerAppDao {
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-
     }
-
     @Test(priority = 7)
     public void testFetchPlayerT20iInfoByInvalidName() {
         log.debug("Executing testFetchPlayerT20iInfoByInvalidName()...");
@@ -101,7 +95,6 @@ public class TestPlayerAppDao {
             assert true;
              log.error("Invalid playerName",e);
         }
-
     }
     @Test(priority = 8)
     public void testFetchPlayerT20iInfoByNameNull() {
@@ -112,7 +105,6 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-
     @Test(priority = 9)
     public void testFetchPlayerT20iInfoByNameEmpty() {
         log.debug("Executing testFetchPlayerT20iInfoByNameEmpty()...");
@@ -123,7 +115,6 @@ public class TestPlayerAppDao {
             assert true;
         }
     }
-
     @Test(priority = 10)
     public void testFetchPlayerODIInfoByName() {
         log.debug("Executing testFetchPlayerODIInfoByName()...");
@@ -136,9 +127,7 @@ public class TestPlayerAppDao {
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-
     }
-
     @Test(priority = 11)
     public void testFetchPlayerODIInfoByInvalidName() {
         log.debug("Executing testFetchPlayerODIInfoByInvalidName()...");
@@ -168,7 +157,6 @@ public class TestPlayerAppDao {
                 assert true;
             }
     }
-
     @Test(priority = 14)
     public void testFetchPlayerTestInfoByName() {
         log.debug("Executing testFetchPlayerTestInfoByName()...");
@@ -181,9 +169,7 @@ public class TestPlayerAppDao {
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
         }
-
     }
-
     @Test(priority = 15)
     public void testFetchPlayerTestInfoByNameNull() {
         log.debug("Executing testFetchPlayerTestInfoByNameNull()...");
