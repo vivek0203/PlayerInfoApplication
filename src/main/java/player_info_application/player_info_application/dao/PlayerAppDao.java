@@ -14,15 +14,16 @@ public class PlayerAppDao {
     private static final Logger log = LoggerFactory.getLogger(PlayerAppDao.class);
 
     public static Map<String, Map<String, Object>> fetchPlayerCareerData(String playerName) throws SQLException {
+        if (playerName == null || playerName.isEmpty()) {
+            log.error("Please provide a valid Player Name, invalid Player Name null or empty..",playerName);
+            throw new IllegalArgumentException("Please provide a valid Player Name, invalid Player Name null or empty:{}"+playerName);
+        }
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Map<String, Map<String, Object>> playerCareerInfo = new LinkedHashMap<>();
         try {
-            if (playerName == null || playerName.isEmpty()) {
-                log.error("Please provide a valid Player Name, invalid Player Name null or empty..");
-                throw new IllegalArgumentException("Please provide a valid Player Name, invalid Player Name null or empty..");
-            }
+
             conn = Connect.getDataSource().getConnection();
             String query = "Select * from player_career_info where player_name like ? ";
             log.debug("Executing fetchPlayerCareerData Query : {} ", query);
@@ -141,17 +142,17 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Map<String, Object>> fetchPlayerT20iInfoByName(String playerName) throws SQLException {
-
+        if (playerName == null || playerName.isEmpty()) {
+            log.error("Please provide a valid playerName, invalid playerName null or empty :{}", playerName);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :{}" + playerName);
+        }
         Connection conn = null;
         PreparedStatement ps = null;
         Map<String, Map<String, Object>> playerT20iInfo = new HashMap<>();
         ResultSet rs = null;
 
         try {
-            if (playerName == null || playerName.isEmpty()) {
-                log.error("Please provide a valid playerName, invalid playerName null or empty :{}", playerName);
-                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :{}" + playerName);
-            }
+
             conn = Connect.getDataSource().getConnection();
 
             String query = "Select player_name,player_specification,total_T20i_matches,total_t20i_wickets,player_t20i_runs  from player_career_info where player_name like ? ";
@@ -186,15 +187,15 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Map<String, Object>> fetchPlayerODIInfoByName(String playerName) throws SQLException {
+        if (playerName == null || playerName.isEmpty()) {
+            log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
+        }
         Map<String, Map<String, Object>> playerOdiInfo = new HashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            if (playerName == null || playerName.isEmpty()) {
-                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
-                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
-            }
             conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_ODI_matches,pci.total_odi_wickets,pci.player_odi_runs, ppi.age,ppi.gender  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name like ? ";
@@ -233,15 +234,16 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Map<String, Object>> fetchPlayerTestInfoByName(String playerName) throws SQLException {
+        if (playerName == null || playerName.isEmpty()) {
+            log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
+        }
         Map<String, Map<String, Object>> playerTestInfo = new HashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            if (playerName == null || playerName.isEmpty()) {
-                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", playerName);
-                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + playerName);
-            }
+
             conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_Test_matches,pci.total_test_wickets,pci.player_test_runs, ppi.age,ppi.gender,ppi.state  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name like ? ";
@@ -283,15 +285,15 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Map<String, Object>> fetchPlayerPersonalDataByName(String name) throws SQLException {
+        if (name == null || name.isEmpty()) {
+                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", name);
+                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + name);
+            }
         Map<String, Map<String, Object>> playerPersonalInfo = new HashMap<>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            if (name == null || name.isEmpty()) {
-                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", name);
-                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + name);
-            }
             conn = Connect.getDataSource().getConnection();
 
             String query = "Select * from player_personal_info  where name like ?";
@@ -323,15 +325,16 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Map<String, Object>> fetch5PlayerDataByGender(String gender) throws SQLException {
+        if (gender == null || gender.isEmpty()) {
+            log.error("Please provide a valid playerName, invalid gender null or empty ::{}", gender);
+            throw new IllegalArgumentException("Please provide a valid gender, invalid gender null or empty :" + gender);
+        }
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Map<String, Map<String, Object>> top5experiencedPlayerInfo = new LinkedHashMap<>();
         try {
-            if (gender == null || gender.isEmpty()) {
-                log.error("Please provide a valid playerName, invalid gender null or empty ::{}", gender);
-                throw new IllegalArgumentException("Please provide a valid gender, invalid gender null or empty :" + gender);
-            }
+
             conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking,pci.player_name,pci.player_specification,pci.player_total_matches,ppi.age,ppi.gender,ppi.state from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking where gender like ? order by player_total_matches desc limit 5 ";
@@ -370,15 +373,16 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Map<String, Object>> fetch5PlayerInfoByGender(String gender) throws SQLException {
+        if (gender == null || gender.isEmpty()) {
+            log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
+            throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + gender);
+        }
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Map<String, Map<String, Object>> top5CenturyScorerInfo = new LinkedHashMap<>();
         try {
-            if (gender == null || gender.isEmpty()) {
-                log.error("Please provide a valid playerName, invalid playerName null or empty ::{}", gender);
-                throw new IllegalArgumentException("Please provide a valid playerName, invalid playerName null or empty :" + gender);
-            }
+
             conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking,pci.player_name,pci.player_specification,pci.player_total_matches,pci.player_centuries,ppi.age from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking  where gender like ? order by player_centuries desc limit 5 ";
@@ -414,15 +418,16 @@ public class PlayerAppDao {
     }
 
     public static Map<String, Map<String, Object>> fetch3PlayerInfoByGender(String gender) throws SQLException {
+        if (gender == null || gender.isEmpty()) {
+            log.error("Please provide a valid gender, invalid gender null or empty ::{}", gender);
+            throw new IllegalArgumentException("Please provide a valid gender, invalid gender null or empty :" + gender);
+        }
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Map<String, Map<String, Object>> top3OdiWicketTakers = new LinkedHashMap<>();
         try {
-            if (gender == null || gender.isEmpty()) {
-                log.error("Please provide a valid gender, invalid gender null or empty ::{}", gender);
-                throw new IllegalArgumentException("Please provide a valid gender, invalid gender null or empty :" + gender);
-            }
+
             conn = Connect.getDataSource().getConnection();
 
             String query = "Select pci.ranking,pci.player_name,pci.player_specification,pci.total_ODI_matches,pci.total_odi_wickets,ppi.age from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking  where gender like ? order by total_odi_wickets desc limit 3";
