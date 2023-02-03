@@ -11,9 +11,9 @@ import java.util.Map;
 import static org.testng.Assert.*;
 
 @SuppressWarnings("AccessStaticViaInstance")
-public class TestPlayerAppDao {
+public class PlayerAppDaoTest {
 
-    private static final Logger log = LoggerFactory.getLogger(TestPlayerAppDao.class);
+    private static final Logger log = LoggerFactory.getLogger(PlayerAppDaoTest.class);
     static PlayerAppDao playerAppDao;
 
     @Test(priority = 1)
