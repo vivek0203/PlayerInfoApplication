@@ -14,7 +14,7 @@ import static org.testng.Assert.*;
 public class TestPlayerAppDao {
 
     private static final Logger log = LoggerFactory.getLogger(TestPlayerAppDao.class);
-    PlayerAppDao playerAppDao;
+    static PlayerAppDao playerAppDao;
 
     @Test(priority = 1)
     public void testFetchPlayerCareerDataByName()  {
