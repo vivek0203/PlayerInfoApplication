@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import static org.testng.Assert.*;
 
+@SuppressWarnings("AccessStaticViaInstance")
 public class TestPlayerAppDao {
 
     private static final Logger log = LoggerFactory.getLogger(TestPlayerAppDao.class);
