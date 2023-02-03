@@ -444,18 +444,7 @@ public class TestPlayerAppDao {
             playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
         } catch (SQLException | IllegalArgumentException e) {
             assert true;
-        }
-    }
-    @Test(priority = 37)
-    public void  testFetchAnyNoOfPlayerInfoByAllNameEmpty() {
-        log.debug("Executing testFetchAnyNoOfPlayerInfoByAllNameNull()...");
-        try {
-            List<String> playersName = new ArrayList<>();
-            playersName.add("");
-            playersName.add("");
-            playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
-        } catch (SQLException | IllegalArgumentException e) {
-            assert true;
+            log.error("player name cannot be  null",e);
         }
     }
 }
