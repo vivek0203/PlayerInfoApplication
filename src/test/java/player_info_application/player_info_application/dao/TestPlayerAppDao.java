@@ -14,7 +14,7 @@ import static org.testng.Assert.*;
 public class TestPlayerAppDao {
 
     private static final Logger log = LoggerFactory.getLogger(TestPlayerAppDao.class);
-    PlayerAppDao playerAppDao;
+    static PlayerAppDao playerAppDao;
 
     @Test(priority = 1)
     public void testFetchPlayerCareerDataByName()  {
@@ -410,7 +410,7 @@ public class TestPlayerAppDao {
         try {
             List<String> playersName = new ArrayList<>();
             playersName.add("Vi");
-            playersName.add("Sharma");
+            playersName.add("rma");
             getPlayersInfo = playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
             assertThat(getPlayersInfo).isNotNull();
             assertThat(getPlayersInfo.size()).isEqualTo(1);
@@ -444,7 +444,7 @@ public class TestPlayerAppDao {
             playerAppDao.fetchAnyNoOfPlayerInfo(playersName);
         } catch (SQLException | IllegalArgumentException e) {
             assert true;
+            log.error("player name cannot be  null",e);
         }
     }
 }
-
