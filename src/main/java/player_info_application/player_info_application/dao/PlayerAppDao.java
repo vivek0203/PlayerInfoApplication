@@ -25,7 +25,7 @@ public class PlayerAppDao {
         try {
 
             conn = Connect.getDataSource().getConnection();
-            String query = "Select * from player_career_info where player_name = ? ";
+            String query = "Select * from player_career_info where player_name like ? ";
             log.debug("Executing fetchPlayerCareerData Query : {} ", query);
             log.debug("Parameters : { PlayerName : {}} ", playerName);
 

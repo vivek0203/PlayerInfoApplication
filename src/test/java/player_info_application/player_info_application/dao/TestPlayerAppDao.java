@@ -21,7 +21,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
         Map<String, Map<String,Object>>   getPlayerData;
         try {
-            getPlayerData = PlayerAppDao.fetchPlayerCareerData("Hardik Pandya");
+            getPlayerData = PlayerAppDao.fetchPlayerCareerData("Hardik pandya");
             assertNotNull(getPlayerData);
             assertThat(getPlayerData).hasSize(1);
             log.info("PlayerCareerInfo : {}",getPlayerData);
@@ -120,7 +120,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerODIInfoByName()...");
         Map<String, Map<String, Object>> getPlayerODIInfo;
         try {
-            getPlayerODIInfo = PlayerAppDao.fetchPlayerODIInfoByName("kl rahul");
+            getPlayerODIInfo = PlayerAppDao.fetchPlayerODIInfoByName("Mithali Raj");
             assertThat(getPlayerODIInfo).isNotNull();
             assertThat(getPlayerODIInfo).hasSize(1);
             log.info("playerOdiData : {}",getPlayerODIInfo);
@@ -162,7 +162,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerTestInfoByName()...");
         Map<String, Map<String, Object>> getPlayerTestInfo ;
         try {
-            getPlayerTestInfo = PlayerAppDao.fetchPlayerTestInfoByName("Rohit sharma");
+            getPlayerTestInfo = PlayerAppDao.fetchPlayerTestInfoByName("rohit sharma");
             assertThat(getPlayerTestInfo).isNotNull();
             assertThat(getPlayerTestInfo).hasSize(1);
             log.info("PlayerTestData : {}",getPlayerTestInfo);
