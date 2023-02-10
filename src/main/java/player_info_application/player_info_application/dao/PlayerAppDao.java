@@ -25,12 +25,12 @@ public class PlayerAppDao {
         try {
 
             conn = Connect.getDataSource().getConnection();
-            String query = "Select * from player_career_info where player_name like ? ";
+            String query = "Select * from player_career_info where player_name = ? ";
             log.debug("Executing fetchPlayerCareerData Query : {} ", query);
             log.debug("Parameters : { PlayerName : {}} ", playerName);
 
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + playerName + "%");
+            ps.setString(1,playerName);
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -155,12 +155,12 @@ public class PlayerAppDao {
 
             conn = Connect.getDataSource().getConnection();
 
-            String query = "Select player_name,player_specification,total_T20i_matches,total_t20i_wickets,player_t20i_runs  from player_career_info where player_name like ? ";
+            String query = "Select player_name,player_specification,total_T20i_matches,total_t20i_wickets,player_t20i_runs  from player_career_info where player_name = ? ";
             log.debug("Executing fetchPlayerT20iInfoByName Query : {} ", query);
             log.debug("Parameters : { Player Name : {}} ", playerName);
 
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + playerName + "%");
+            ps.setString(1, playerName);
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -198,11 +198,11 @@ public class PlayerAppDao {
         try {
             conn = Connect.getDataSource().getConnection();
 
-            String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_ODI_matches,pci.total_odi_wickets,pci.player_odi_runs, ppi.age,ppi.gender  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name like ? ";
+            String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_ODI_matches,pci.total_odi_wickets,pci.player_odi_runs, ppi.age,ppi.gender  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name = ? ";
             log.debug("Executing fetchPlayerODIInfoByName Query : {} ", query);
             log.debug("Parameters : { Player_Name : {}} ", playerName);
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + playerName + "%");
+            ps.setString(1,  playerName);
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -246,11 +246,11 @@ public class PlayerAppDao {
 
             conn = Connect.getDataSource().getConnection();
 
-            String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_Test_matches,pci.total_test_wickets,pci.player_test_runs, ppi.age,ppi.gender,ppi.state  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name like ? ";
+            String query = "Select pci.ranking, pci.player_name, pci.player_specification, pci.total_Test_matches,pci.total_test_wickets,pci.player_test_runs, ppi.age,ppi.gender,ppi.state  from player_career_info pci left join player_personal_info ppi on pci.ranking = ppi.player_ranking  where player_name = ? ";
             log.debug("Executing fetchPlayerTestInfoByName2 Query : {} ", query);
             log.debug("Parameter : { PlayerName : {}} ", playerName);
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + playerName + "%");
+            ps.setString(1, playerName);
             rs = ps.executeQuery();
 
             Map<String, Object> playerData = new LinkedHashMap<>();
@@ -296,11 +296,11 @@ public class PlayerAppDao {
         try {
             conn = Connect.getDataSource().getConnection();
 
-            String query = "Select * from player_personal_info  where name like ?";
+            String query = "Select * from player_personal_info  where name = ?";
             log.debug("Executing fetchPlayerPersonalData Query : {} ", query);
             log.debug("Parameter : { Name : {}  } ", name);
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + name + "%");
+            ps.setString(1, name );
             rs = ps.executeQuery();
             Map<String, Object> playerData = new LinkedHashMap<>();
             while (rs.next()) {

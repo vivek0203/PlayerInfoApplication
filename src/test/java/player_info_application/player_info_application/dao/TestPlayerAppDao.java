@@ -21,7 +21,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerCareerDataByName()...");
         Map<String, Map<String,Object>>   getPlayerData;
         try {
-            getPlayerData = PlayerAppDao.fetchPlayerCareerData("Hardik");
+            getPlayerData = PlayerAppDao.fetchPlayerCareerData("Hardik Pandya");
             assertNotNull(getPlayerData);
             assertThat(getPlayerData).hasSize(1);
             log.info("PlayerCareerInfo : {}",getPlayerData);
@@ -78,9 +78,9 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerT20iInfoByName()...");
         Map<String, Map<String, Object>> getPlayerT20Info ;
         try {
-            getPlayerT20Info = PlayerAppDao.fetchPlayerT20iInfoByName("Yadav");
+            getPlayerT20Info = PlayerAppDao.fetchPlayerT20iInfoByName("Suryakumar Yadav");
             assertThat(getPlayerT20Info).isNotNull();
-            assertThat(getPlayerT20Info).hasSize(3);
+            assertThat(getPlayerT20Info).hasSize(1);
             log.info("PlayerT20Data : {}",getPlayerT20Info);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
@@ -120,9 +120,9 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerODIInfoByName()...");
         Map<String, Map<String, Object>> getPlayerODIInfo;
         try {
-            getPlayerODIInfo = PlayerAppDao.fetchPlayerODIInfoByName("Raj");
+            getPlayerODIInfo = PlayerAppDao.fetchPlayerODIInfoByName("kl rahul");
             assertThat(getPlayerODIInfo).isNotNull();
-            assertThat(getPlayerODIInfo).hasSize(3);
+            assertThat(getPlayerODIInfo).hasSize(1);
             log.info("playerOdiData : {}",getPlayerODIInfo);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
@@ -162,9 +162,9 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerTestInfoByName()...");
         Map<String, Map<String, Object>> getPlayerTestInfo ;
         try {
-            getPlayerTestInfo = PlayerAppDao.fetchPlayerTestInfoByName("sharma");
+            getPlayerTestInfo = PlayerAppDao.fetchPlayerTestInfoByName("Rohit sharma");
             assertThat(getPlayerTestInfo).isNotNull();
-            assertThat(getPlayerTestInfo).hasSize(2);
+            assertThat(getPlayerTestInfo).hasSize(1);
             log.info("PlayerTestData : {}",getPlayerTestInfo);
         } catch (SQLException | IllegalArgumentException e) {
             throw new IllegalArgumentException(e);
@@ -207,7 +207,7 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerPersonalDataByName()...");
         Map<String, Map<String, Object>>  getPlayerPersonalInfo;
         try {
-            getPlayerPersonalInfo = PlayerAppDao.fetchPlayerPersonalDataByName("Pant");
+            getPlayerPersonalInfo = PlayerAppDao.fetchPlayerPersonalDataByName("Rishabh Pant");
             assertThat(getPlayerPersonalInfo).isNotNull();
             assertThat(getPlayerPersonalInfo).hasSize(1);
             log.info("PlayerPersonalInfo : {}",getPlayerPersonalInfo);
