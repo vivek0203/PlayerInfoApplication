@@ -396,7 +396,7 @@ public class TestPlayerAppDao {
         try {
             List<String> playersName = new ArrayList<>();
             playersName.add("Vi");
-            playersName.add("rma");
+            playersName.add("sharma");
             getPlayersInfo = PlayerAppDao.fetchAnyNoOfPlayerInfo(playersName);
             assertThat(getPlayersInfo).isNotNull();
             assertThat(getPlayersInfo.size()).isEqualTo(1);
