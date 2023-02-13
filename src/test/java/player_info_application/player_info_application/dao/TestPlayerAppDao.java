@@ -38,6 +38,7 @@ public class TestPlayerAppDao {
         }catch (IllegalArgumentException | SQLException e){
             assert true;
             log.error("Invalid playerName",e);
+
         }
     }
     @Test(priority = 3)
@@ -45,8 +46,9 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerCareerDataByNameNull()...");
         try {
             PlayerAppDao.fetchPlayerCareerData(null);
-        } catch (IllegalArgumentException| SQLException Exception ) {
+        } catch (IllegalArgumentException| SQLException e) {
             assert true;
+            log.error("player name cannot be  null",e);
         }
     }
     @Test(priority = 4)
@@ -101,8 +103,9 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerT20iInfoByNameNull()...");
         try {
             PlayerAppDao.fetchPlayerT20iInfoByName(null);
-        } catch (IllegalArgumentException| SQLException Exception ) {
+        } catch (IllegalArgumentException| SQLException e) {
             assert true;
+            log.error("player name cannot be  null",e);
         }
     }
     @Test(priority = 9)
@@ -111,7 +114,7 @@ public class TestPlayerAppDao {
 
         try {
             PlayerAppDao.fetchPlayerT20iInfoByName("");
-        } catch (IllegalArgumentException| SQLException Exception ) {
+        } catch (IllegalArgumentException| SQLException e) {
             assert true;
         }
     }
@@ -136,6 +139,7 @@ public class TestPlayerAppDao {
         }catch (IllegalArgumentException | SQLException e){
             assert true;
             log.error("Invalid playerName",e);
+            log.error("player name cannot be  null",e);
         }
     }
     @Test(priority = 12)
@@ -178,6 +182,7 @@ public class TestPlayerAppDao {
             PlayerAppDao.fetchPlayerTestInfoByName(null);
         }catch (IllegalArgumentException | SQLException e){
             assert true;
+            log.error("player name cannot be  null",e);
         }
     }
     @Test(priority = 16)
@@ -234,8 +239,9 @@ public class TestPlayerAppDao {
         log.debug("Executing testFetchPlayerPersonalDataByNameNul()...");
         try {
             PlayerAppDao.fetchPlayerPersonalDataByName(null);
-        } catch (IllegalArgumentException| SQLException Exception ) {
+        } catch (IllegalArgumentException| SQLException e) {
             assert true;
+            log.error("player name cannot be  null",e);
         }
 
     }
