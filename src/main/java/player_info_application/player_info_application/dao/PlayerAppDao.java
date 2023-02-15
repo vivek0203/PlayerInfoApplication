@@ -23,9 +23,8 @@ public class PlayerAppDao {
         ResultSet rs = null;
         Map<String, Map<String, Object>> playerCareerInfo = new LinkedHashMap<>();
         try {
-
             conn = Connect.getDataSource().getConnection();
-            String query = "Select * from player_career_info where player_name like ? ";
+            String query = "Select * from player_career_info where player_name = ? ";
             log.debug("Executing fetchPlayerCareerData Query : {} ", query);
             log.debug("Parameters : { PlayerName : {}} ", playerName);
 
@@ -81,21 +80,23 @@ public class PlayerAppDao {
 
     public static Map<String, Map<String, Object>> get10PlayerData() throws SQLException {
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
         Map<String, Map<String, Object>> playerFullInfo = new LinkedHashMap<>();
         try {
             conn = Connect.getDataSource().getConnection();
-            stmt = conn.createStatement();
-            String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking  where ranking <= 10  ";
-            log.debug("Executing get10PlayerData Query : {} ", query);
 
-            rs = stmt.executeQuery(query);
+            String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.player_name = ppi.name where ranking limit 10  offset 0";
+            log.debug("Executing get10PlayerData Query : {} ", query);
+            ps = conn.prepareStatement(query);
+            //ps.setInt(1,limit);
+           // ps.setInt(2,offset);
+            rs = ps.executeQuery(query);
 
             while (rs.next()) {
                 Map<String, Object> playerData = new LinkedHashMap<>();
 
-                playerData.put(PlayersData.RANK, rs.getInt("ranking"));
+                playerData.put(PlayersData.PLAYERNAME, rs.getString("player_name"));
 
                 playerData.put(PlayersData.PLAYERSPECIFICATION, rs.getString("player_specification"));
 
@@ -133,10 +134,10 @@ public class PlayerAppDao {
 
                 playerData.put(PlayersData.STATE, rs.getString("state"));
 
-                playerFullInfo.put(rs.getString("player_name"), playerData);
+                playerFullInfo.put(rs.getString("ranking"), playerData);
             }
         } finally {
-            DBUtil.close(rs, stmt, conn);
+            DBUtil.close(rs, ps, conn);
         }
         return playerFullInfo;
     }
