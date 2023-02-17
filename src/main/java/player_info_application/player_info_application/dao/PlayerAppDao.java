@@ -86,9 +86,10 @@ public class PlayerAppDao {
         try {
             conn = Connect.getDataSource().getConnection();
 
-            String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.player_name = ppi.name where ranking limit 10  offset 0";
+            String query = "Select pci.*,ppi.* from player_career_info pci inner join player_personal_info ppi on pci.ranking = ppi.player_ranking where ranking <=10 ";
             log.debug("Executing get10PlayerData Query : {} ", query);
             ps = conn.prepareStatement(query);
+
             //ps.setInt(1,limit);
            // ps.setInt(2,offset);
             rs = ps.executeQuery(query);
